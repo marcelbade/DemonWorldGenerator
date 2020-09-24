@@ -3,16 +3,25 @@ package marcel.demonworld.armygenerator.dto.statCards;
 import javax.persistence.*;
 
 
+@Entity
+@Table(name = "itemcards")
 public class ItemCard implements DemonWorldCard {
 
     @Id
     private Integer id;
+    @Column(name = "faction", columnDefinition = "text")
     private String faction;
+    @Column(name = "name", columnDefinition = "text")
     private String name;
+    @Column(name = "pointCost")
     private Integer pointCost;
+    @Column(name = "typeOfItem", columnDefinition = "text")
     private String typeOfItem;
+    @Column(name = "rules", columnDefinition = "text")
     private String rules;
+    @Column(name = "usedBy", columnDefinition = "text")
     private String usedBy;
+    @Column(name = "unique", columnDefinition = "text")
     private Boolean unique;
 
     public String getTypeOfItem() {
