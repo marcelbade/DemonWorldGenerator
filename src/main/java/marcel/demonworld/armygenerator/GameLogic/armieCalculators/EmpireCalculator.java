@@ -8,7 +8,9 @@ import marcel.demonworld.armygenerator.dto.statCardDTOs.DemonWorldCard;
 import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -25,13 +27,23 @@ public class EmpireCalculator implements ArmyCalculator {
     @Override
     public CalculatedArmyResult CalculatePointCost(List<DemonWorldCard> list, float maximumPointValue) {
 
-        double nordmarkotalPointValue = 0;
+        double[] nordmarkotalPointValue = {0, 0};
         double suedmarkTotalPointValue = 0;
         double ostmarkotalPointValue = 0;
         double westmarkTotalPointValue = 0;
 
+        //best data structure?
+        Map< String, double []>  borderMarkPointValues =  new HashMap<>();
+        borderMarkPointValues.
+
+
         if (container.getPickedMark().equalsIgnoreCase("Nordmark")) {
-            nordmarkotalPointValue = 0.5 * maximumPointValue;
+
+            borderMarkPointValues.put("Nordmark", new double[]{ 0,1, 0.5});
+
+
+            nordmarkotalPointValue[0] = 0.1 * maximumPointValue;
+            nordmarkotalPointValue[1] = 0.5 * maximumPointValue;
             suedmarkTotalPointValue = 0;
             ostmarkotalPointValue = 0;
             westmarkTotalPointValue = 0;
@@ -61,7 +73,7 @@ public class EmpireCalculator implements ArmyCalculator {
                 case NORDMARK:
                     container.setNordmarkSum(container.getNordmarkSum() + uc.getPoints());
 
-                    if (container.getNordmarkSum() >= maximumPointValue * .10 && container.getNordmarkSum() <= nordmarkotalPointValue) {
+                    if (container.getNordmarkSum() >= nordmarkotalPointValue[0] && container.getNordmarkSum() <= nordmarkotalPointValue[1]) {
                         container.setFlagnordmark(true);
                     }
                     break;
