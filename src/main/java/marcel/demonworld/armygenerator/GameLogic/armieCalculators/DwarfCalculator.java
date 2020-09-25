@@ -86,11 +86,13 @@ public class DwarfCalculator implements ArmyCalculator {
                     if (container.getAlliesSum() >= maximumPointValue * 0.2) {
                         container.setFlagAllies(true);
                     }
-
                     break;
-
             }
+            container.setTotalSum(container.getTotalSum() + uc.getPoints());
+        }
 
+        if (container.getTotalSum() <= maximumPointValue) {
+            container.setArmyFlag(true);
         }
 
         //TODO: you got to rework the return DTO!

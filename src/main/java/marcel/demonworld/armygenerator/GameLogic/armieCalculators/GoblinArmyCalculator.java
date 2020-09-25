@@ -1,8 +1,10 @@
 package marcel.demonworld.armygenerator.GameLogic.armieCalculators;
 
+import marcel.demonworld.armygenerator.GameLogic.ResultContainers.GoblinResultContainer;
 import marcel.demonworld.armygenerator.dto.armyDTOs.CalculatedArmyResult;
 import marcel.demonworld.armygenerator.dto.statCardDTOs.DemonWorldCard;
 import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -11,30 +13,16 @@ import java.util.List;
  */
 public class GoblinArmyCalculator implements ArmyCalculator {
 
-    private boolean flagInfanterie = false;
-    private boolean flagInsektenreiter = false;
-    private boolean flagRieseninsekten = false;
-    private boolean flagGeraete = false;
-    private boolean flagSchamanen = false;
-    private boolean flagverbuendete_Orktruppen = false;
-    private boolean flagHelden_Befehlshaber = false;
-    private boolean ArmyFlag = false;
+    @Autowired
+    GoblinResultContainer container;
+
 
     // emtpy dto  for the return values
-   // CalculatedArmyResult calculatedArmyResult = new CalculatedArmyResult();
+    // CalculatedArmyResult calculatedArmyResult = new CalculatedArmyResult();
 
     @Override
     public CalculatedArmyResult CalculatePointCost(List<DemonWorldCard> list, final float maximumPointValue) {
 
-        // net and subfaction totals
-        int totalSum = 0;
-        int infanterieSum = 0;
-        int insektenreiterSum = 0;
-        int rieseninsektenSum = 0;
-        int geraeteSum = 0;
-        int verbuendete_OrktruppenSum = 0;
-        int schamanenSum = 0;
-        int helden_BefehlshaberSum = 0;
 
         // min. and max. point fraction for subfactions
         final float infanterieTotal = 0.30f * maximumPointValue;
@@ -50,73 +38,76 @@ public class GoblinArmyCalculator implements ArmyCalculator {
             switch (uc.getSubFaction()) {
                 case "infanterie":
 
-                    infanterieSum += uc.getPoints();
+                    container.setInfanterieSum(container.getInfanterieSum() + uc.getPoints());
 
-                    if (infanterieSum >= infanterieTotal) {
-                        flagInfanterie = true;
+                    if (container.getInfanterieSum() >= infanterieTotal) {
+                        container.setFlagInfanterie(true);
                     }
                     break;
 
                 case "insektenreiter":
 
-                    insektenreiterSum += uc.getPoints();
+                    container.setInsektenreiterSum(container.getInsektenreiterSum() + uc.getPoints());
 
-                    if (insektenreiterSum <= reiterTotal) {
-                        flagInsektenreiter = true;
+                    if (container.getInsektenreiterSum() >= infanterieTotal) {
+                        container.setFlagInsektenreiter(true);
                     }
                     break;
 
                 case "rieseninsekten":
 
-                    rieseninsektenSum += uc.getPoints();
+                    container.setRieseninsektenSum(container.getRieseninsektenSum() + uc.getPoints());
 
-                    if (rieseninsektenSum <= insektenTotal) {
-                        flagRieseninsekten = true;
+                    if (container.getRieseninsektenSum() >= infanterieTotal) {
+                        container.setFlagRieseninsekten(true);
                     }
                     break;
 
                 case "geraete":
 
-                    geraeteSum += uc.getPoints();
+                    container.setGeraeteSum(container.getGeraeteSum() + uc.getPoints());
 
-                    if (geraeteSum <= geraeteTotal) {
-                        flagGeraete = true;
+                    if (container.getGeraeteSum() >= infanterieTotal) {
+                        container.setFlagGeraete(true);
                     }
                     break;
 
                 case "helden_befehlshaber":
 
-                    helden_BefehlshaberSum += uc.getPoints();
+                    container.setHelden_BefehlshaberSum(container.getHelden_BefehlshaberSum() + uc.getPoints());
 
-                    if (helden_BefehlshaberSum <= heldenTotal) {
-                        flagHelden_Befehlshaber = true;
+                    if (container.getHelden_BefehlshaberSum() >= infanterieTotal) {
+                        container.setFlagHelden_Befehlshaber(true);
                     }
                     break;
 
                 case "schamanen":
 
-                    schamanenSum += uc.getPoints();
+                    container.setSchamanenSum(container.getSchamanenSum() + uc.getPoints());
 
-                    if (schamanenSum < schamamenTotal) {
-                        flagSchamanen = true;
+                    if (container.getSchamanenSum() >= infanterieTotal) {
+                        container.setFlagSchamanen(true);
                     }
                     break;
+
 
                 case "verbündete_orktruppen":
 
-                    verbuendete_OrktruppenSum += uc.getPoints();
+                    container.setVerbuendete_OrktruppenSum(container.getVerbuendete_OrktruppenSum() + uc.getPoints());
 
-                    if (verbuendete_OrktruppenSum <= orksTotal) {
-                        flagverbuendete_Orktruppen = true;
+                    if (container.getVerbuendete_OrktruppenSum() >= infanterieTotal) {
+                        container.setFlagverbuendete_Orktruppen(true);
                     }
                     break;
+
             }
 
-            totalSum += uc.getPoints();
+            container.setTotalSum(container.getTotalSum() + uc.getPoints());
+
         }
 
-        if (totalSum <= maximumPointValue) {
-            ArmyFlag = true;
+        if (container.getTotalSum() <= maximumPointValue) {
+            container.setArmyFlag(true);
         }
 
         //TODO: you got to rework the return DTO!
