@@ -49,7 +49,7 @@ public class GoblinArmyCalculator implements ArmyCalculator {
 
                     container.setInsektenreiterSum(container.getInsektenreiterSum() + uc.getPoints());
 
-                    if (container.getInsektenreiterSum() >= infanterieTotal) {
+                    if (container.getInsektenreiterSum() >= reiterTotal) {
                         container.setFlagInsektenreiter(true);
                     }
                     break;
@@ -58,7 +58,7 @@ public class GoblinArmyCalculator implements ArmyCalculator {
 
                     container.setRieseninsektenSum(container.getRieseninsektenSum() + uc.getPoints());
 
-                    if (container.getRieseninsektenSum() >= infanterieTotal) {
+                    if (container.getRieseninsektenSum() >= insektenTotal) {
                         container.setFlagRieseninsekten(true);
                     }
                     break;
@@ -67,7 +67,7 @@ public class GoblinArmyCalculator implements ArmyCalculator {
 
                     container.setGeraeteSum(container.getGeraeteSum() + uc.getPoints());
 
-                    if (container.getGeraeteSum() >= infanterieTotal) {
+                    if (container.getGeraeteSum() >= geraeteTotal) {
                         container.setFlagGeraete(true);
                     }
                     break;
@@ -76,7 +76,7 @@ public class GoblinArmyCalculator implements ArmyCalculator {
 
                     container.setHelden_BefehlshaberSum(container.getHelden_BefehlshaberSum() + uc.getPoints());
 
-                    if (container.getHelden_BefehlshaberSum() >= infanterieTotal) {
+                    if (container.getHelden_BefehlshaberSum() >= heldenTotal) {
                         container.setFlagHelden_Befehlshaber(true);
                     }
                     break;
@@ -85,7 +85,7 @@ public class GoblinArmyCalculator implements ArmyCalculator {
 
                     container.setSchamanenSum(container.getSchamanenSum() + uc.getPoints());
 
-                    if (container.getSchamanenSum() >= infanterieTotal) {
+                    if (container.getSchamanenSum() >= schamamenTotal) {
                         container.setFlagSchamanen(true);
                     }
                     break;
@@ -95,15 +95,13 @@ public class GoblinArmyCalculator implements ArmyCalculator {
 
                     container.setVerbuendete_OrktruppenSum(container.getVerbuendete_OrktruppenSum() + uc.getPoints());
 
-                    if (container.getVerbuendete_OrktruppenSum() >= infanterieTotal) {
+                    if (container.getVerbuendete_OrktruppenSum() >= orksTotal) {
                         container.setFlagverbuendete_Orktruppen(true);
                     }
                     break;
-
             }
 
             container.setTotalSum(container.getTotalSum() + uc.getPoints());
-
         }
 
         if (container.getTotalSum() <= maximumPointValue) {
@@ -115,6 +113,12 @@ public class GoblinArmyCalculator implements ArmyCalculator {
     }
 
 
+    /**
+     * Method confirms whether the army has a valid commander.
+     *
+     * @param list the cards of the current army list.
+     * @return boolean, is a valid commander present?
+     */
     @Override
     public boolean commanderPresent(List<DemonWorldCard> list) {
         for (DemonWorldCard dc : list) {
@@ -124,7 +128,6 @@ public class GoblinArmyCalculator implements ArmyCalculator {
         }
         return false;
     }
-
 
 }// end class
 
