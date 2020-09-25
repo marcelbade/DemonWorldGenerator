@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.dto.statCards;
+package marcel.demonworld.armygenerator.dto.statCardDTOs;
 
 import javax.persistence.*;
 

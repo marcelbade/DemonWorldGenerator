@@ -1,7 +1,7 @@
 package marcel.demonworld.armygenerator.GameLogic.armieCalculators;
 
 import marcel.demonworld.armygenerator.dto.armyDTOs.CalculatedArmyResult;
-import marcel.demonworld.armygenerator.dto.statCards.DemonWorldCard;
+import marcel.demonworld.armygenerator.dto.statCardDTOs.DemonWorldCard;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.dto.statCards;
+package marcel.demonworld.armygenerator.dto.statCardDTOs;
 
 import javax.persistence.*;
 
@@ -8,6 +8,7 @@ import javax.persistence.*;
 public class ItemCard implements DemonWorldCard {
 
     @Id
+    @Column(name = "id")
     private Integer id;
     @Column(name = "faction", columnDefinition = "text")
     private String faction;
@@ -21,8 +22,8 @@ public class ItemCard implements DemonWorldCard {
     private String rules;
     @Column(name = "usedBy", columnDefinition = "text")
     private String usedBy;
-    @Column(name = "unique", columnDefinition = "text")
-    private Boolean unique;
+    @Column(name = "uniqueItem", columnDefinition = "text")
+    private Boolean uniqueItem;
 
     public String getTypeOfItem() {
         return typeOfItem;
@@ -86,11 +87,11 @@ public class ItemCard implements DemonWorldCard {
         this.usedBy = usedBy;
     }
 
-    public boolean isUnique() {
-        return unique;
+    public boolean getUniqueItem() {
+        return uniqueItem;
     }
 
-    public void setUnique(boolean unique) {
-        this.unique = unique;
+    public void setUniqueItem(boolean uniqueItem) {
+        this.uniqueItem = uniqueItem;
     }
 }

@@ -1,6 +1,6 @@
 package marcel.demonworld.armygenerator.services;
 
-import marcel.demonworld.armygenerator.dto.statCards.ItemCard;
+import marcel.demonworld.armygenerator.dto.statCardDTOs.ItemCard;
 import marcel.demonworld.armygenerator.repositories.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

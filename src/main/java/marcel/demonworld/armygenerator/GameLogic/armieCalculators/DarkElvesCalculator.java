@@ -1,8 +1,8 @@
 package marcel.demonworld.armygenerator.GameLogic.armieCalculators;
 
 import marcel.demonworld.armygenerator.dto.armyDTOs.CalculatedArmyResult;
-import marcel.demonworld.armygenerator.dto.statCards.DemonWorldCard;
-import marcel.demonworld.armygenerator.dto.statCards.UnitCard;
+import marcel.demonworld.armygenerator.dto.statCardDTOs.DemonWorldCard;
+import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
 
 import static marcel.demonworld.armygenerator.GameLogic.constants.SubFactions.darkelves.DarkElvesSubFaction.*;
 

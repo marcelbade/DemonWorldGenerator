@@ -3,8 +3,8 @@ package marcel.demonworld.armygenerator.GameLogic.armieCalculators;
 import static marcel.demonworld.armygenerator.GameLogic.constants.SubFactions.empire.EmpireSubFaction.*;
 
 import marcel.demonworld.armygenerator.dto.armyDTOs.CalculatedArmyResult;
-import marcel.demonworld.armygenerator.dto.statCards.DemonWorldCard;
-import marcel.demonworld.armygenerator.dto.statCards.UnitCard;
+import marcel.demonworld.armygenerator.dto.statCardDTOs.DemonWorldCard;
+import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
 
 import java.util.List;
 
