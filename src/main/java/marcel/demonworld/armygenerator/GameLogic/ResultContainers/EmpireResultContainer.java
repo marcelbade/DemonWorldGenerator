@@ -10,19 +10,21 @@ public class EmpireResultContainer {
 
     String pickedMark;
 
-    private boolean flagkaiserheer = false;
-    private boolean flagorden = false;
-    private boolean flaghelden_befehlshaber = false;
-    private boolean flagmagier_priester = false;
-    private boolean flagzentralmark = false;
-    private boolean flagnordmark = false;
-    private boolean flagsuedmark = false;
-    private boolean flagostmark = false;
-    private boolean flagwestmark = false;
+    private boolean flagKaiserheer = false;
+    private boolean flagProvinzHeer = false;
+    private boolean flagOrden = false;
+    private boolean flagHelden_Befehlshaber = false;
+    private boolean flagMagier_Priester = false;
+    private boolean flagZentralmark = false;
+    private boolean flagNordmark = false;
+    private boolean flagSuedmark = false;
+    private boolean flagOstmark = false;
+    private boolean flagWestmark = false;
     private boolean ArmyFlag = false;
 
     private int totalSum = 0;
     private int kaiserheerSum = 0;
+    private int provinzheerSum = 0;
     private int ordenSum = 0;
     private int helden_befehlshaberSum = 0;
     private int magier_priesterSum = 0;

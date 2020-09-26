@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * additional rules for the empire
  * <p>
- * - only one mark!
+ * - only one border mark!
  * - one ** commander
  */
 public class EmpireCalculator implements ArmyCalculator {
@@ -24,48 +24,16 @@ public class EmpireCalculator implements ArmyCalculator {
     @Autowired
     EmpireResultContainer container;
 
+    double[] nordmarkTotalPointValue = {0, 0};
+    double[] suedmarkTotalPointValue = {0, 0};
+    double[] ostmarkTotalPointValue = {0, 0};
+    double[] westmarkTotalPointValue = {0, 0};
+
+
     @Override
     public CalculatedArmyResult CalculatePointCost(List<DemonWorldCard> list, float maximumPointValue) {
 
-        double[] nordmarkotalPointValue = {0, 0};
-        double suedmarkTotalPointValue = 0;
-        double ostmarkotalPointValue = 0;
-        double westmarkTotalPointValue = 0;
-
-        //best data structure?
-        Map< String, double []>  borderMarkPointValues =  new HashMap<>();
-        borderMarkPointValues.
-
-
-        if (container.getPickedMark().equalsIgnoreCase("Nordmark")) {
-
-            borderMarkPointValues.put("Nordmark", new double[]{ 0,1, 0.5});
-
-
-            nordmarkotalPointValue[0] = 0.1 * maximumPointValue;
-            nordmarkotalPointValue[1] = 0.5 * maximumPointValue;
-            suedmarkTotalPointValue = 0;
-            ostmarkotalPointValue = 0;
-            westmarkTotalPointValue = 0;
-
-        } else if (container.getPickedMark().equalsIgnoreCase("Südmark")) {
-            suedmarkTotalPointValue = 0.5 * maximumPointValue;
-            nordmarkotalPointValue = 0;
-            ostmarkotalPointValue = 0;
-            westmarkTotalPointValue = 0;
-        } else if (container.getPickedMark().equalsIgnoreCase("Ostmark")) {
-            ostmarkotalPointValue = 0.5 * maximumPointValue;
-            nordmarkotalPointValue = 0;
-            suedmarkTotalPointValue = 0;
-            westmarkTotalPointValue = 0;
-
-        } else if (container.getPickedMark().equalsIgnoreCase("Westmark")) {
-            westmarkTotalPointValue = 0.5 * maximumPointValue;
-            nordmarkotalPointValue = 0;
-            suedmarkTotalPointValue = 0;
-            ostmarkotalPointValue = 0;
-        }
-
+        setTheBorderMarksPoints(maximumPointValue);
 
         for (DemonWorldCard uc : list) {
 
@@ -73,47 +41,79 @@ public class EmpireCalculator implements ArmyCalculator {
                 case NORDMARK:
                     container.setNordmarkSum(container.getNordmarkSum() + uc.getPoints());
 
-                    if (container.getNordmarkSum() >= nordmarkotalPointValue[0] && container.getNordmarkSum() <= nordmarkotalPointValue[1]) {
-                        container.setFlagnordmark(true);
+                    if (container.getNordmarkSum() >= nordmarkTotalPointValue[0] && container.getNordmarkSum() <= nordmarkTotalPointValue[1]) {
+                        container.setFlagNordmark(true);
                     }
                     break;
                 case SUEDMARK:
                     container.setSuedmarkSum(container.getSuedmarkSum() + uc.getPoints());
 
-                    if (container.getSuedmarkSum() >= maximumPointValue * .10 && container.getSuedmarkSum() <= maximumPointValue * .50) {
-                        container.setFlagsuedmark(true);
+                    if (container.getSuedmarkSum() >= suedmarkTotalPointValue[0] && container.getSuedmarkSum() <= suedmarkTotalPointValue[1]) {
+                        container.setFlagSuedmark(true);
                     }
                     break;
                 case WESTMARK:
                     container.setWestmarkSum(container.getWestmarkSum() + uc.getPoints());
 
-                    if (container.getWestmarkSum() >= maximumPointValue * .10 && container.getWestmarkSum() <= maximumPointValue * .50) {
-                        container.setFlagwestmark(true);
+                    if (container.getWestmarkSum() >= westmarkTotalPointValue[0] && container.getWestmarkSum() <= westmarkTotalPointValue[1]) {
+                        container.setFlagWestmark(true);
                     }
                     break;
                 case OSTMARK:
                     container.setOstmarkSum(container.getOstmarkSum() + uc.getPoints());
 
-                    if (container.getOstmarkSum() >= maximumPointValue * .10 && container.getOstmarkSum() <= maximumPointValue * .50) {
-                        container.setFlagostmark(true);
+                    if (container.getOstmarkSum() >= ostmarkTotalPointValue[0] && container.getOstmarkSum() <= ostmarkTotalPointValue[1]) {
+                        container.setFlagOstmark(true);
                     }
                     break;
                 case ZENTRALMARK:
-                    container.setNordmarkSum(container.getNordmarkSum() + uc.getPoints());
+                    container.setZentralmarkSum(container.getZentralmarkSum() + uc.getPoints());
 
-                    if (container.getNordmarkSum() >= maximumPointValue * .10 && container.getNordmarkSum() <= maximumPointValue * .50) {
-                        container.setFlagnordmark(true);
+                    if (container.getZentralmarkSum() <= maximumPointValue * .30) {
+                        container.setFlagZentralmark(true);
                     }
                     break;
+
+                //TODO: Oi, Smartypants: order magicians count as order, not magicians. Plsease test.
                 case ORDEN:
+                    container.setOrdenSum(container.getOrdenSum() + uc.getPoints());
+
+                    if (container.getOrdenSum() <= maximumPointValue * .40) {
+                        container.setFlagOrden(true);
+                    }
                     break;
                 case PROVINZHEER:
+                    container.setProvinzheerSum(container.getProvinzheerSum() + uc.getPoints());
+
+                    if (container.getProvinzheerSum() >= maximumPointValue * .20 && container.getProvinzheerSum() <= maximumPointValue * .50) {
+                        container.setFlagProvinzHeer(true);
+                    }
                     break;
+
                 case KAISERHEER:
+                    container.setKaiserheerSum(container.getKaiserheerSum() + uc.getPoints());
+
+                    if (container.getKaiserheerSum() >= maximumPointValue * .10 && container.getKaiserheerSum() <= maximumPointValue * .50) {
+                        container.setFlagKaiserheer(true);
+                    }
                     break;
+
                 case HELDEN_BEFEHLSHABER:
+                    container.setHelden_befehlshaberSum(container.getHelden_befehlshaberSum() + uc.getPoints());
+
+                    if (container.getHelden_befehlshaberSum() <= maximumPointValue * .30) {
+                        container.setFlagHelden_Befehlshaber(true);
+                    }
+
                     break;
                 case MAGIER_PRIESTER:
+
+                    container.setMagier_priesterSum(container.getMagier_priesterSum() + uc.getPoints());
+
+                    if (container.getMagier_priesterSum() <= maximumPointValue * .30) {
+                        container.setFlagMagier_Priester(true);
+                    }
+
                     break;
             }
 
@@ -126,6 +126,31 @@ public class EmpireCalculator implements ArmyCalculator {
         return null;
     }
 
+    private void setTheBorderMarksPoints(float maximumPointValue) {
+
+        if (container.getPickedMark().equalsIgnoreCase("Nordmark")) {
+
+            nordmarkTotalPointValue[0] = 0.1 * maximumPointValue;
+            nordmarkTotalPointValue[1] = 0.5 * maximumPointValue;
+
+        } else if (container.getPickedMark().equalsIgnoreCase("Südmark")) {
+
+            suedmarkTotalPointValue[0] = 0.1 * maximumPointValue;
+            suedmarkTotalPointValue[1] = 0.5 * maximumPointValue;
+
+        } else if (container.getPickedMark().equalsIgnoreCase("Ostmark")) {
+
+            ostmarkTotalPointValue[0] = 0.1 * maximumPointValue;
+            ostmarkTotalPointValue[1] = 0.5 * maximumPointValue;
+
+        } else if (container.getPickedMark().equalsIgnoreCase("Westmark")) {
+
+            westmarkTotalPointValue[0] = 0.1 * maximumPointValue;
+            westmarkTotalPointValue[1] = 0.5 * maximumPointValue;
+        }
+
+    }
+
     @Override
     public boolean commanderPresent(List<DemonWorldCard> list) {
         for (DemonWorldCard dc : list) {
@@ -135,6 +160,4 @@ public class EmpireCalculator implements ArmyCalculator {
         }
         return false;
     }
-
-
 }

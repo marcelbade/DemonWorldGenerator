@@ -1,6 +1,6 @@
-package marcel.demonworld.armygenerator.GameLogic.constants.SubFactions.ishtar;
+package marcel.demonworld.armygenerator.GameLogic.constants.SubFactions.ishtak;
 
-public class IshtarSubFaction {
+public class IshtakSubFaction {
 
     final public static String TIERMENSCHEN = "tiermenschen";
     final public static String MENSCHEN = "menschen";
