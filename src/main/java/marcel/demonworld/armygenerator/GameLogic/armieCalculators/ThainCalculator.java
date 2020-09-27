@@ -9,6 +9,7 @@ import marcel.demonworld.armygenerator.dto.statCardDTOs.DemonWorldCard;
 import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -180,15 +181,20 @@ public class ThainCalculator implements ArmyCalculator {
         unit.setSubFaction(unit.getSubFaction().concat("_" + tribe));
     }
 
-    private boolean checkIfGreatChampionsAllowed(List<DemonWorldCard> armyList) {
+    private boolean checkIfGreatChampionsAllowed(UnitCard unitCard, List<DemonWorldCard> armyList) {
 
         boolean result = true;
-        for (String tribe : TRIBES) {
-            if (!(armyList.stream().anyMatch(c -> c.getSubFaction().contains(tribe)))) {
 
-                result = false;
-                break;
+        if (Arrays.stream(GREAT_CHAMPION_NAMES).anyMatch(name -> name.equalsIgnoreCase(unitCard.getUnitName()))) {
+
+            for (String tribe : TRIBES) {
+                if (!(armyList.stream().anyMatch(c -> c.getSubFaction().contains(tribe)))) {
+
+                    result = false;
+                    break;
+                }
             }
+
         }
         return result;
     }
