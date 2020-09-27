@@ -30,8 +30,30 @@ public class ThainCalculator implements ArmyCalculator {
     ThainResultContainer container;
 
 
+    /*
+     * data structure for number of  Veteran Units the player can add
+     * */
+    private final String[] TRIBES = {"Adler", "Wolf", "Bär", "Silberlöwe", "Eber"};
+
+    private final static String[] GREAT_CHAMPION_NAMES = {
+            "Arr'ydwen der wilde Eber",
+            "Bold'dyrr der einäugige Bär",
+            "Shariga'kyan der leise Tod", "Har'anyrrd der Späher",
+            "Dargorkon'yaghar d. Winterwolf"};
+
+
+    private Map<String, Integer> numberOfVeteranUnitsPerTribe = new HashMap<String, Integer>() {{
+        put(TRIBES[0], 0);
+        put(TRIBES[1], 0);
+        put(TRIBES[2], 0);
+        put(TRIBES[3], 0);
+        put(TRIBES[4], 0);
+    }};
+
+
     @Override
     public CalculatedArmyResult CalculatePointCost(List<DemonWorldCard> list, float maximumPointValue) {
+
 
         for (DemonWorldCard uc : list) {
 
@@ -53,7 +75,7 @@ public class ThainCalculator implements ArmyCalculator {
                 case VETERANEN:
                     container.setVeteranenSum(container.getVeteranenSum() + uc.getPoints());
 
-                    if (container.getVeteranenSum() <= maximumPointValue * .50) {
+                    if (container.getVeteranenSum() <= maximumPointValue * .50 && confirmVeteranCountIsValid(list, TRIBES)) {
                         container.setFlagVeteranen(true);
                     }
                     break;
@@ -86,48 +108,87 @@ public class ThainCalculator implements ArmyCalculator {
     }
 
 
-    public Map<String, Integer> maxNumberOfVeteransOfTribe(UnitCard card) {
+    /**
+     * Assert that number of veteran units per tribe does not exceed the maximum.
+     *
+     * @param armyList The Thain ArmyList.
+     * @param tribes   The list of tribes.
+     * @return boolean flag
+     */
+    private boolean confirmVeteranCountIsValid(List<DemonWorldCard> armyList, String[] tribes) {
 
-        //todo: check the tribes in sql
+        boolean result = true;
 
-        Map<String, Integer> numberOfTribeUnits = new HashMap<>();
-        numberOfTribeUnits.put("Eagle", 0);
-        numberOfTribeUnits.put("Mountainlion", 0);
-        numberOfTribeUnits.put("Boar", 0);
-        numberOfTribeUnits.put("Bear", 0);
-        numberOfTribeUnits.put("Wolf", 0);
-
-        for (Map.Entry<String, Integer> entry : numberOfTribeUnits.entrySet()) {
-            if (entry.getKey().equalsIgnoreCase(card.getSubFaction())) {
-                entry.setValue(entry.getValue() + 1);
-            }
+        // set correct max number of veterans per tribe
+        for (String tribe : tribes) {
+            maxNumberOfVeteransOfTribe(armyList, tribe);
         }
-        return numberOfTribeUnits;
+
+        //assert number <= max number
+        for (String tribe : tribes) {
+            if (!(numberOfVeteranUnitsPerTribe.get(tribe) == currentNumberOfVeterans(armyList, tribe)))
+                result = false;
+            break;
+        }
+        return result;
     }
 
     /**
+     * Determine max number of veteran for one tribe.
+     *
+     * @param armyList The Thain ArmyList.
+     * @param tribe    one Thain tribe
+     */
+    private void maxNumberOfVeteransOfTribe(List<DemonWorldCard> armyList, String tribe) {
+        numberOfVeteranUnitsPerTribe.put(tribe, (int) armyList.
+                stream().
+                filter(c -> c instanceof UnitCard && c.getSubFaction().contains(tribe)
+                        && c.getSubFaction().contains("Stammeskrieger")).count());
+
+    }
+
+    /**
+     * Actual number of veteran units.
+     *
+     * @param armyList The Thain ArmyList.
+     * @param tribe    one Thain tribe
+     * @return number of units.
+     */
+    private long currentNumberOfVeterans(List<DemonWorldCard> armyList, String tribe) {
+        return armyList.stream().
+                filter(c -> c instanceof UnitCard && c.getSubFaction().equalsIgnoreCase(tribe)).count();
+    }
+
+
+    /**
      * ALL units that are not Dorgar, Garydwen must be assigned to a tribe at the moment of selection.
+     * TODO: the assignment of non-Drogar, non-Garydwen Thain units must be done in the frontend code by calling this
+     * TODO[continuation] method. Try to detach it from the frontend logic as much as possible.
      *
      * @param unit  the unit that must be assigned to a tribe.
      * @param tribe the tribe it is assigned to.
      */
     public void assignTribeToUnit(UnitCard unit, String tribe) {
-        unit.setSubFaction(tribe.concat("_zugeordnet"));
+        unit.setSubFaction(unit.getSubFaction().concat("_" + tribe));
     }
 
-    /**
-     * determine the number of max champions per tribe
-     *
-     * @param list current army list
-     * @param card
-     * @return number of champions
-     */
-    private long setMaxNumberOfChampionsOfTribe(List<DemonWorldCard> list, UnitCard card) {
-        return list.stream().filter(c -> c.getSubFaction().equalsIgnoreCase(card.getSubFaction())).count();
+    private boolean checkIfGreatChampionsAllowed(List<DemonWorldCard> armyList) {
+
+        boolean result = true;
+        for (String tribe : TRIBES) {
+            if (!(armyList.stream().anyMatch(c -> c.getSubFaction().contains(tribe)))) {
+
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
+
 
     @Override
     public boolean commanderPresent(List<DemonWorldCard> list) {
-        return list.stream().filter(c -> c instanceof UnitCard).anyMatch(card -> ((UnitCard) card).getCommandStars() >= 2);
+        return list.stream().
+                filter(c -> c instanceof UnitCard).anyMatch(card -> ((UnitCard) card).getCommandStars() >= 2);
     }
 }

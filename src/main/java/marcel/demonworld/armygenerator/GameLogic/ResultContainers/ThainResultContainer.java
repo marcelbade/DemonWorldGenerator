@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 public class ThainResultContainer implements ResultContainer {
 
+
     private boolean flagStammeskrieger = false;
     private boolean flagVeteranen = false;
     private boolean flagSchamanen = false;

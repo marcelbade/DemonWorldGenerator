@@ -26,13 +26,13 @@ public class DwarfCalculator implements ArmyCalculator {
 
     @Autowired
     DwarfResultContainer container;
-    
+
     @Override
     public CalculatedArmyResult CalculatePointCost(List<DemonWorldCard> list, float maximumPointValue) {
 
         double gaetaTotalPointValue;
         double zahraTotalPointValue;
-        // point allowance for allies is 20% minus minor dwarf realm
+        // point allowance for allies is 20% minus the minor dwarf realm
         double pointsForMinorRealm;
 
         if (container.isGaetaPicked()) {
