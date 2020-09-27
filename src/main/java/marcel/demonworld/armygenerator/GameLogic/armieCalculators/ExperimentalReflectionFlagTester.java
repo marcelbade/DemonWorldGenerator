@@ -41,5 +41,42 @@ public class ExperimentalReflectionFlagTester {
     }// end method
 }
 
-
+//        //*******************************************************
+//        //TEST -> reflection solution instead of switch statement !
+//
+//        int reflectionTest_PointTotal = 0;
+//
+//        Field[] containerFields = container.getClass().getDeclaredFields();
+//        list.stream().forEach(demonWorldCard -> {
+//
+//            Arrays.stream(containerFields).
+//                    filter(f -> f.getName().contains(demonWorldCard.getSubFaction()) && f.getName().contains("sum")).
+//                    map(field -> {
+//                                field.setAccessible(true);
+//                                try {
+//                                    field.setInt(field.getName(), field.getInt(field.getName()) + demonWorldCard.getPointCost());
+//
+//
+//                                } catch (IllegalAccessException e) {
+//                                    e.printStackTrace();
+//                                }
+//                                return container;
+//                            }
+//                    );
+//        });
+//
+//        // army net points?
+//        Arrays.stream(containerFields).filter( fieldNetpoints -> fieldNetpoints.getName().contains("totalSum")).map(
+//
+//                fnp -> {
+//                    try {
+//                        return fnp.setInt(fnp.getName(), field.getInt(field.getName()) + demonWorldCard.getPointCost());
+//                    } catch (IllegalAccessException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//        ) ;
+//
+//
+//        //*******************************************************
 

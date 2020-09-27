@@ -8,40 +8,51 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static marcel.demonworld.armygenerator.GameLogic.constants.SubFactions.orks.OrksSubFaction.*;
 
+/**
+ * TODO: WYVERN -> count as item
+ * TODO: LIMIT TO ONE CLAN
+ * <p>
+ * ok, orks is mildly annoying
+ * you choose -> clan OR clangett
+ * Clan: special troops of that one clan 50 percent
+ * Clangett: lead by one of Clanngetts Lieutenants and troops of all clans can be picked, but at a lower max (20%)
+ * ALSO:
+ * The lieutenants are Trazzag,  Fherniak,  Ärrig,  Khazzar  and  Nallian
+ * <p>
+ * DONE
+ * ======================
+ * - check for clangett lt. method
+ * - check if clangett or clan, make max numbers dependent on that choice
+ * - limit to one clan , else FALSE
+ * BUGS
+ * =========================================
+ * - you have a nasty logic error in "limitToOneClan" method, one unit can have SEVERAL clans, distinct wont work!!
+ *
+ */
 public class OrkCalculator implements ArmyCalculator {
 
     @Autowired
     OrkResultContainer container;
 
-    /**
-     * TODO: WYVERN -> count as item
-     * TODO: every ork army must belong to a clan OR be lead by one of Clanngetts Lieutenants
-     * ok, orks is mildly annoying
-     * you choose -> clan OR clangett
-     * Clan: special troops of that one clan 50 percent
-     * Clangett: lead by one of Clanngetts Lieutenants and troops of all clans can be picked, but at a lower max (20%)
-     * ALSO:
-     * The lieutenants are Trazzag,  Fherniak,  Ärrig,  Khazzar  und  Nallian
-     */
-
-
     @Override
     public CalculatedArmyResult CalculatePointCost(List<DemonWorldCard> list, float maximumPointValue) {
 
-        double sondertruppenotalPointValue;
+
+        double sondertruppenTotalPointValue;
         double clangettTotalPointValue;
 
         if (container.isClangettSelected()) {
 
-            sondertruppenotalPointValue = .20 * maximumPointValue;
+            sondertruppenTotalPointValue = .20 * maximumPointValue;
             clangettTotalPointValue = .20 * maximumPointValue;
 
         } else {
 
-            sondertruppenotalPointValue = .50 * maximumPointValue;
+            sondertruppenTotalPointValue = .50 * maximumPointValue;
             clangettTotalPointValue = 0;
         }
 
@@ -53,7 +64,7 @@ public class OrkCalculator implements ArmyCalculator {
 
                     container.setSondertruppenSum(container.getSondertruppenSum() + uc.getPoints());
 
-                    if (container.getSondertruppenSum() <= maximumPointValue * .50) {
+                    if (container.getSondertruppenSum() <= sondertruppenTotalPointValue) {
                         container.setFlagSondertruppen(true);
                     }
                     break;
@@ -69,7 +80,7 @@ public class OrkCalculator implements ArmyCalculator {
 
                     container.setClanngettSum(container.getClanngettSum() + uc.getPoints());
 
-                    if (container.getClanngettSum() <= maximumPointValue * .30) {
+                    if (container.getClanngettSum() <= clangettTotalPointValue) {
                         container.setFlagClanngett(true);
                     }
                     break;
@@ -116,20 +127,25 @@ public class OrkCalculator implements ArmyCalculator {
 
         if (container.isClangettSelected()) {
             container.setArmyFlag(checkForClangettLieutenant(list));
+        } else {
+            container.setArmyFlag(limitToOneClan(list));
         }
+
 
         //TODO: you got to rework the return DTO!
         return null;
     }
 
-    private boolean checkForClangettLieutenant(List<DemonWorldCard> list) {
-        return list.stream().anyMatch(card -> ((UnitCard) card).getUnitName().equalsIgnoreCase("Trazzag|Fherniak|Ärrig|Khazzar|Nallian"));
+    private boolean checkForClangettLieutenant(List<DemonWorldCard> armyList) {
+        return armyList.stream().
+                anyMatch(card -> ((UnitCard) card).
+                        getUnitName().
+                        equalsIgnoreCase("Trazzag|Fherniak|Ärrig|Khazzar|Nallian"));
     }
 
-    private void limitToOneClan() {
+    private boolean limitToOneClan(List<DemonWorldCard> armyList) {
 
-        //todo: the first time a clan unit is selected, shut down all others, if all are unselected, allow it again.
-
+        return armyList.stream().filter(card -> card.getSubFaction().contains("clan")).collect(Collectors.toList()) //.stream().distinct().count() > 1;
     }
 
     @Override

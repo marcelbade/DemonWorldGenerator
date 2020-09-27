@@ -104,7 +104,7 @@ public class GoblinArmyCalculator implements ArmyCalculator {
             container.setTotalSum(container.getTotalSum() + uc.getPoints());
         }
 
-        if (container.getTotalSum() <= maximumPointValue) {
+        if (container.getTotalSum() <= maximumPointValue && commanderPresent(list)) {
             container.setArmyFlag(true);
         }
 

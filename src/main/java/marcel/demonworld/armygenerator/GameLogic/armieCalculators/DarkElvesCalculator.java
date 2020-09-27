@@ -48,6 +48,7 @@ public class DarkElvesCalculator implements ArmyCalculator {
         }
         return null;
     }
+
     @Override
     public boolean commanderPresent(List<DemonWorldCard> list) {
         return list.stream().filter(c -> c instanceof UnitCard).anyMatch(card -> ((UnitCard) card).getCommandStars() >= 2);

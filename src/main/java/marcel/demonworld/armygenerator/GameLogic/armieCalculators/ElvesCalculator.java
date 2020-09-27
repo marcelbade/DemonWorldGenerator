@@ -13,6 +13,8 @@ import static marcel.demonworld.armygenerator.GameLogic.constants.SubFactions.el
 
 /**
  * ArmyCalculator implementation. See interface.
+ * TODO:  A LOT!!  look through this code!
+ *
  */
 public class ElvesCalculator implements ArmyCalculator {
 
@@ -22,44 +24,6 @@ public class ElvesCalculator implements ArmyCalculator {
     @Override
     public CalculatedArmyResult CalculatePointCost(List<DemonWorldCard> list, float maximumPointValue) {
 
-//        //*******************************************************
-//        //TEST -> reflection solution instead of switch statement !
-//
-//        int reflectionTest_PointTotal = 0;
-//
-//        Field[] containerFields = container.getClass().getDeclaredFields();
-//        list.stream().forEach(demonWorldCard -> {
-//
-//            Arrays.stream(containerFields).
-//                    filter(f -> f.getName().contains(demonWorldCard.getSubFaction()) && f.getName().contains("sum")).
-//                    map(field -> {
-//                                field.setAccessible(true);
-//                                try {
-//                                    field.setInt(field.getName(), field.getInt(field.getName()) + demonWorldCard.getPointCost());
-//
-//
-//                                } catch (IllegalAccessException e) {
-//                                    e.printStackTrace();
-//                                }
-//                                return container;
-//                            }
-//                    );
-//        });
-//
-//        // army net points?
-//        Arrays.stream(containerFields).filter( fieldNetpoints -> fieldNetpoints.getName().contains("totalSum")).map(
-//
-//                fnp -> {
-//                    try {
-//                        return fnp.setInt(fnp.getName(), field.getInt(field.getName()) + demonWorldCard.getPointCost());
-//                    } catch (IllegalAccessException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//        ) ;
-//
-//
-//        //*******************************************************
 
         int maxNumberOfOldHeroes = calculateNumberOfOldHeroes(list);
 
@@ -151,7 +115,7 @@ public class ElvesCalculator implements ArmyCalculator {
 
         container.setArmyFlag(ArmyCompliance.checkALlComplianceFlags(this));
 
-        if (container.getTotalSum() <= maximumPointValue && container.isArmyFlag()) {
+        if (container.getTotalSum() <= maximumPointValue) {
             container.setArmyFlag(true);
         }
 

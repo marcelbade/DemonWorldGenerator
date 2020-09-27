@@ -10,6 +10,10 @@ import java.util.List;
 
 import static marcel.demonworld.armygenerator.GameLogic.constants.SubFactions.ishtak.IshtakSubFaction.*;
 
+
+/*
+ *   in addition to all limits, heroes, chracters, ect.... must be <= 50%!!
+ * */
 public class IshtakCalculator implements ArmyCalculator {
 
     @Autowired
@@ -73,11 +77,19 @@ public class IshtakCalculator implements ArmyCalculator {
             container.setTotalSum(container.getTotalSum() + uc.getPoints());
 
         }
-        if (container.getTotalSum() <= maximumPointValue) {
+        if (container.getTotalSum() <= maximumPointValue && determinePointValuesHeroes(list, maximumPointValue)) {
             container.setArmyFlag(true);
         }
         return null;
     }
+
+    private boolean determinePointValuesHeroes(List<DemonWorldCard> armyList, float maximumPointValue) {
+
+        return armyList.stream().
+                filter(c -> ((UnitCard) c).getUnitType().equalsIgnoreCase("H|M")).
+                mapToInt(DemonWorldCard::getPoints).sum() <= maximumPointValue * 0.50;
+    }
+
 
     @Override
     public boolean commanderPresent(List<DemonWorldCard> list) {

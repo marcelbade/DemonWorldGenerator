@@ -43,7 +43,7 @@ public class ThainCalculator implements ArmyCalculator {
             "Dargorkon'yaghar d. Winterwolf"};
 
 
-    private Map<String, Integer> numberOfVeteranUnitsPerTribe = new HashMap<String, Integer>() {{
+    private final Map<String, Integer> numberOfVeteranUnitsPerTribe = new HashMap<String, Integer>() {{
         put(TRIBES[0], 0);
         put(TRIBES[1], 0);
         put(TRIBES[2], 0);
@@ -90,13 +90,13 @@ public class ThainCalculator implements ArmyCalculator {
                 case CHAMPIONS_HELDEN:
                     container.setChampions_heldenSum(container.getChampions_heldenSum() + uc.getPoints());
 
-                    if (container.getChampions_heldenSum() <= maximumPointValue * .30 && checkIfGreatChampionsAllowed(list)) {
+                    if (container.getChampions_heldenSum() <= maximumPointValue * .30 && checkIfGreatChampionsAllowed(uc, list)) {
                         container.setFlagChampions_helden(true);
                     } else if (container.getChampions_heldenSum() > maximumPointValue * .30) {
 
                         //TODO: SEND ERROR MESSAGE TO FRONTED
 
-                    } else if (!checkIfGreatChampionsAllowed(list)) {
+                    } else if (!checkIfGreatChampionsAllowed(uc, list)) {
 
                         //TODO: SEND ERROR MESSAGE TO FRONTED
                     }
@@ -181,14 +181,14 @@ public class ThainCalculator implements ArmyCalculator {
         unit.setSubFaction(unit.getSubFaction().concat("_" + tribe));
     }
 
-    private boolean checkIfGreatChampionsAllowed(UnitCard unitCard, List<DemonWorldCard> armyList) {
+    private boolean checkIfGreatChampionsAllowed(DemonWorldCard card, List<DemonWorldCard> armyList) {
 
         boolean result = true;
 
-        if (Arrays.stream(GREAT_CHAMPION_NAMES).anyMatch(name -> name.equalsIgnoreCase(unitCard.getUnitName()))) {
+        if (card instanceof UnitCard && Arrays.stream(GREAT_CHAMPION_NAMES).anyMatch(name -> name.equalsIgnoreCase(card.getName()))) {
 
             for (String tribe : TRIBES) {
-                if (!(armyList.stream().anyMatch(c -> c.getSubFaction().contains(tribe)))) {
+                if (armyList.stream().noneMatch(c -> c.getSubFaction().contains(tribe))) {
 
                     result = false;
                     break;
