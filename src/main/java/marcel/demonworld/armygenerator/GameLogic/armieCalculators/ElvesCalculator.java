@@ -110,7 +110,7 @@ public class ElvesCalculator implements ArmyCalculator {
             container.setTotalSum(container.getTotalSum() + uc.getPoints());
         }
 
-        container.setArmyFlag(ArmyCompliance.checkALlComplianceFlags(this));
+
 
         if (container.getTotalSum() <= maximumPointValue) {
             container.setArmyFlag(true);

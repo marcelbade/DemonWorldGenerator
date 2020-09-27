@@ -92,7 +92,11 @@ public class DwarfCalculator implements ArmyCalculator {
             container.setTotalSum(container.getTotalSum() + uc.getPoints());
         }
 
-        if (container.getTotalSum() <= maximumPointValue && commanderPresent(list)) {
+        if (commanderPresent(list)) {
+            container.setCommanderPresentFlag(true);
+        }
+
+        if (container.getTotalSum() <= maximumPointValue) {
             container.setArmyFlag(true);
         }
 
