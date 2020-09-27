@@ -14,7 +14,6 @@ import static marcel.demonworld.armygenerator.GameLogic.constants.SubFactions.el
 /**
  * ArmyCalculator implementation. See interface.
  * TODO:  A LOT!!  look through this code!
- *
  */
 public class ElvesCalculator implements ArmyCalculator {
 
@@ -63,11 +62,9 @@ public class ElvesCalculator implements ArmyCalculator {
                 case ALTE_HELDEN:
 
                     // TODO: confirm that this is correct!
-
-                    container.setNumberOfOldHeroes(container.getNumberOfOldHeroes() + 1);
                     container.setAlte_HeldenSum(container.getAlte_HeldenSum() + uc.getPoints());
 
-                    if (container.getNumberOfOldHeroes() <= maxNumberOfOldHeroes) {
+                    if (container.getNumberOfOldHeroes() <= calculateNumberOfOldHeroes(list)) {
                         container.setFlagAlte_Helden(true);
                     }
                     break;
@@ -137,12 +134,6 @@ public class ElvesCalculator implements ArmyCalculator {
      */
     private int calculateNumberOfOldHeroes(List<DemonWorldCard> armyList) {
 
-        int allowance = 0;
-
-        for (DemonWorldCard dc : armyList) {
-            if (dc instanceof UnitCard && dc.getSubFaction().equalsIgnoreCase("Thanaril | Ratsarmee"))
-                allowance++;
-        }
-        return allowance / 5;
+        return (int) armyList.stream().filter(c -> c.getSubFaction().equalsIgnoreCase("Thanaril | Ratsarmee")).count() / 5;
     }
 }

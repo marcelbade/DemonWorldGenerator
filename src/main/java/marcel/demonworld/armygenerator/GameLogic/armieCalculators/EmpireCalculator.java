@@ -18,12 +18,14 @@ import java.util.Map;
  * <p>
  * - only one border mark!
  * - one ** commander
+ * TODO: the border mark must be picked in the frontend. is stored in the resultContainer
  */
 public class EmpireCalculator implements ArmyCalculator {
 
     @Autowired
     EmpireResultContainer container;
 
+    // arrays for the lower and upper point limits of the border marks
     double[] nordmarkTotalPointValue = {0, 0};
     double[] suedmarkTotalPointValue = {0, 0};
     double[] ostmarkTotalPointValue = {0, 0};

@@ -6,6 +6,7 @@ import marcel.demonworld.armygenerator.dto.statCardDTOs.DemonWorldCard;
 import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,10 +29,7 @@ import static marcel.demonworld.armygenerator.GameLogic.constants.SubFactions.or
  * - check for clangett lt. method
  * - check if clangett or clan, make max numbers dependent on that choice
  * - limit to one clan , else FALSE
- * BUGS
- * =========================================
- * - you have a nasty logic error in "limitToOneClan" method, one unit can have SEVERAL clans, distinct wont work!!
- *
+
  */
 public class OrkCalculator implements ArmyCalculator {
 
@@ -144,8 +142,20 @@ public class OrkCalculator implements ArmyCalculator {
     }
 
     private boolean limitToOneClan(List<DemonWorldCard> armyList) {
+        String[] clansPresent = {};
+        boolean result = false;
 
-        return armyList.stream().filter(card -> card.getSubFaction().contains("clan")).collect(Collectors.toList()) //.stream().distinct().count() > 1;
+        Optional<DemonWorldCard> firstClanUnit = armyList.stream().filter(c -> c.getSubFaction().contains("clan")).findFirst();
+        if (firstClanUnit.isPresent()) {
+            clansPresent = firstClanUnit.get().getSubFaction().split("/");
+        }
+
+        for (String s : clansPresent) {
+            if (armyList.stream().allMatch(c -> c.getSubFaction().contains(s))) {
+                result = true;
+            }
+        }
+        return result;
     }
 
     @Override

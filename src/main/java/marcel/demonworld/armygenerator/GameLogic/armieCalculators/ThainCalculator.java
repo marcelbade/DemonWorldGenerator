@@ -110,10 +110,21 @@ public class ThainCalculator implements ArmyCalculator {
                     }
                     break;
             }
+        }
 
+        if (container.getTotalSum() <= maximumPointValue
+                && commanderPresent(list)
+                && checkShamanHeroesLimit(maximumPointValue)
+        ) {
+            container.setArmyFlag(true);
         }
 
         return null;
+    }
+
+
+    private boolean checkShamanHeroesLimit(float maximumPointValue) {
+        return (container.getChampions_heldenSum() + container.getSchamanenSum()) <= maximumPointValue;
     }
 
 
@@ -181,6 +192,13 @@ public class ThainCalculator implements ArmyCalculator {
         unit.setSubFaction(unit.getSubFaction().concat("_" + tribe));
     }
 
+    /**
+     * check if the army contains at least one unit of the same tribe as the great champion
+     *
+     * @param card
+     * @param armyList
+     * @return
+     */
     private boolean checkIfGreatChampionsAllowed(DemonWorldCard card, List<DemonWorldCard> armyList) {
 
         boolean result = true;
@@ -189,12 +207,10 @@ public class ThainCalculator implements ArmyCalculator {
 
             for (String tribe : TRIBES) {
                 if (armyList.stream().noneMatch(c -> c.getSubFaction().contains(tribe))) {
-
                     result = false;
                     break;
                 }
             }
-
         }
         return result;
     }
