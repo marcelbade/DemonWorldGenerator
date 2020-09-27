@@ -81,11 +81,6 @@ public class IshtakCalculator implements ArmyCalculator {
 
     @Override
     public boolean commanderPresent(List<DemonWorldCard> list) {
-        for (DemonWorldCard dc : list) {
-            if (dc instanceof UnitCard && ((UnitCard) dc).getCommandStars() >= 2) {
-                return true;
-            }
-        }
-        return false;
+        return list.stream().filter(c -> c instanceof UnitCard).anyMatch(card -> ((UnitCard) card).getCommandStars() >= 2);
     }
 }

@@ -26,23 +26,23 @@ public class DwarfCalculator implements ArmyCalculator {
 
     @Autowired
     DwarfResultContainer container;
-
-
+    
     @Override
     public CalculatedArmyResult CalculatePointCost(List<DemonWorldCard> list, float maximumPointValue) {
 
         double gaetaTotalPointValue;
         double zahraTotalPointValue;
+        // point allowance for allies is 20% minus minor dwarf realm
+        double pointsForMinorRealm;
 
-        if (container.getPickedRealm().equalsIgnoreCase("Gaeta")) {
-
+        if (container.isGaetaPicked()) {
             gaetaTotalPointValue = .40 * maximumPointValue;
             zahraTotalPointValue = .20 * maximumPointValue;
-
+            pointsForMinorRealm = container.getZahraSum();
         } else {
-
             gaetaTotalPointValue = .20 * maximumPointValue;
             zahraTotalPointValue = .40 * maximumPointValue;
+            pointsForMinorRealm = container.getGaetaSum();
         }
 
 
@@ -58,6 +58,7 @@ public class DwarfCalculator implements ArmyCalculator {
                         container.setFlagGaeta(true);
                     }
                     break;
+
                 case ZAHRA:
                     container.setZahraSum(container.getZahraSum() + uc.getPoints());
 
@@ -83,7 +84,7 @@ public class DwarfCalculator implements ArmyCalculator {
                 case ALLIES:
                     container.setAlliesSum(container.getAlliesSum() + uc.getPoints());
 
-                    if (container.getAlliesSum() >= maximumPointValue * 0.2) {
+                    if (container.getAlliesSum() >= (maximumPointValue * 0.2) - pointsForMinorRealm) {
                         container.setFlagAllies(true);
                     }
                     break;

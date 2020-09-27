@@ -1,8 +1,13 @@
 package marcel.demonworld.armygenerator.dto.statCardDTOs;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 
+@Setter
+@Getter
 @Entity
 @Table(name = "itemcards")
 public class ItemCard implements DemonWorldCard {
@@ -13,7 +18,7 @@ public class ItemCard implements DemonWorldCard {
     @Column(name = "faction", columnDefinition = "text")
     private String faction;
     @Column(name = "name", columnDefinition = "text")
-    private String name;
+    private String itemName;
     @Column(name = "pointCost")
     private Integer pointCost;
     @Column(name = "typeOfItem", columnDefinition = "text")
@@ -25,40 +30,15 @@ public class ItemCard implements DemonWorldCard {
     @Column(name = "uniqueItem", columnDefinition = "text")
     private Boolean uniqueItem;
 
-    public String getTypeOfItem() {
-        return typeOfItem;
-    }
 
-    public void setTypeOfItem(String typeOfItem) {
-        this.typeOfItem = typeOfItem;
-    }
-
-    public String getFaction() {
-        return faction;
-    }
-
-    public void setFaction(String faction) {
-        this.faction = faction;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    @Override
     public int getPoints() {
-        return pointCost;
+        return this.pointCost;
+    }
+
+    @Override
+    public String getName() {
+        return this.itemName;
     }
 
     @Override
@@ -66,32 +46,4 @@ public class ItemCard implements DemonWorldCard {
         return getUsedBy();
     }
 
-    public void setPointCost(int pointCost) {
-        this.pointCost = pointCost;
-    }
-
-    public String getRules() {
-        return rules;
-    }
-
-    public void setRules(String rules) {
-        this.rules = rules;
-    }
-
-
-    public String getUsedBy() {
-        return usedBy;
-    }
-
-    public void setUsedBy(String usedBy) {
-        this.usedBy = usedBy;
-    }
-
-    public boolean getUniqueItem() {
-        return uniqueItem;
-    }
-
-    public void setUniqueItem(boolean uniqueItem) {
-        this.uniqueItem = uniqueItem;
-    }
 }

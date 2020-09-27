@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class GoblinResultContainer {
+public class GoblinResultContainer implements ResultContainer{
 
     private boolean flagInfanterie = false;
     private boolean flagInsektenreiter = false;

@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ElvesResultContainer {
+public class ElvesResultContainer implements ResultContainer{
 
     // rule compliance flags
     private boolean flagThanarilClantruppen = false;

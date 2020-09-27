@@ -7,6 +7,10 @@ package marcel.demonworld.armygenerator.dto.statCardDTOs;
  */
 public interface DemonWorldCard {
 
-    public int getPoints();
-    public String getSubFaction();
+    String getName();
+
+    String getSubFaction();
+
+    int getPoints();
+
 }

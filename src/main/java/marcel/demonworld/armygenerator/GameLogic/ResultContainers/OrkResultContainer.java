@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class OrkResultContainer {
+public class OrkResultContainer implements ResultContainer{
 
     //todo: this has to be set on the frontend to select the correct ork calculator.
         boolean clangettSelected = false;

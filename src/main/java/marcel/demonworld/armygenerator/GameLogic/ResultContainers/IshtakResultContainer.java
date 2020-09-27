@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class IshtakResultContainer {
+public class IshtakResultContainer implements ResultContainer{
 
     private boolean flagEishexen = false;
     private boolean flagEisriesen = false;

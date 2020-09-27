@@ -7,6 +7,7 @@ import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 import static marcel.demonworld.armygenerator.GameLogic.constants.SubFactions.orks.OrksSubFaction.*;
 
@@ -26,24 +27,24 @@ public class OrkCalculator implements ArmyCalculator {
      * The lieutenants are Trazzag,  Fherniak,  Ärrig,  Khazzar  und  Nallian
      */
 
-    private boolean checkForClangettLieutenant(List<DemonWorldCard> list) {
-
-        for (DemonWorldCard dc : list) {
-            if (dc instanceof UnitCard && (
-                    ((UnitCard) dc).getUnitName().equalsIgnoreCase("Trazzag") ||
-                            ((UnitCard) dc).getUnitName().equalsIgnoreCase("Fherniak") ||
-                            ((UnitCard) dc).getUnitName().equalsIgnoreCase("Ärrig") ||
-                            ((UnitCard) dc).getUnitName().equalsIgnoreCase("Khazzar") ||
-                            ((UnitCard) dc).getUnitName().equalsIgnoreCase("Nallian"))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     @Override
     public CalculatedArmyResult CalculatePointCost(List<DemonWorldCard> list, float maximumPointValue) {
+
+        double sondertruppenotalPointValue;
+        double clangettTotalPointValue;
+
+        if (container.isClangettSelected()) {
+
+            sondertruppenotalPointValue = .20 * maximumPointValue;
+            clangettTotalPointValue = .20 * maximumPointValue;
+
+        } else {
+
+            sondertruppenotalPointValue = .50 * maximumPointValue;
+            clangettTotalPointValue = 0;
+        }
+
 
         for (DemonWorldCard uc : list) {
 
@@ -109,21 +110,30 @@ public class OrkCalculator implements ArmyCalculator {
             }
         }
 
-        if (container.getTotalSum() <= maximumPointValue) {
+        if (container.getTotalSum() <= maximumPointValue && commanderPresent(list)) {
             container.setArmyFlag(true);
+        }
+
+        if (container.isClangettSelected()) {
+            container.setArmyFlag(checkForClangettLieutenant(list));
         }
 
         //TODO: you got to rework the return DTO!
         return null;
     }
 
+    private boolean checkForClangettLieutenant(List<DemonWorldCard> list) {
+        return list.stream().anyMatch(card -> ((UnitCard) card).getUnitName().equalsIgnoreCase("Trazzag|Fherniak|Ärrig|Khazzar|Nallian"));
+    }
+
+    private void limitToOneClan() {
+
+        //todo: the first time a clan unit is selected, shut down all others, if all are unselected, allow it again.
+
+    }
+
     @Override
     public boolean commanderPresent(List<DemonWorldCard> list) {
-        for (DemonWorldCard dc : list) {
-            if (dc instanceof UnitCard && ((UnitCard) dc).getCommandStars() >= 2) {
-                return true;
-            }
-        }
-        return false;
+        return list.stream().filter(c -> c instanceof UnitCard).anyMatch(card -> ((UnitCard) card).getCommandStars() >= 2);
     }
 }

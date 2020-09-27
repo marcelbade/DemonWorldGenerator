@@ -3,6 +3,7 @@ package marcel.demonworld.armygenerator.GameLogic.armieCalculators;
 import marcel.demonworld.armygenerator.dto.armyDTOs.CalculatedArmyResult;
 import marcel.demonworld.armygenerator.dto.statCardDTOs.DemonWorldCard;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -14,6 +15,20 @@ import java.util.List;
  * compliance.
  */
 public interface ArmyCalculator {
-      CalculatedArmyResult CalculatePointCost(List<DemonWorldCard> list, float maximumPointValue);
-      boolean commanderPresent(List<DemonWorldCard> list);
+    CalculatedArmyResult CalculatePointCost(List<DemonWorldCard> list, float maximumPointValue);
+
+    boolean commanderPresent(List<DemonWorldCard> list);
+
+    default void subtractPointsAndRemoveFromList(List<DemonWorldCard> list, DemonWorldCard card) {
+
+        Iterator<DemonWorldCard> iterator = list.iterator();
+
+
+        //todo: Determine, at a later time, if you need to make the substract method mroe complicated?
+        while (iterator.hasNext()) {
+            if (((DemonWorldCard) iterator).getName().equalsIgnoreCase(card.getName())) {
+                iterator.remove();
+            }
+        }
+    }
 }

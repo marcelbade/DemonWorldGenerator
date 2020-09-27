@@ -6,14 +6,21 @@ package marcel.demonworld.armygenerator.GameLogic.ResultContainers;
 
 import lombok.Getter;
 import lombok.Setter;
+import marcel.demonworld.armygenerator.dto.statCardDTOs.DemonWorldCard;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
-public class DwarfResultContainer {
+public class DwarfResultContainer implements ResultContainer {
+
+    //The Army List
+    List<DemonWorldCard> armyList = new ArrayList<>();
 
     //picked Realm
 
-    String pickedRealm;
+    boolean gaetaPicked;
 
     // rule compliance flags
     private boolean flagGeneraltroops = false;
@@ -30,6 +37,5 @@ public class DwarfResultContainer {
     private int zahraSum = 0;
     private int heroes_characters_priestsSum = 0;
     private int alliesSum = 0;
-
 
 }

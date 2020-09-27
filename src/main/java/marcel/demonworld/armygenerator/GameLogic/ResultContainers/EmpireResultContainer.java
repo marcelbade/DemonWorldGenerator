@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class EmpireResultContainer {
+public class EmpireResultContainer implements ResultContainer {
 
     String pickedMark;
 

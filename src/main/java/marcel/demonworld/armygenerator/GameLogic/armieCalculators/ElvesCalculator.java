@@ -16,11 +16,11 @@ import static marcel.demonworld.armygenerator.GameLogic.constants.SubFactions.el
  */
 public class ElvesCalculator implements ArmyCalculator {
 
-	@Autowired
-	ElvesResultContainer container;
+    @Autowired
+    ElvesResultContainer container;
 
-	@Override
-	public CalculatedArmyResult CalculatePointCost(List<DemonWorldCard> list, float maximumPointValue) {
+    @Override
+    public CalculatedArmyResult CalculatePointCost(List<DemonWorldCard> list, float maximumPointValue) {
 
 //        //*******************************************************
 //        //TEST -> reflection solution instead of switch statement !
@@ -61,132 +61,124 @@ public class ElvesCalculator implements ArmyCalculator {
 //
 //        //*******************************************************
 
-		int maxNumberOfOldHeroes = calculateNumberOfOldHeroes(list);
+        int maxNumberOfOldHeroes = calculateNumberOfOldHeroes(list);
 
-		for (DemonWorldCard uc : list) {
+        for (DemonWorldCard uc : list) {
 
-			switch (uc.getSubFaction()) {
+            switch (uc.getSubFaction()) {
 
-			case THANARILCLANTRUPPEN:
+                case THANARILCLANTRUPPEN:
 
-				container.setThanarilClantruppenSum(container.getThanarilClantruppenSum() + uc.getPoints());
+                    container.setThanarilClantruppenSum(container.getThanarilClantruppenSum() + uc.getPoints());
 
-				if (container.getThanarilClantruppenSum() >= maximumPointValue * 0.30
-						&& container.getThanarilClantruppenSum() >= maximumPointValue * 0.70) {
-					container.setFlagThanarilClantruppen(true);
-				}
-				break;
+                    if (container.getThanarilClantruppenSum() >= maximumPointValue * 0.30
+                            && container.getThanarilClantruppenSum() >= maximumPointValue * 0.70) {
+                        container.setFlagThanarilClantruppen(true);
+                    }
+                    break;
 
-			case THANARILKRIEGERBÜNDE:
+                case THANARILKRIEGERBÜNDE:
 
-				container.setThanarilKriegerbuendeSum(container.getThanarilKriegerbuendeSum() + uc.getPoints());
+                    container.setThanarilKriegerbuendeSum(container.getThanarilKriegerbuendeSum() + uc.getPoints());
 
-				if (container.getThanarilKriegerbuendeSum() <= maximumPointValue * 0.30) {
-					container.setFlagThanarilKriegerbünde(true);
-				}
-				break;
+                    if (container.getThanarilKriegerbuendeSum() <= maximumPointValue * 0.30) {
+                        container.setFlagThanarilKriegerbünde(true);
+                    }
+                    break;
 
-			case THANARIL_CLANLORDS_BARDEN_BEFEHLSHABER:
+                case THANARIL_CLANLORDS_BARDEN_BEFEHLSHABER:
 
-				container.setThanaril_Clanlords_Barden_BefehlshaberSum(
-						container.getThanaril_Clanlords_Barden_BefehlshaberSum() + uc.getPoints());
+                    container.setThanaril_Clanlords_Barden_BefehlshaberSum(
+                            container.getThanaril_Clanlords_Barden_BefehlshaberSum() + uc.getPoints());
 
-				if (container.getThanaril_Clanlords_Barden_BefehlshaberSum() <= maximumPointValue * 0.30) {
-					container.setFlagThanaril_Clanlords_Barden_Befehlshaber(true);
-				}
-				break;
+                    if (container.getThanaril_Clanlords_Barden_BefehlshaberSum() <= maximumPointValue * 0.30) {
+                        container.setFlagThanaril_Clanlords_Barden_Befehlshaber(true);
+                    }
+                    break;
 
-			case ALTE_HELDEN:
+                case ALTE_HELDEN:
 
-				// TODO: confirm that this is correct!
+                    // TODO: confirm that this is correct!
 
-				container.setNumberOfOldHeroes(container.getNumberOfOldHeroes() + 1);
-				container.setAlte_HeldenSum(container.getAlte_HeldenSum() + uc.getPoints());
+                    container.setNumberOfOldHeroes(container.getNumberOfOldHeroes() + 1);
+                    container.setAlte_HeldenSum(container.getAlte_HeldenSum() + uc.getPoints());
 
-				if (container.getNumberOfOldHeroes() <= maxNumberOfOldHeroes) {
-					container.setFlagAlte_Helden(true);
-				}
-				break;
+                    if (container.getNumberOfOldHeroes() <= maxNumberOfOldHeroes) {
+                        container.setFlagAlte_Helden(true);
+                    }
+                    break;
 
-			case DYREA_LOREATHS:
+                case DYREA_LOREATHS:
 
-				container.setDyrea_LoreathsSum(container.getDyrea_LoreathsSum() + uc.getPoints());
+                    container.setDyrea_LoreathsSum(container.getDyrea_LoreathsSum() + uc.getPoints());
 
-				if (container.getDyrea_LoreathsSum() <= maximumPointValue * 0.30) {
-					container.setFlagDyrea_Loreaths(true);
-				}
+                    if (container.getDyrea_LoreathsSum() <= maximumPointValue * 0.30) {
+                        container.setFlagDyrea_Loreaths(true);
+                    }
 
-				break;
+                    break;
 
-			case OREA_VANAR_TRUPPEN_MEISTER:
+                case OREA_VANAR_TRUPPEN_MEISTER:
 
-				container.setOrea_Vanar_Truppen_MeisterSum(
-						container.getOrea_Vanar_Truppen_MeisterSum() + uc.getPoints());
+                    container.setOrea_Vanar_Truppen_MeisterSum(
+                            container.getOrea_Vanar_Truppen_MeisterSum() + uc.getPoints());
 
-				if (container.getOrea_Vanar_Truppen_MeisterSum() <= maximumPointValue * 0.30) {
-					container.setFlagOrea_Vanar_Truppen_Meister(true);
-				}
-				break;
+                    if (container.getOrea_Vanar_Truppen_MeisterSum() <= maximumPointValue * 0.30) {
+                        container.setFlagOrea_Vanar_Truppen_Meister(true);
+                    }
+                    break;
 
-			case RATSARMEE_EINHEITEN_BEFEHLSHABER:
+                case RATSARMEE_EINHEITEN_BEFEHLSHABER:
 
-				container.setRatsarmee_Einheiten_BefehlshaberSum(
-						container.getRatsarmee_Einheiten_BefehlshaberSum() + uc.getPoints());
-				if (container.getRatsarmee_Einheiten_BefehlshaberSum() <= maximumPointValue * 0.50) {
-					container.setFlagRatsarmee_Einheiten_Befehlshaber(true);
-				}
-				break;
+                    container.setRatsarmee_Einheiten_BefehlshaberSum(
+                            container.getRatsarmee_Einheiten_BefehlshaberSum() + uc.getPoints());
+                    if (container.getRatsarmee_Einheiten_BefehlshaberSum() <= maximumPointValue * 0.50) {
+                        container.setFlagRatsarmee_Einheiten_Befehlshaber(true);
+                    }
+                    break;
 
-			case BAUMHERREN_ZENTAUREN:
+                case BAUMHERREN_ZENTAUREN:
 
-				container.setBaumherren_ZentaurenSum(container.getBaumherren_ZentaurenSum() + uc.getPoints());
+                    container.setBaumherren_ZentaurenSum(container.getBaumherren_ZentaurenSum() + uc.getPoints());
 
-				if (container.getBaumherren_ZentaurenSum() <= maximumPointValue * 0.25) {
-					container.setFlagBaumherren_Zentauren(true);
-				}
-				break;
-			}
-			container.setTotalSum(container.getTotalSum() + uc.getPoints());
-		}
+                    if (container.getBaumherren_ZentaurenSum() <= maximumPointValue * 0.25) {
+                        container.setFlagBaumherren_Zentauren(true);
+                    }
+                    break;
+            }
+            container.setTotalSum(container.getTotalSum() + uc.getPoints());
+        }
 
-		container.setArmyFlag(ArmyCompliance.checkALlComplianceFlags(this));
+        container.setArmyFlag(ArmyCompliance.checkALlComplianceFlags(this));
 
-		if (container.getTotalSum() <= maximumPointValue && container.isArmyFlag()) {
-			container.setArmyFlag(true);
-		}
+        if (container.getTotalSum() <= maximumPointValue && container.isArmyFlag()) {
+            container.setArmyFlag(true);
+        }
 
-		// TODO: you got to rework the return DTO!
-		return null;
-	}
+        // TODO: you got to rework the return DTO!
+        return null;
+    }
 
-	@Override
-	public boolean commanderPresent(List<DemonWorldCard> list) {
-		for (DemonWorldCard dc : list) {
-			if (dc instanceof UnitCard && ((UnitCard) dc).getCommandStars() >= 2) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean commanderPresent(List<DemonWorldCard> list) {
+        return list.stream().filter(c -> c instanceof UnitCard).anyMatch(card -> ((UnitCard) card).getCommandStars() >= 2);
+    }
 
-	/**
-	 * Method calculates number of "old Heroes" for the army. The maximum is 1 hero
-	 * per 5 units with the attribute "Thanaril" OR "Ratsarmee"
-	 *
-	 * @param armyList elves faction army list.
-	 * @return maximum number of units with the "old Heroes" subfaction value.
-	 */
-	private int calculateNumberOfOldHeroes(List<DemonWorldCard> armyList) {
+    /**
+     * Method calculates number of "old Heroes" for the army. The maximum is 1 hero
+     * per 5 units with the attribute "Thanaril" OR "Ratsarmee"
+     *
+     * @param armyList elves faction army list.
+     * @return maximum number of units with the "old Heroes" subfaction value.
+     */
+    private int calculateNumberOfOldHeroes(List<DemonWorldCard> armyList) {
 
-		String[] attributes = { "Thanaril", "Ratsarmee", "ratsarmee", "thanaril" };
-		int allowance = 0;
+        int allowance = 0;
 
-		for (DemonWorldCard dc : armyList) {
-			for (String s : attributes) {
-				if (dc instanceof UnitCard && dc.getSubFaction().contains(s))
-					allowance += 1;
-			}
-		}
-		return allowance / 5;
-	}
+        for (DemonWorldCard dc : armyList) {
+            if (dc instanceof UnitCard && dc.getSubFaction().equalsIgnoreCase("Thanaril | Ratsarmee"))
+                allowance++;
+        }
+        return allowance / 5;
+    }
 }
