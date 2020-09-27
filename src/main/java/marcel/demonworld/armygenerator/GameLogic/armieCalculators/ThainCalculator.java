@@ -89,9 +89,17 @@ public class ThainCalculator implements ArmyCalculator {
                 case CHAMPIONS_HELDEN:
                     container.setChampions_heldenSum(container.getChampions_heldenSum() + uc.getPoints());
 
-                    if (container.getChampions_heldenSum() <= maximumPointValue * .30) {
+                    if (container.getChampions_heldenSum() <= maximumPointValue * .30 && checkIfGreatChampionsAllowed(list)) {
                         container.setFlagChampions_helden(true);
+                    } else if (container.getChampions_heldenSum() > maximumPointValue * .30) {
+
+                        //TODO: SEND ERROR MESSAGE TO FRONTED
+
+                    } else if (!checkIfGreatChampionsAllowed(list)) {
+
+                        //TODO: SEND ERROR MESSAGE TO FRONTED
                     }
+
                     break;
                 case GARYDWEN:
                     container.setGarydwenSum(container.getGarydwenSum() + uc.getPoints());
