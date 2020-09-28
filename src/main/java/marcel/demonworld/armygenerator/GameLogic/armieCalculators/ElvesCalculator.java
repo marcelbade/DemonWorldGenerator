@@ -21,7 +21,7 @@ import static marcel.demonworld.armygenerator.GameLogic.constants.SubFactions.el
  *    be recruited if the LEADER OF THAT KRIEGERBUND is selected [DONE]
  *  - Every school of the Orea Vanar can be deployed ONCE  [DONE]
  *  - the orea vanar master can only b picked IF their school is also deployed
- *  - Units of the Ilah Ri Ratsarmee can only be deployed if a Befehlshaber of the illah ri is deployed
+ *  - Units of the Ilah Ri Ratsarmee can only be deployed if a Befehlshaber of the illah ri is deployed  [DONE]
  * */
 public class ElvesCalculator implements ArmyCalculator {
 
@@ -129,8 +129,8 @@ public class ElvesCalculator implements ArmyCalculator {
     /**
      * Every Army must contain a ** commander.
      *
-     * @param list
-     * @return
+     * @param list The current List of selected stat cards.
+     * @return boolean flag
      */
     @Override
     public boolean commanderPresent(List<DemonWorldCard> list) {
@@ -142,31 +142,33 @@ public class ElvesCalculator implements ArmyCalculator {
      * Method calculates number of "old Heroes" for the army. The maximum is 1 hero
      * per 5 units with the attribute "Thanaril" OR "Ratsarmee"
      *
-     * @param armyList elves faction army list.
+     * @param armyList The current List of selected stat cards.
      * @return maximum number of units with the "old Heroes" subfaction value.
      */
     private int calculateNumberOfOldHeroes(List<DemonWorldCard> armyList) {
-        return (int) armyList.stream().filter(c -> c.getSubFaction().equalsIgnoreCase("Thanaril | Ratsarmee")).count() / 5;
+        return (int) armyList.stream().filter(
+                c -> c.getSubFaction().equalsIgnoreCase(THANARILCLANTRUPPEN)
+                        || c.getSubFaction().equalsIgnoreCase(Ilah_RI_EINHEITEN)).count() / 5;
     }
 
 
     /**
      * to pick more than one Thanaril Unit, you need to also deploy one Thanaril hero.
      *
-     * @return
+     * @return boolean flag
      */
     private boolean thanarilRuleCompliance(List<DemonWorldCard> armyList) {
         boolean result = true;
 
-        if (armyList.stream().filter(c -> c.getSubFaction().equalsIgnoreCase("Thanaril-Kriegerbd")).count() > 1 &&
-                armyList.stream().anyMatch(c -> c.getSubFaction().equalsIgnoreCase("Held/Befehlsh. Kriegerbd")))
+        if (armyList.stream().filter(c -> c.getSubFaction().equalsIgnoreCase(THANARILKRIEGERBÜNDE)).count() > 1 &&
+                armyList.stream().anyMatch(c -> !c.getSubFaction().equalsIgnoreCase(THANARIL_BEFEHLSHABER)))
             result = false;
 
         return result;
     }
 
     /**
-     * @param armyList
+     * @param armyList The current List of selected stat cards.
      * @return booelan flag
      */
     private boolean oreaVanarHeroCompliance(List<DemonWorldCard> armyList, DemonWorldCard OreaVanarHero) {
@@ -178,7 +180,7 @@ public class ElvesCalculator implements ArmyCalculator {
 
         result = armyList.stream().anyMatch(c -> c.getName().equalsIgnoreCase(subfactions[2]));
 
-        //TODO: CONTINUE HERE !!
+        //TODO: CONTINUE HERE !! -> problem is the subfaction in sql for these heroes
 
         return result;
     }
@@ -187,7 +189,7 @@ public class ElvesCalculator implements ArmyCalculator {
     /**
      * Your army can only have tree people or centaurs!
      *
-     * @param armyList
+     * @param armyList The current List of selected stat cards.
      * @return booelan flag
      */
     private boolean treePeopleOrCentaurs(List<DemonWorldCard> armyList) {
@@ -201,6 +203,4 @@ public class ElvesCalculator implements ArmyCalculator {
 
         return result;
     }
-
-
 }

@@ -86,7 +86,8 @@ public class IshtakCalculator implements ArmyCalculator {
     private boolean determinePointValuesHeroes(List<DemonWorldCard> armyList, float maximumPointValue) {
 
         return armyList.stream().
-                filter(c -> ((UnitCard) c).getUnitType().equalsIgnoreCase("H|M")).
+                filter(c -> ((UnitCard) c).getUnitType().equalsIgnoreCase("M")
+                        || ((UnitCard) c).getUnitType().equalsIgnoreCase("H")).
                 mapToInt(DemonWorldCard::getPoints).sum() <= maximumPointValue * 0.50;
     }
 

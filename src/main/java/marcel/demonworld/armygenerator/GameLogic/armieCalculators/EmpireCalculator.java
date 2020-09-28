@@ -76,7 +76,7 @@ public class EmpireCalculator implements ArmyCalculator {
                     }
                     break;
 
-                //TODO: Oi, Smartypants: order magicians count as order, not magicians. Plsease test.
+                //TODO: Oi, Smartypants: order magicians count as order, not magicians. Please test.
                 case ORDEN:
                     container.setOrdenSum(container.getOrdenSum() + uc.getPoints());
 
