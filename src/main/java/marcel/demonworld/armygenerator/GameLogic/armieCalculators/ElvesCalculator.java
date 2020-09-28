@@ -6,15 +6,23 @@ import marcel.demonworld.armygenerator.dto.statCardDTOs.DemonWorldCard;
 import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static marcel.demonworld.armygenerator.GameLogic.constants.SubFactions.elves.ElvesSubFaction.*;
 
-/**
- * ArmyCalculator implementation. See interface.
- * TODO:  A LOT!!  look through this code!
- */
+/*
+ *   let's rework elves
+ *   here are the rules of army composition:
+ *  - the army MUST have at least ONE Thanaril-Clanlord/Befehlshaber
+ *  - centaurs OR treelords
+ *  - Thanaril Kriegerbünde: the first one is picked freely. Foradditianl units of that Kriegerbund can only
+ *    be recruited if the LEADER OF THAT KRIEGERBUND is selected
+ *  - Every school of the Orea Vanar can be deployed ONCE
+ *  - the orea vanar master can only b picked IF their school is also deployed
+ *  - Units of the Ilah Ri Ratsarmee can only be deployed of a Befehlshaber of the illah ri is deployed
+ * */
 public class ElvesCalculator implements ArmyCalculator {
 
     @Autowired
@@ -111,7 +119,6 @@ public class ElvesCalculator implements ArmyCalculator {
         }
 
 
-
         if (container.getTotalSum() <= maximumPointValue) {
             container.setArmyFlag(true);
         }
@@ -136,4 +143,29 @@ public class ElvesCalculator implements ArmyCalculator {
 
         return (int) armyList.stream().filter(c -> c.getSubFaction().equalsIgnoreCase("Thanaril | Ratsarmee")).count() / 5;
     }
+
+    private boolean treePeopleOrCentaurs(List<DemonWorldCard> armyList) {
+
+        boolean result = true;
+        String exclude = "";
+
+        // what is the first pick
+        Optional<DemonWorldCard> firstPick = armyList.stream().filter(c -> c.getSubFaction().equalsIgnoreCase("Zentauren|Baumherren")).findFirst();
+        //make sure all cards do NOT have the one not picked!
+
+        if (firstPick.isPresent()) {
+            exclude = firstPick.get().
+                    getSubFaction().
+                    equalsIgnoreCase("Zentauren") ? "baumherrem" : "Zentauren";
+        }
+
+        for (DemonWorldCard uc : armyList) {
+            if (uc.getSubFaction().equalsIgnoreCase(exclude)) ;
+            result = false;
+        }
+
+        return true;
+    }
+
+
 }
