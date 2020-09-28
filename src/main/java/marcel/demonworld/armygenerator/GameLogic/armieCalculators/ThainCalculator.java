@@ -123,8 +123,14 @@ public class ThainCalculator implements ArmyCalculator {
     }
 
 
+    /**
+     * Confirm that Heroes, shamans,... <= 50%
+     *
+     * @param maximumPointValue
+     * @return boolean flag
+     */
     private boolean checkShamanHeroesLimit(float maximumPointValue) {
-        return (container.getChampions_heldenSum() + container.getSchamanenSum()) <= maximumPointValue;
+        return (container.getChampions_heldenSum() + container.getSchamanenSum()) <= 0.50 * maximumPointValue;
     }
 
 
@@ -138,11 +144,8 @@ public class ThainCalculator implements ArmyCalculator {
     private boolean confirmVeteranCountIsValid(List<DemonWorldCard> armyList, String[] tribes) {
 
         boolean result = true;
-
         // set correct max number of veterans per tribe
-        for (String tribe : tribes) {
-            maxNumberOfVeteransOfTribe(armyList, tribe);
-        }
+        Arrays.stream(tribes).forEach(tribe -> maxNumberOfVeteransOfTribe(armyList, tribe));
 
         //assert number <= max number
         for (String tribe : tribes) {
@@ -156,8 +159,8 @@ public class ThainCalculator implements ArmyCalculator {
     /**
      * Determine max number of veteran for one tribe.
      *
-     * @param armyList The Thain ArmyList.
-     * @param tribe    one Thain tribe
+     * @param armyList
+     * @param tribe
      */
     private void maxNumberOfVeteransOfTribe(List<DemonWorldCard> armyList, String tribe) {
         numberOfVeteranUnitsPerTribe.put(tribe, (int) armyList.
@@ -197,16 +200,17 @@ public class ThainCalculator implements ArmyCalculator {
      *
      * @param card
      * @param armyList
-     * @return
+     * @return boolean flag
      */
     private boolean checkIfGreatChampionsAllowed(DemonWorldCard card, List<DemonWorldCard> armyList) {
 
         boolean result = true;
 
+        // if the card is indeed a champion, see if any card in armylist EXCEPT this card matches the subFaction (tribe)
         if (card instanceof UnitCard && Arrays.stream(GREAT_CHAMPION_NAMES).anyMatch(name -> name.equalsIgnoreCase(card.getName()))) {
 
             for (String tribe : TRIBES) {
-                if (armyList.stream().noneMatch(c -> c.getSubFaction().contains(tribe))) {
+                if (armyList.stream().noneMatch(c -> c.getSubFaction().contains(tribe) && (!c.getName().equals(card.getName())))) {
                     result = false;
                     break;
                 }

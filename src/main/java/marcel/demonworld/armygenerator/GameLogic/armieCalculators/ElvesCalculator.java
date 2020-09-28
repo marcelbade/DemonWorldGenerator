@@ -15,13 +15,13 @@ import static marcel.demonworld.armygenerator.GameLogic.constants.SubFactions.el
 /*
  *   let's rework elves
  *   here are the rules of army composition:
- *  - the army MUST have at least ONE Thanaril-Clanlord/Befehlshaber
- *  - centaurs OR treelords
- *  - Thanaril Kriegerbünde: the first one is picked freely. Foradditianl units of that Kriegerbund can only
- *    be recruited if the LEADER OF THAT KRIEGERBUND is selected
- *  - Every school of the Orea Vanar can be deployed ONCE
+ *  - the army MUST have at least ONE Thanaril-Clanlord/Befehlshaber [DONE]
+ *  - centaurs OR treelords[DONE]
+ *  - Thanaril Kriegerbünde: the first one is picked freely. Additional units of that Kriegerbund can only
+ *    be recruited if the LEADER OF THAT KRIEGERBUND is selected [DONE]
+ *  - Every school of the Orea Vanar can be deployed ONCE  [DONE]
  *  - the orea vanar master can only b picked IF their school is also deployed
- *  - Units of the Ilah Ri Ratsarmee can only be deployed of a Befehlshaber of the illah ri is deployed
+ *  - Units of the Ilah Ri Ratsarmee can only be deployed if a Befehlshaber of the illah ri is deployed
  * */
 public class ElvesCalculator implements ArmyCalculator {
 
@@ -39,7 +39,6 @@ public class ElvesCalculator implements ArmyCalculator {
             switch (uc.getSubFaction()) {
 
                 case THANARILCLANTRUPPEN:
-
                     container.setThanarilClantruppenSum(container.getThanarilClantruppenSum() + uc.getPoints());
 
                     if (container.getThanarilClantruppenSum() >= maximumPointValue * 0.30
@@ -49,7 +48,6 @@ public class ElvesCalculator implements ArmyCalculator {
                     break;
 
                 case THANARILKRIEGERBÜNDE:
-
                     container.setThanarilKriegerbuendeSum(container.getThanarilKriegerbuendeSum() + uc.getPoints());
 
                     if (container.getThanarilKriegerbuendeSum() <= maximumPointValue * 0.30) {
@@ -57,7 +55,7 @@ public class ElvesCalculator implements ArmyCalculator {
                     }
                     break;
 
-                case THANARIL_CLANLORDS_BARDEN_BEFEHLSHABER:
+                case THANARIL_BEFEHLSHABER:
 
                     container.setThanaril_Clanlords_Barden_BefehlshaberSum(
                             container.getThanaril_Clanlords_Barden_BefehlshaberSum() + uc.getPoints());
@@ -68,7 +66,6 @@ public class ElvesCalculator implements ArmyCalculator {
                     break;
 
                 case ALTE_HELDEN:
-
                     // TODO: confirm that this is correct!
                     container.setAlte_HeldenSum(container.getAlte_HeldenSum() + uc.getPoints());
 
@@ -77,8 +74,8 @@ public class ElvesCalculator implements ArmyCalculator {
                     }
                     break;
 
-                case DYREA_LOREATHS:
-
+                case DYREA:
+                case LOREATHS:
                     container.setDyrea_LoreathsSum(container.getDyrea_LoreathsSum() + uc.getPoints());
 
                     if (container.getDyrea_LoreathsSum() <= maximumPointValue * 0.30) {
@@ -87,8 +84,8 @@ public class ElvesCalculator implements ArmyCalculator {
 
                     break;
 
-                case OREA_VANAR_TRUPPEN_MEISTER:
-
+                case OREA_VANAR_TRUPPEN:
+                case OREA_VANAR_BEFEHLSHABER:
                     container.setOrea_Vanar_Truppen_MeisterSum(
                             container.getOrea_Vanar_Truppen_MeisterSum() + uc.getPoints());
 
@@ -97,8 +94,8 @@ public class ElvesCalculator implements ArmyCalculator {
                     }
                     break;
 
-                case RATSARMEE_EINHEITEN_BEFEHLSHABER:
-
+                case Ilah_RI_EINHEITEN:
+                case Ilah_RI_BEFEHLSHABER:
                     container.setRatsarmee_Einheiten_BefehlshaberSum(
                             container.getRatsarmee_Einheiten_BefehlshaberSum() + uc.getPoints());
                     if (container.getRatsarmee_Einheiten_BefehlshaberSum() <= maximumPointValue * 0.50) {
@@ -106,14 +103,15 @@ public class ElvesCalculator implements ArmyCalculator {
                     }
                     break;
 
-                case BAUMHERREN_ZENTAUREN:
-
+                case ZENTAUREN:
+                case BAUMHERREN:
                     container.setBaumherren_ZentaurenSum(container.getBaumherren_ZentaurenSum() + uc.getPoints());
 
                     if (container.getBaumherren_ZentaurenSum() <= maximumPointValue * 0.25) {
                         container.setFlagBaumherren_Zentauren(true);
                     }
                     break;
+
             }
             container.setTotalSum(container.getTotalSum() + uc.getPoints());
         }
@@ -127,9 +125,17 @@ public class ElvesCalculator implements ArmyCalculator {
         return null;
     }
 
+
+    /**
+     * Every Army must contain a ** commander.
+     *
+     * @param list
+     * @return
+     */
     @Override
     public boolean commanderPresent(List<DemonWorldCard> list) {
-        return list.stream().filter(c -> c instanceof UnitCard).anyMatch(card -> ((UnitCard) card).getCommandStars() >= 2);
+        return list.stream().
+                filter(c -> c instanceof UnitCard).anyMatch(card -> ((UnitCard) card).getCommandStars() >= 2);
     }
 
     /**
@@ -140,31 +146,60 @@ public class ElvesCalculator implements ArmyCalculator {
      * @return maximum number of units with the "old Heroes" subfaction value.
      */
     private int calculateNumberOfOldHeroes(List<DemonWorldCard> armyList) {
-
         return (int) armyList.stream().filter(c -> c.getSubFaction().equalsIgnoreCase("Thanaril | Ratsarmee")).count() / 5;
     }
 
+
+    /**
+     * to pick more than one Thanaril Unit, you need to also deploy one Thanaril hero.
+     *
+     * @return
+     */
+    private boolean thanarilRuleCompliance(List<DemonWorldCard> armyList) {
+        boolean result = true;
+
+        if (armyList.stream().filter(c -> c.getSubFaction().equalsIgnoreCase("Thanaril-Kriegerbd")).count() > 1 &&
+                armyList.stream().anyMatch(c -> c.getSubFaction().equalsIgnoreCase("Held/Befehlsh. Kriegerbd")))
+            result = false;
+
+        return result;
+    }
+
+    /**
+     * @param armyList
+     * @return booelan flag
+     */
+    private boolean oreaVanarHeroCompliance(List<DemonWorldCard> armyList, DemonWorldCard OreaVanarHero) {
+
+        boolean result = false;
+
+        //last part of subfaction name of old hero == name of school
+        String[] subfactions = OreaVanarHero.getSubFaction().split("/");
+
+        result = armyList.stream().anyMatch(c -> c.getName().equalsIgnoreCase(subfactions[2]));
+
+        //TODO: CONTINUE HERE !!
+
+        return result;
+    }
+
+
+    /**
+     * Your army can only have tree people or centaurs!
+     *
+     * @param armyList
+     * @return booelan flag
+     */
     private boolean treePeopleOrCentaurs(List<DemonWorldCard> armyList) {
 
         boolean result = true;
-        String exclude = "";
 
-        // what is the first pick
-        Optional<DemonWorldCard> firstPick = armyList.stream().filter(c -> c.getSubFaction().equalsIgnoreCase("Zentauren|Baumherren")).findFirst();
-        //make sure all cards do NOT have the one not picked!
+        if (armyList.stream().anyMatch(c -> c.getSubFaction().equals(ZENTAUREN)))
+            result = armyList.stream().anyMatch(c -> !c.getSubFaction().equals(BAUMHERREN));
+        else if (armyList.stream().anyMatch(c -> c.getSubFaction().equals(BAUMHERREN)))
+            result = armyList.stream().anyMatch(c -> !c.getSubFaction().equals(ZENTAUREN));
 
-        if (firstPick.isPresent()) {
-            exclude = firstPick.get().
-                    getSubFaction().
-                    equalsIgnoreCase("Zentauren") ? "baumherrem" : "Zentauren";
-        }
-
-        for (DemonWorldCard uc : armyList) {
-            if (uc.getSubFaction().equalsIgnoreCase(exclude)) ;
-            result = false;
-        }
-
-        return true;
+        return result;
     }
 
 
