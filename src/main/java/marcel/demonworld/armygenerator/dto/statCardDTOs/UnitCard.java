@@ -35,7 +35,7 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "rangedAttackStats", columnDefinition = "text")
     private String rangedAttackStats;
 
-    @Column(name = "unique", columnDefinition = "text")
+    @Column(name = "isUnique", columnDefinition = "text")
     private Boolean uniqueUnit;
 
     @Column(name = "leader", columnDefinition = "text")

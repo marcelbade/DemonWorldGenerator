@@ -18,7 +18,7 @@ public class SelectArmyService {
         return repo.findAll().stream().filter(uc -> uc.getFaction().equals(faction)).collect(Collectors.toList());
     }
 
-    public List<UnitCard> returnAll(){
+    public List<UnitCard> returnAll() {
         return repo.findAll();
     }
 }
