@@ -136,4 +136,17 @@ public class UnitCard implements DemonWorldCard {
     public String getName() {
         return this.unitName;
     }
+
+
+    @Override
+    public int getPoints() {
+        return this.points;
+    }
+
+
+    @Override
+    public String getSubFaction() {
+        return this.subFaction;
+    }
+
 }
