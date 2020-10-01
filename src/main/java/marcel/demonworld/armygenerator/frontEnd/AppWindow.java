@@ -47,7 +47,7 @@ public class AppWindow {
 
 
         JPanel contentPane = new JPanel(new BorderLayout());
-        contentPane.add(treeView.createTree("Zwerge"));
+        contentPane.add(treeView.createTree("Delfen"));
 
         MainWindow.add(sp);
         MainWindow.add(contentPane);

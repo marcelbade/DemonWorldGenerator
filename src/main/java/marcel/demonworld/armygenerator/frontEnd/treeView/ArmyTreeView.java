@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -29,8 +30,6 @@ public class ArmyTreeView {
         //units + subfactions
         for (DtoTreeNode<String> subFaction : allNodes.getChildNodes()) {
 
-            //TEST
-            System.out.println("SUBFACTION =>" + subFaction.getType());
 
             //create a subFaction view node
             DefaultMutableTreeNode subFactionNode = new DefaultMutableTreeNode(subFaction.getType());
@@ -40,9 +39,6 @@ public class ArmyTreeView {
             List<DtoTreeNode<String>> unitsOfSubFaction = subFaction
                     .getChildNodes()
                     .stream()
-                    .peek(p -> {
-                        System.out.println("THESE STREAM SHOULD HAVE the units:: " + p.getType());
-                    })
                     .filter(unit -> unit.getOwner().getType().equals(subFaction.getType())) // <= OWNER IS NULL!!
                     .collect(Collectors.toList());
 
@@ -53,16 +49,40 @@ public class ArmyTreeView {
             }
             army.add(subFactionNode);
         }
-        return new JTree(army);
+
+        JTree tree = new JTree(army);
+
+        setCustomTreeViewIcons(tree);
+        return tree;
     }
 
-    //generate data for root + all nodes
+    /**
+     * Set cusotm Icons for every item in the tree view.
+     *
+     * @param tree the Swing tree view
+     */
+    private void setCustomTreeViewIcons(JTree tree) {
+
+        ImageIcon leafIcon = new ImageIcon("/resources/static/images/TreeViewIcons/D20_black.jpg");
+        DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+        renderer.setOpenIcon(leafIcon);
+        tree.setCellRenderer(renderer);
+
+    }
+
+    /**
+     * generate data for root + all nodes
+     *
+     * @param faction - Demonworld army
+     * @return a tree data structure with the shape army -> subFaction => unit
+     */
     private DtoTreeNode<String> treeViewDataGenerator(String faction) {
 
         List<UnitCard> armyList = service.returnArmy(faction);
 
         //root
         DtoTreeNode<String> root = new DtoTreeNode<>(faction);
+
         //subfactions
         root.setChildNodes(armyList.stream().map(DemonWorldCard::getSubFaction).distinct().map(DtoTreeNode::new).collect(Collectors.toList()));
 
