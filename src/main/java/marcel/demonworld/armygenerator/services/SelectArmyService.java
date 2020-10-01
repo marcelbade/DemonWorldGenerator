@@ -11,8 +11,15 @@ import java.util.stream.Collectors;
 @Service
 public class SelectArmyService {
 
-    @Autowired
     ArmyRepository repo;
+
+
+    //TODO[TO NOTES]: for some reason this creates a Nulöl Pointer UNLESS you autowire repo in the constructor?!?!
+    @Autowired
+    public SelectArmyService(ArmyRepository repo) {
+        this.repo = repo;
+    }
+
 
     public List<UnitCard> returnArmy(String faction) {
         return repo.findAll().stream().filter(uc -> uc.getFaction().equals(faction)).collect(Collectors.toList());
