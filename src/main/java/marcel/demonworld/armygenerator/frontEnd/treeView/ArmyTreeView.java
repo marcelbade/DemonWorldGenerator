@@ -6,10 +6,14 @@ import marcel.demonworld.armygenerator.services.SelectArmyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
-import java.util.*;
+import javax.swing.tree.TreeCellRenderer;
+import java.awt.*;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 //https://www.codejava.net/java-se/swing/jtree-basic-tutorial-and-examples
@@ -20,6 +24,10 @@ public class ArmyTreeView {
     SelectArmyService service;
 
 
+    /**
+     * @param faction the name of the army
+     * @return a complete treeView consisting of DefaultMutableTreeNode
+     */
     public JComponent createTree(String faction) {
 
         DtoTreeNode<String> allNodes = treeViewDataGenerator(faction);
@@ -30,7 +38,6 @@ public class ArmyTreeView {
         //units + subfactions
         for (DtoTreeNode<String> subFaction : allNodes.getChildNodes()) {
 
-
             //create a subFaction view node
             DefaultMutableTreeNode subFactionNode = new DefaultMutableTreeNode(subFaction.getType());
 
@@ -39,25 +46,26 @@ public class ArmyTreeView {
             List<DtoTreeNode<String>> unitsOfSubFaction = subFaction
                     .getChildNodes()
                     .stream()
-                    .filter(unit -> unit.getOwner().getType().equals(subFaction.getType())) // <= OWNER IS NULL!!
+                    .filter(unit -> unit.getOwner().getType().equals(subFaction.getType()))
                     .collect(Collectors.toList());
 
             //add units -> subFaction
             for (DtoTreeNode<String> unitOfSubFaction : unitsOfSubFaction) {
-                subFactionNode.add(new DefaultMutableTreeNode(unitOfSubFaction.getType()) {
-                });
+                subFactionNode.add(new DefaultMutableTreeNode(unitOfSubFaction.getType()));
             }
             army.add(subFactionNode);
         }
 
         JTree tree = new JTree(army);
 
-        setCustomTreeViewIcons(tree);
+        TreeCellRenderer cellRenderer = new CustomTreeCellRenderer();
+        tree.setCellRenderer(cellRenderer);
+
         return tree;
     }
 
     /**
-     * Set cusotm Icons for every item in the tree view.
+     * Set custom Icons for every item in the tree view.
      *
      * @param tree the Swing tree view
      */
@@ -94,5 +102,3 @@ public class ArmyTreeView {
         return root;
     }
 }
-//TODO: move this to its own file
-

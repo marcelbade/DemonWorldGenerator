@@ -39,8 +39,8 @@ public class AppWindow {
         JFrame MainWindow;
 
         MainWindow = new JFrame();
-        String data[][] = utils.createTableData("Zwerge");
-        String column[] = utils.getTableAttributeNames();
+        String[][] data = utils.createTableData("Zwerge");
+        String[] column = utils.getTableAttributeNames();
         JTable completeArmyStatsTable = new JTable(data, column);
         completeArmyStatsTable.setBounds(30, 40, 200, 300);
         JScrollPane sp = new JScrollPane(completeArmyStatsTable);
