@@ -12,6 +12,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeCellRenderer;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,13 +42,9 @@ public class ArmyTreeView {
             //create a subFaction view node
             DefaultMutableTreeNode subFactionNode = new DefaultMutableTreeNode(subFaction.getType());
 
-            //get units filtered for one subFaction
-            //TODO: impose an order!!
-            List<DtoTreeNode<String>> unitsOfSubFaction = subFaction
-                    .getChildNodes()
-                    .stream()
-                    .filter(unit -> unit.getOwner().getType().equals(subFaction.getType()))
-                    .collect(Collectors.toList());
+            //get units one subFaction
+            //TODO: this is ordered alphabetically. Make the order configurable!
+            List<DtoTreeNode<String>> unitsOfSubFaction = subFaction.getChildNodes();
 
             //add units -> subFaction
             for (DtoTreeNode<String> unitOfSubFaction : unitsOfSubFaction) {
@@ -64,6 +61,9 @@ public class ArmyTreeView {
         return tree;
     }
 
+
+    //TODO NOT WORKING. Cant find file ?!
+
     /**
      * Set custom Icons for every item in the tree view.
      *
@@ -79,10 +79,10 @@ public class ArmyTreeView {
     }
 
     /**
-     * generate data for root + all nodes
+     * Method generates data for root + all nodes.
      *
-     * @param faction - Demonworld army
-     * @return a tree data structure with the shape army -> subFaction => unit
+     * @param faction - DemonWorld army
+     * @return a tree data structure with the form: army (root) -> subFaction (branch) => unit (leaf)
      */
     private DtoTreeNode<String> treeViewDataGenerator(String faction) {
 

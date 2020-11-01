@@ -9,6 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Optional;
 
+/**
+ *  This class produces the buttons for the tree view.
+ */
 public class TreeButton {
 
     @Autowired
@@ -22,6 +25,7 @@ public class TreeButton {
         bttn.setBackground(Color.darkGray);
 
         bttn.addActionListener(e -> {
+            System.out.println("UNIT SELECTED FROM TREE ==>" + bttn.getName());
             addUnitToArmyList(bttn.getName());
         });
         return bttn;

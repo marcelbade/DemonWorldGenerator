@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import javax.swing.*;
 
 /**
- * show all choices here!
+ * class generates a table.
  */
 @Component
 public class MainTable {
@@ -14,10 +14,9 @@ public class MainTable {
     @Autowired
     TableUtilities utils;
 
-
     public JTable createMainTable(String faction) throws IllegalAccessException {
 
-        JTable table = new JTable(utils.createTableData("Zwerge"), utils.getTableAttributeNames());
+        JTable table = new JTable(utils.createTableData("Zwerge"), utils.getUnitStatNames());
         table.setBounds(0, 0, 800, 600);
 
         return table;

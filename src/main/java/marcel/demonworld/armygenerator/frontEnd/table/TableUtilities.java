@@ -10,35 +10,45 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class contains methods to generate the data table. Data consists of a 2d String array.
+ */
 @Component
 public class TableUtilities {
 
     @Autowired
     SelectArmyService service;
 
-    public String[] getTableAttributeNames() {
+    /**
+     * Method returns the names of all unit stats im the game.
+     * The method uses reflection to read out all property names of the unitCard class and returns them as a String[].
+     *
+     * @return a String[] with the names of every unit stat
+     */
+    public String[] getUnitStatNames() {
 
         List<String> result = new ArrayList<>();
         String[] names = new String[UnitCard.class.getDeclaredFields().length];
 
         UnitCard uc = new UnitCard();
 
+        // make everything public
         Arrays.stream(uc.getClass().getDeclaredFields()).forEach(f -> f.setAccessible(true));
+        //get all names
         Arrays.stream(uc.getClass().getDeclaredFields()).forEach(f -> result.add(f.getName()));
 
         for (int i = 0; i < names.length; i++) {
             names[i] = result.get(i);
         }
-
         return names;
     }
 
     /**
-     * KEY METHOD. This method remaps your repo DTO to a 2D-array that Swing uses for tables.
+     * Method takes DTO and remaps it into a 2D array. Array supplies all data for the table.
      *
-     * @param faction -String, faction to display
+     * @param faction String, faction to display
      * @return a 2D String array [card][stats]
-     * @throws IllegalAccessException throws exceprion
+     * @throws IllegalAccessException throws exception
      */
     public String[][] createTableData(String faction) throws IllegalAccessException {
 
@@ -65,7 +75,8 @@ public class TableUtilities {
     }
 
     /**
-     * Method turns any field value of an Object implementing DemonCard into String.
+     * Method turns any field value of an Object implementing DemonCard into a String.
+     * All game stats are either a String, int, or boolean. Method turns those values unto Strings.
      *
      * @param o reflected property of Class
      * @return Stringified value of class field.
@@ -80,6 +91,13 @@ public class TableUtilities {
     }
 
 
+    /**
+     * Method takes a stringified game stat and makes it pretty, e.g., true becomes "ja", false "nein", the placeholders "0"
+     * and "x" become whitespace.
+     *
+     * @param raw The unprocessed String
+     * @return beautified String
+     */
     private String beautifyStat(String raw) {
 
         String processed = raw;
@@ -96,17 +114,23 @@ public class TableUtilities {
             case "x":
                 processed = "";
                 break;
-            //TODO FOR NOTES: can't have regex in case, but in default like this:
             default:
                 //TODO: regex is totally wrong...
+                // if the stat is the range weapon stat...
                 if (raw.matches("^[123456789]F")) {
-                    processed = beautifyRangeWeaponranges(raw);
+                    processed = beautifyRangeWeaponRanges(raw);
                 }
         }
         return processed;
     }
 
-    private String beautifyRangeWeaponranges(String rawRanges) {
+    /**
+     * Method takes the range weapon stat String and makes it pretty.
+     *
+     * @param rawRanges
+     * @return
+     */
+    private String beautifyRangeWeaponRanges(String rawRanges) {
         //2F:16, 5F:13, 8F:9
         StringBuilder processed = new StringBuilder();
         String[] ranges = rawRanges.split("");
