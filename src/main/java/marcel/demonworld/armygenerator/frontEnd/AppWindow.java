@@ -70,7 +70,8 @@ public class AppWindow {
 
         //TreeView Panel
         JPanel treePane = new JPanel();
-        treePane.add(treeView.createTree(armySelection.getSelectedArmy()));
+        treeView.createTree(armySelection.getSelectedArmy());
+        treePane.add(treeView.getTree());
         treePane.setBounds(150, 150, 390, 320);
 
         //table Panel
@@ -82,7 +83,7 @@ public class AppWindow {
         // Add to main Window
         MainWindow.add(treePane);
         MainWindow.add(dropDownPanel);
-       // MainWindow.add(tablePane);
+        // MainWindow.add(tablePane);
 
         // set main window
         MainWindow.getContentPane().setBackground(Color.DARK_GRAY);

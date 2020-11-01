@@ -7,7 +7,7 @@ import javax.swing.tree.TreeCellRenderer;
 import java.awt.*;
 
 /**
- * A custom tree renderer. The reason for the custom implementation are the necessity to render the leafs differently
+ * A custom tree renderer. The reason for the custom implementation are the necessity to render the leaves differently
  * from the other tree nodes, as well as adding buttons to the leaves.
  */
 public class CustomTreeCellRenderer implements TreeCellRenderer {

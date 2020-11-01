@@ -2,24 +2,29 @@ package marcel.demonworld.armygenerator.frontEnd.treeView;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 @Getter
 @Setter
 /*
 Tree data structure implementation.
 TODO FOR NOTES: add to notes.
  */
-class DtoTreeNode<T> {
+public class DtoTreeNode<T> {
 
-    private DtoTreeNode<T> Owner;
-    private T type;
+    private DtoTreeNode<T> parentNode;
+    private T currentNode;
     private List<DtoTreeNode<T>> childNodes = new ArrayList<>();
 
-    public DtoTreeNode(T type) {
-        this.type = type;
+    public DtoTreeNode(T currentNode) {
+        this.currentNode = currentNode;
+    }
+
+    public DtoTreeNode( ) {
     }
 
     public void setChildNodes(List<DtoTreeNode<T>> childNodes) {
@@ -27,12 +32,8 @@ class DtoTreeNode<T> {
         setRoot();
     }
 
-    public void addChildNode(DtoTreeNode<T> newChildNode) {
-        this.childNodes.add(newChildNode);
-        setRoot();
-    }
 
     private void setRoot() {
-        this.childNodes.forEach(n -> n.setOwner(this));
+        this.childNodes.forEach(n -> n.setParentNode(this));
     }
 }

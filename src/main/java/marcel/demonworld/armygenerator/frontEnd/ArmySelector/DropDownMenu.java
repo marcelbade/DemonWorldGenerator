@@ -1,19 +1,14 @@
 package marcel.demonworld.armygenerator.frontEnd.ArmySelector;
 
-import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
 import marcel.demonworld.armygenerator.frontEnd.treeView.ArmyTreeView;
+import marcel.demonworld.armygenerator.frontEnd.treeView.DtoTreeNode;
 import marcel.demonworld.armygenerator.services.SelectArmyService;
-import org.hibernate.sql.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
-import javax.swing.tree.DefaultTreeModel;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.util.ArrayList;
-import java.util.List;
+
 
 //combobox
 @Component
@@ -26,7 +21,7 @@ public class DropDownMenu {
     @Autowired
     ArmyTreeView armyTreeView;
 
-
+    DtoTreeNode<String> dtoTreeNode = new DtoTreeNode<>();
 
     public JComboBox<String> createDropDownMenuForArmyNames() {
 
@@ -35,16 +30,9 @@ public class DropDownMenu {
         ActionListener selectActionListener = e -> {
             // global method / class for setting faction and therefore calculator....
             armySelection.setSelectedArmy((String) DropDownMenu.getSelectedItem());
-            System.out.println("<<FIRED:::getSelectedItem ->" + (String) DropDownMenu.getSelectedItem());
-
+            armyTreeView.reloadTree();
         };
-
         DropDownMenu.addActionListener(selectActionListener);
-
         return DropDownMenu;
     }
 }
-
-
-
-
