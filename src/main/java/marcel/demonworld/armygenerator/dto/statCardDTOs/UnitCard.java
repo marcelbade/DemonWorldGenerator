@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * one dto for all army cards, no matter what the unit type is.
@@ -16,7 +18,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = "unitcards")
+@Table(name = "units")
 public class UnitCard implements DemonWorldCard {
 
     @Id
@@ -28,7 +30,7 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "faction", columnDefinition = "text")
     private String faction;
 
-    @Column(name = "name", columnDefinition = "text")
+    @Column(name = "unitName", columnDefinition = "text")
     private String unitName;
 
     @Column(name = "rangedWapon", columnDefinition = "text")
@@ -133,22 +135,20 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "specialRules", columnDefinition = "text")
     private String specialRules;
 
-
     @Override
     public String getName() {
         return this.unitName;
     }
-
 
     @Override
     public int getPoints() {
         return this.points;
     }
 
-
     @Override
     public String getSubFaction() {
         return this.subFaction;
     }
+
 
 }
