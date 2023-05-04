@@ -53,6 +53,7 @@ public class ItemCard implements DemonWorldCard {
     @Column(name = "controlZone_OverRun" )
     private Integer controlZone_OverRun;
 
+
     @Column(name = "Initiative", columnDefinition = "text")
     private Integer Initiative;
 
