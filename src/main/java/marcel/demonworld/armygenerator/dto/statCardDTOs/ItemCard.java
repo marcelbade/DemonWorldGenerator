@@ -17,23 +17,23 @@ public class ItemCard implements DemonWorldCard {
     @Column(name = "id", columnDefinition = "text")
     private Integer id;
     @Column(name = "faction", columnDefinition = "text")
-    private Integer faction;
+    private String faction;
     @Column(name = "forUnit", columnDefinition = "text")
-    private Integer forUnit;
+    private Boolean forUnit;
     @Column(name = "name", columnDefinition = "text")
     private String itemName;
     @Column(name = "generic", columnDefinition = "text")
-    private Integer generic;
+    private Boolean generic;
     @Column(name = "unitType", columnDefinition = "text")
-    private Integer unitType;
+    private String unitType;
     @Column(name = "itemType", columnDefinition = "text")
     private String itemType;
     @Column(name = "requirement", columnDefinition = "text")
     private String requirement;
     @Column(name = "banner", columnDefinition = "text")
-    private boolean banner;
+    private Boolean banner;
     @Column(name = "musician", columnDefinition = "text")
-    private boolean musician;
+    private Boolean musician;
     @Column(name = "points", columnDefinition = "text")
     private Integer pointCost;
     @Column(name = "move", columnDefinition = "text")
