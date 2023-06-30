@@ -9,26 +9,71 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = "itemcards")
+@Table(name = "items")
 public class ItemCard implements DemonWorldCard {
 
+
     @Id
-    @Column(name = "id")
+    @Column(name = "id", columnDefinition = "text")
     private Integer id;
     @Column(name = "faction", columnDefinition = "text")
-    private String faction;
+    private Integer faction;
+    @Column(name = "forUnit", columnDefinition = "text")
+    private Integer forUnit;
     @Column(name = "name", columnDefinition = "text")
     private String itemName;
-    @Column(name = "pointCost")
+    @Column(name = "generic", columnDefinition = "text")
+    private Integer generic;
+    @Column(name = "unitType", columnDefinition = "text")
+    private Integer unitType;
+    @Column(name = "itemType", columnDefinition = "text")
+    private String itemType;
+    @Column(name = "requirement", columnDefinition = "text")
+    private String requirement;
+    @Column(name = "banner", columnDefinition = "text")
+    private boolean banner;
+    @Column(name = "musician", columnDefinition = "text")
+    private boolean musician;
+    @Column(name = "points", columnDefinition = "text")
     private Integer pointCost;
-    @Column(name = "typeOfItem", columnDefinition = "text")
-    private String typeOfItem;
-    @Column(name = "rules", columnDefinition = "text")
-    private String rules;
-    @Column(name = "usedBy", columnDefinition = "text")
-    private String usedBy;
-    @Column(name = "uniqueItem", columnDefinition = "text")
-    private Boolean uniqueItem;
+    @Column(name = "move", columnDefinition = "text")
+    private Integer move;
+    @Column(name = "charge", columnDefinition = "text")
+    private Integer charge;
+    @Column(name = "skirmish", columnDefinition = "text")
+    private Integer skirmish;
+    @Column(name = "hold_maneuvers", columnDefinition = "text")
+    private Integer hold_maneuvers;
+    @Column(name = "controlZone_OverRun", columnDefinition = "text")
+    private Integer controlZone_OverRun;
+    @Column(name = "Initiative", columnDefinition = "text")
+    private Integer Initiative;
+    @Column(name = "size", columnDefinition = "text")
+    private Integer size;
+    @Column(name = "armourRange", columnDefinition = "text")
+    private Integer armourRange;
+    @Column(name = "armourMelee", columnDefinition = "text")
+    private Integer armourMelee;
+    @Column(name = "weapon1", columnDefinition = "text")
+    private Integer weapon1;
+    @Column(name = "weapon2", columnDefinition = "text")
+    private Integer weapon2;
+    @Column(name = "skillMelee", columnDefinition = "text")
+    private Integer skillMelee;
+    @Column(name = "rangedWeapon", columnDefinition = "text")
+    private String rangedWeapon;
+    @Column(name = "skillRange", columnDefinition = "text")
+    private Integer skillRange;
+    @Column(name = "fear", columnDefinition = "text")
+    private Integer fear;
+    @Column(name = "moral1", columnDefinition = "text")
+    private Integer moral1;
+    @Column(name = "moral2", columnDefinition = "text")
+    private Integer moral2;
+    @Column(name = "hitpoints", columnDefinition = "text")
+    private Integer hitpoints;
+    @Column(name = "specialRules", columnDefinition = "text")
+    private String specialRules;
 
 
     @Override
@@ -43,7 +88,8 @@ public class ItemCard implements DemonWorldCard {
 
     @Override
     public String getSubFaction() {
-        return getUsedBy();
+        return null;
     }
+
 
 }

@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = "unitcards")
+@Table(name = "units")
 public class UnitCard implements DemonWorldCard {
 
     @Id
@@ -26,16 +26,16 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "faction", columnDefinition = "text")
     private String faction;
 
-    @Column(name = "name", columnDefinition = "text")
+    @Column(name = "unitName", columnDefinition = "text")
     private String unitName;
 
-    @Column(name = "rangedWapon", columnDefinition = "text")
+    @Column(name = "rangedWeapon", columnDefinition = "text")
     private String rangedWeapon;
 
     @Column(name = "rangedAttackStats", columnDefinition = "text")
     private String rangedAttackStats;
 
-    @Column(name = "unique", columnDefinition = "text")
+    @Column(name = "isUnique", columnDefinition = "text")
     private Boolean uniqueUnit;
 
     @Column(name = "leader", columnDefinition = "text")
@@ -136,4 +136,11 @@ public class UnitCard implements DemonWorldCard {
     public String getName() {
         return this.unitName;
     }
+    @Override
+    public int getPoints() {
+        return this.points;
+    }
+
+
+
 }
