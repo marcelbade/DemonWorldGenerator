@@ -17,19 +17,7 @@ public class ArmyController {
     SelectArmyService armyService;
 
     /**
-     * Returns all unit cards of one faction
-     *
-     * @param faction;
-     * @return all unit cards of one army
-     */
-    @GetMapping("/faction/{faction}")
-    public List<UnitCard> getAllUnitCardsOfArmy(@PathVariable String faction) {
-        return armyService.returnArmy(faction);
-    }
-
-    /**
      * Returns ALL unit cards currently in the game.
-     *
      * @return all unit cards in the game
      */
     @GetMapping("/factions")
