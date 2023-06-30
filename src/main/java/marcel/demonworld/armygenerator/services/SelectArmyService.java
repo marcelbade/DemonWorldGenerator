@@ -14,10 +14,10 @@ public class SelectArmyService {
     @Autowired
     ArmyRepository repo;
 
-    public List<UnitCard> returnArmy(String faction) {
-        return repo.findAll().stream().filter(uc -> uc.getFaction().equals(faction)).collect(Collectors.toList());
-    }
-
+    /**
+     * Method returns all units in the game.
+     * @return List<UnitCard>
+     */
     public List<UnitCard> returnAll(){
         return repo.findAll();
     }
