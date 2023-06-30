@@ -33,7 +33,7 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "unitName", columnDefinition = "text")
     private String unitName;
 
-    @Column(name = "rangedWapon", columnDefinition = "text")
+    @Column(name = "rangedWeapon", columnDefinition = "text")
     private String rangedWeapon;
 
     @Column(name = "rangedAttackStats", columnDefinition = "text")
