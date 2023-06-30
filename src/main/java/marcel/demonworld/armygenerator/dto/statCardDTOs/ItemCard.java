@@ -97,11 +97,15 @@ public class ItemCard implements DemonWorldCard {
     private String specialRules;
 
 
-    @Column(name = "type", columnDefinition = "text")
+    @Column(name = "itemType", columnDefinition = "text")
     private String type;
 
     @Column(name = "generic", columnDefinition = "text")
     private Boolean generic;
+
+    @Column(name = "forUnit", columnDefinition = "text")
+    private boolean forUnit;
+
 
 
     // override the Lombok getter.
