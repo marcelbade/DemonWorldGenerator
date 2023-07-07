@@ -89,8 +89,11 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "hold_maneuvers")
     private Integer hold_maneuvers;
 
-    @Column(name = "controlZone_OverRun")
-    private Integer controlZone_OverRun;
+    @Column(name = "controlZone")
+    private Integer controlZone;
+
+    @Column(name = "OverRun")
+    private Integer overRun;
 
     @Column(name = "Initiative")
     private Integer initiative;
@@ -131,16 +134,31 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "specialRules", columnDefinition = "text")
     private String specialRules;
 
+    @Column(name = "isHighFlyer", columnDefinition = "text")
+    private Boolean isHighFlyer;
+
+    @Column(name = "isLowFlyer", columnDefinition = "text")
+    private Boolean isLowFlyer;
+
+    @Column(name = "hasShield", columnDefinition = "text")
+    private Boolean hasShield;
+
+    @Column(name = "isMounted", columnDefinition = "text")
+    private Boolean isMounted;
+
+    @Column(name = "chargeBonus", columnDefinition = "text")
+    private Boolean chargeBonus;
+
 
     @Override
     public String getName() {
         return this.unitName;
     }
+
     @Override
     public int getPoints() {
         return this.points;
     }
-
 
 
 }
