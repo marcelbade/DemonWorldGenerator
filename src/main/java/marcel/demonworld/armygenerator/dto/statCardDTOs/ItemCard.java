@@ -18,60 +18,76 @@ public class ItemCard implements DemonWorldCard {
     private Integer id;
     @Column(name = "faction", columnDefinition = "text")
     private String faction;
-    @Column(name = "forUnit", columnDefinition = "text")
-    private Boolean forUnit;
     @Column(name = "name", columnDefinition = "text")
     private String itemName;
     @Column(name = "generic", columnDefinition = "text")
-    private Boolean generic;
+    private String generic;
+    @Column(name = "hasShield", columnDefinition = "text")
+    private String hasShield;
+    @Column(name = "mustBeMounted", columnDefinition = "text")
+    private String mustBeMounted;
+    @Column(name = "usableByCav", columnDefinition = "text")
+    private String usableByCav;
+    @Column(name = "maxRangeArmor", columnDefinition = "text")
+    private String maxRangeArmor;
+    @Column(name = "maxSize", columnDefinition = "text")
+    private String maxSize;
+    @Column(name = "subfaction", columnDefinition = "text")
+    private String subfaction;
+    @Column(name = "everyElement", columnDefinition = "text")
+    private String everyElement;
+    @Column(name = "limitedToUnit", columnDefinition = "text")
+    private String limitedToUnit;
+    @Column(name = "magicUsersOnly", columnDefinition = "text")
+    private String magicUsersOnly;
     @Column(name = "unitType", columnDefinition = "text")
     private String unitType;
     @Column(name = "itemType", columnDefinition = "text")
     private String itemType;
-    @Column(name = "requirement", columnDefinition = "text")
-    private String requirement;
+    @Column(name = "requiresWeaponType", columnDefinition = "text")
+    private String requiresWeaponType;
     @Column(name = "banner", columnDefinition = "text")
-    private Boolean banner;
+    private Boolean requiresBanner;
     @Column(name = "musician", columnDefinition = "text")
-    private Boolean musician;
+    private Boolean requiresMusician;
     @Column(name = "points", columnDefinition = "text")
     private Integer pointCost;
-    @Column(name = "move", columnDefinition = "text")
-    private Integer move;
-    @Column(name = "charge", columnDefinition = "text")
-    private Integer charge;
-    @Column(name = "skirmish", columnDefinition = "text")
-    private Integer skirmish;
-    @Column(name = "hold_maneuvers", columnDefinition = "text")
-    private Integer hold_maneuvers;
+    @Column(name = "altersMove", columnDefinition = "text")
+    private Integer altersMove;
+    @Column(name = "altersCharge", columnDefinition = "text")
+    private Integer altersCharge;
+    @Column(name = "altersSkirmish", columnDefinition = "text")
+    private Integer altersSkirmish;
+    @Column(name = "altersHold_maneuvers", columnDefinition = "text")
+    private Integer altersHold_maneuvers;
     @Column(name = "controlZone_OverRun", columnDefinition = "text")
     private Integer controlZone_OverRun;
-    @Column(name = "Initiative", columnDefinition = "text")
-    private Integer Initiative;
-    @Column(name = "size", columnDefinition = "text")
-    private Integer size;
-    @Column(name = "armourRange", columnDefinition = "text")
-    private Integer armourRange;
-    @Column(name = "armourMelee", columnDefinition = "text")
-    private Integer armourMelee;
+    @Column(name = "altersInitiative", columnDefinition = "text")
+    private Integer altersInitiative;
+    @Column(name = "altersSize", columnDefinition = "text")
+    private Integer altersSize;
+    @Column(name = "altersArmourRange", columnDefinition = "text")
+    private Integer altersArmourRange;
+    @Column(name = "altersArmourMelee", columnDefinition = "text")
+    private Integer altersArmourMelee;
     @Column(name = "weapon1", columnDefinition = "text")
     private Integer weapon1;
     @Column(name = "weapon2", columnDefinition = "text")
     private Integer weapon2;
-    @Column(name = "skillMelee", columnDefinition = "text")
-    private Integer skillMelee;
+    @Column(name = "altersSkillMelee", columnDefinition = "text")
+    private Integer altersSkillMelee;
     @Column(name = "rangedWeapon", columnDefinition = "text")
     private String rangedWeapon;
     @Column(name = "skillRange", columnDefinition = "text")
     private Integer skillRange;
-    @Column(name = "fear", columnDefinition = "text")
-    private Integer fear;
-    @Column(name = "moral1", columnDefinition = "text")
-    private Integer moral1;
-    @Column(name = "moral2", columnDefinition = "text")
-    private Integer moral2;
-    @Column(name = "hitpoints", columnDefinition = "text")
-    private Integer hitpoints;
+    @Column(name = "altersFear", columnDefinition = "text")
+    private Integer altersFear;
+    @Column(name = "altersMoral1", columnDefinition = "text")
+    private Integer altersMoral1;
+    @Column(name = "altersMoral2", columnDefinition = "text")
+    private Integer altersMoral2;
+    @Column(name = "altersHitpoints", columnDefinition = "text")
+    private Integer altersHitpoints;
     @Column(name = "specialRules", columnDefinition = "text")
     private String specialRules;
 

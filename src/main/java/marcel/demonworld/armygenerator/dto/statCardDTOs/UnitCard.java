@@ -20,7 +20,6 @@ public class UnitCard implements DemonWorldCard {
     @Id
     private Integer id;
 
-
     //mySQL doesn't use text, it uses "text". in order to avoid a code breaking SQL error columnDef. must be set!
     // TODO: you accidentally used text instead of int for one of the weapon values!
     @Column(name = "faction", columnDefinition = "text")
@@ -37,6 +36,9 @@ public class UnitCard implements DemonWorldCard {
 
     @Column(name = "isUnique", columnDefinition = "text")
     private Boolean uniqueUnit;
+
+    @Column(name = "isMounted", columnDefinition = "text")
+    private Boolean isMounted;
 
     @Column(name = "leader", columnDefinition = "text")
     private Boolean leader;
@@ -107,11 +109,23 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "armourMelee")
     private Integer armourMelee;
 
+    @Column(name = "weapon1Name")
+    private Integer weapon1Name;
+
     @Column(name = "weapon1")
     private Integer weapon1;
 
+    @Column(name = "weapon2Name")
+    private Integer weapon2Name;
+
     @Column(name = "weapon2")
     private Integer weapon2;
+
+    @Column(name = "weapon3Name")
+    private Integer weapon3Name;
+
+    @Column(name = "weapon3")
+    private Integer weapon3;
 
     @Column(name = "skillMelee", columnDefinition = "text")
     private Integer skillMelee;
@@ -142,9 +156,6 @@ public class UnitCard implements DemonWorldCard {
 
     @Column(name = "hasShield", columnDefinition = "text")
     private Boolean hasShield;
-
-    @Column(name = "isMounted", columnDefinition = "text")
-    private Boolean isMounted;
 
     @Column(name = "chargeBonus", columnDefinition = "text")
     private Boolean chargeBonus;
