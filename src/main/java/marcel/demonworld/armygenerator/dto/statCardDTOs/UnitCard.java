@@ -109,20 +109,20 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "armourMelee")
     private Integer armourMelee;
 
-    @Column(name = "weapon1Name")
-    private Integer weapon1Name;
+    @Column(name = "weapon1Name", columnDefinition = "text")
+    private String weapon1Name;
 
     @Column(name = "weapon1")
     private Integer weapon1;
 
-    @Column(name = "weapon2Name")
-    private Integer weapon2Name;
+    @Column(name = "weapon2Name", columnDefinition = "text")
+    private String weapon2Name;
 
     @Column(name = "weapon2")
     private Integer weapon2;
 
-    @Column(name = "weapon3Name")
-    private Integer weapon3Name;
+    @Column(name = "weapon3Name", columnDefinition = "text")
+    private String weapon3Name;
 
     @Column(name = "weapon3")
     private Integer weapon3;
@@ -157,8 +157,8 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "hasShield", columnDefinition = "text")
     private Boolean hasShield;
 
-    @Column(name = "chargeBonus", columnDefinition = "text")
-    private Boolean chargeBonus;
+    @Column(name = "chargeBonus")
+    private Integer chargeBonus;
 
 
     @Override
