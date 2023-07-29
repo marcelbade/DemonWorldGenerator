@@ -20,19 +20,19 @@ public class ItemCard implements DemonWorldCard {
     @Column(name = "faction", columnDefinition = "text")
     private String faction;
 
-    @Column(name = "name", columnDefinition = "text")
+    @Column(name = "itemName", columnDefinition = "text")
     private String itemName;
 
-    @Column(name = "generic", columnDefinition = "text")
-    private Boolean generic;
+    @Column(name = "isGeneric", columnDefinition = "integer")
+    private Boolean isGeneric;
 
-    @Column(name = "hasShield", columnDefinition = "text")
-    private Boolean hasShield;
+    @Column(name = "requiresShield", columnDefinition = "integer")
+    private Boolean requiresShield;
 
-    @Column(name = "mustBeMounted", columnDefinition = "text")
+    @Column(name = "mustBeMounted", columnDefinition = "integer")
     private Boolean mustBeMounted;
 
-    @Column(name = "usableByCav", columnDefinition = "text")
+    @Column(name = "usableByCav", columnDefinition = "integer")
     private Boolean usableByCav;
 
     @Column(name = "maxRangeArmor")
@@ -44,13 +44,13 @@ public class ItemCard implements DemonWorldCard {
     @Column(name = "subfaction", columnDefinition = "text")
     private String subfaction;
 
-    @Column(name = "everyElement", columnDefinition = "text")
+    @Column(name = "everyElement", columnDefinition = "integer")
     private Boolean everyElement;
 
     @Column(name = "limitedToUnit", columnDefinition = "text")
-    private Boolean limitedToUnit;
+    private String limitedToUnit;
 
-    @Column(name = "magicUsersOnly", columnDefinition = "text")
+    @Column(name = "magicUsersOnly", columnDefinition = "integer")
     private Boolean magicUsersOnly;
 
     @Column(name = "unitType", columnDefinition = "text")
@@ -62,10 +62,10 @@ public class ItemCard implements DemonWorldCard {
     @Column(name = "requiresWeaponType", columnDefinition = "text")
     private String requiresWeaponType;
 
-    @Column(name = "requiresBanner", columnDefinition = "text")
+    @Column(name = "requiresBanner", columnDefinition = "integer")
     private Boolean requiresBanner;
 
-    @Column(name = "requiresMusician", columnDefinition = "text")
+    @Column(name = "requiresMusician", columnDefinition = "integer")
     private Boolean requiresMusician;
 
     @Column(name = "points", columnDefinition = "text")
@@ -128,6 +128,8 @@ public class ItemCard implements DemonWorldCard {
     @Column(name = "specialRules", columnDefinition = "text")
     private String specialRules;
 
+    @Column(name = "isAdditionalItem", columnDefinition = "integer")
+    private Boolean isAdditionalItem;
 
     @Override
     public int getPoints() {
