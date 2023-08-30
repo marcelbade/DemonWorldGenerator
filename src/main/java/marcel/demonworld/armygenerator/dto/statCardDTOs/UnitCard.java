@@ -160,6 +160,9 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "chargeBonus")
     private Integer chargeBonus;
 
+    @Column(name = "secondSubFaction", columnDefinition = "text")
+    private String secondSubFaction;
+
 
     @Override
     public String getName() {
