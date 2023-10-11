@@ -9,7 +9,10 @@ import java.util.List;
 public class FactionData {
     private String factionName;
     private List<UnitCard> units;
-    private List<SubfactionDTO> subFactions;
+    private List<String> subFactions;
+    private String Ally;
+    private List<UnitCard> allyUnits;
+    private List<String> allySubFactions;
 
 
 }
