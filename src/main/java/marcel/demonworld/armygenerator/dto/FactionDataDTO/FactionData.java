@@ -13,6 +13,6 @@ public class FactionData {
     private String Ally;
     private List<UnitCard> allyUnits;
     private List<String> allySubFactions;
-
-
+    private Boolean hasAlternativeLists;
+    private Integer numberOfAlternativeArmySelections;
 }

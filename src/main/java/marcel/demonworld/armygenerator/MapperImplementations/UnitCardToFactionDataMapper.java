@@ -1,6 +1,6 @@
 package marcel.demonworld.armygenerator.MapperImplementations;
 
-import marcel.demonworld.armygenerator.dto.AlliancesDTO.Alliance;
+import marcel.demonworld.armygenerator.dto.AlliancesDTO.AllianceAndAlternatives;
 import marcel.demonworld.armygenerator.dto.FactionDataDTO.FactionData;
 import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
 import marcel.demonworld.armygenerator.mappingInterfaces.UnitCardToFactionDataMapperInterface;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperInterface {
 
     @Override
-    public List<FactionData> unitCardToFactionData(List<UnitCard> unitList, List<Alliance> allAlliances) {
+    public List<FactionData> unitCardToFactionData(List<UnitCard> unitList, List<AllianceAndAlternatives> allAllianceAndAlternatives) {
 
         List<FactionData> result = new ArrayList<>();
 
@@ -34,9 +34,21 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
             data.setSubFactions(subFactions);
             data.setUnits(factionUnits);
 
-            String allyName = findAlly(factionName, allAlliances);
+            AllianceAndAlternatives allyAndAlts = findAlly(factionName, allAllianceAndAlternatives);
+            data.setHasAlternativeLists(allyAndAlts.getHasAlternativeLists());
+            data.setNumberOfAlternativeArmySelections(allyAndAlts.getNumberOfChoices());
+
+            String allyName = allyAndAlts.getAlly();
+
 
             if (!allyName.equals("NONE")) {
+
+                // ally name must be added as additional sub faction
+                List<String> tempList = data.getSubFactions();
+                tempList.add(allyName);
+
+                data.setSubFactions(tempList);
+
                 List<UnitCard> allyUnits = createFactionUnitLists(allyName, unitList);
                 List<String> allySubFactions = createSubFactionListForFaction(allyUnits);
                 data.setAlly(allyName);
@@ -47,6 +59,7 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
                 data.setAllySubFactions(null);
                 data.setAllyUnits(null);
             }
+
 
             result.add(data);
         }
@@ -69,9 +82,9 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
     }
 
     // Method finds the faction's ally.
-    private String findAlly(String factionName, List<Alliance> allyList) {
-        List<Alliance> alliance = allyList.stream().filter(al -> al.getFaction().equals(factionName)).collect(Collectors.toList());
-        return alliance.get(0).getAlly();
+    private AllianceAndAlternatives findAlly(String factionName, List<AllianceAndAlternatives> allyList) {
+        List<AllianceAndAlternatives> allianceAndAlternatives = allyList.stream().filter(al -> al.getFaction().equals(factionName)).collect(Collectors.toList());
+        return allianceAndAlternatives.get(0);
     }
 }
 

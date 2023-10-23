@@ -12,8 +12,8 @@ import javax.persistence.Table;
 @Setter
 @Getter
 @Entity
-@Table(name = "allies")
-public class Alliance {
+@Table(name = "alliesandalternativelists")
+public class AllianceAndAlternatives {
 
     @Id
     private Integer id;
@@ -23,6 +23,12 @@ public class Alliance {
 
     @Column(name = "ally", columnDefinition = "text")
     private String ally;
+
+    @Column(name = "hasAlternativeLists", columnDefinition = "tinyint")
+    private Boolean hasAlternativeLists;
+
+    @Column(name = "numberOfChoices", columnDefinition = "tinyint")
+    private Integer numberOfChoices;
 
 
 }
