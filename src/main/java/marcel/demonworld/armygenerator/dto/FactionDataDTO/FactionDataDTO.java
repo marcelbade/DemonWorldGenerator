@@ -1,18 +1,17 @@
 package marcel.demonworld.armygenerator.dto.FactionDataDTO;
 
 import lombok.Data;
+import marcel.demonworld.armygenerator.dto.SubFactionDTO.SubFactionDTO;
 import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
 
 import java.util.List;
 
 @Data
-public class FactionData {
+public class FactionDataDTO {
     private String factionName;
-    private List<UnitCard> units;
-    private List<String> subFactions;
+    private List<SubFactionDTO> subFactions;
     private String Ally;
-    private List<UnitCard> allyUnits;
-    private List<String> allySubFactions;
+    private List<SubFactionDTO> allySubFactions;
     private Boolean hasAlternativeLists;
     private Integer numberOfAlternativeArmySelections;
 }

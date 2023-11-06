@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Getter
 @Entity
 @Table(name = "alliesandalternativelists")
-public class AllianceAndAlternatives {
+public class AllianceAndAlternativesDTO {
 
     @Id
     private Integer id;
