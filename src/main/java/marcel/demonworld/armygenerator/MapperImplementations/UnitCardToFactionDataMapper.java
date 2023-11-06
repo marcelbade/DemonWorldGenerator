@@ -62,7 +62,7 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
 
             SubFactionDTO dto = new SubFactionDTO();
             dto.setName(subFaction);
-            dto.setSubFactionUnits(findUnitsForSubFaction(factionName, subFaction, units));
+            dto.setUnits(findUnitsForSubFaction(factionName, subFaction, units));
             result.add(dto);
         }
         return result;

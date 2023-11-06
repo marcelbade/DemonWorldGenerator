@@ -10,6 +10,6 @@ import java.util.List;
 public class SubFactionDTO {
 
     private String name;
-    private List<UnitCard> subFactionUnits;
+    private List<UnitCard> units;
 
 }
