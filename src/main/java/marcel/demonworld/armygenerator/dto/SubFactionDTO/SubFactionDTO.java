@@ -10,6 +10,7 @@ import java.util.List;
 public class SubFactionDTO {
 
     private String name;
+    private boolean alternativeListOption;
+    private boolean selectedAlternativeOption;
     private List<UnitCard> units;
-
 }

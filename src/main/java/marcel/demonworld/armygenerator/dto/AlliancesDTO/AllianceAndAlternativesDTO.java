@@ -3,11 +3,10 @@ package marcel.demonworld.armygenerator.dto.AlliancesDTO;
 
 import lombok.Getter;
 import lombok.Setter;
+import marcel.demonworld.armygenerator.JSONConverter.JSONObjectConverter;
+import org.json.simple.JSONObject;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Setter
 @Getter
@@ -30,5 +29,9 @@ public class AllianceAndAlternativesDTO {
     @Column(name = "numberOfChoices", columnDefinition = "tinyint")
     private Integer numberOfChoices;
 
+    @Lob
+    @Column(name = "alternativeSubFaction", columnDefinition = "JSON")
+    @Convert(converter = JSONObjectConverter.class)
+    private JSONObject alternativeSubFaction;
 
 }

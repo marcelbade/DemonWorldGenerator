@@ -5,6 +5,7 @@ import marcel.demonworld.armygenerator.dto.FactionDataDTO.FactionDataDTO;
 import marcel.demonworld.armygenerator.dto.SubFactionDTO.SubFactionDTO;
 import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
 import marcel.demonworld.armygenerator.mappingInterfaces.UnitCardToFactionDataMapperInterface;
+import org.json.simple.JSONObject;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
@@ -32,10 +33,11 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
             faction.setFactionName(factionName);
             faction.setSubFactions(createSubFactionDTOs(factionName, unitList));
 
-
             AllianceAndAlternativesDTO allyAndAlts = findAlly(factionName, allAllianceAndAlternativeDTOs);
             faction.setHasAlternativeLists(allyAndAlts.getHasAlternativeLists());
             faction.setNumberOfAlternativeArmySelections(allyAndAlts.getNumberOfChoices());
+
+            faction.setAlternativeOptions(stringifyAlternativeListsJSON(factionName, allAllianceAndAlternativeDTOs));
 
             String allyName = allyAndAlts.getAlly();
 
@@ -102,6 +104,17 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
                 .collect(Collectors.toList());
         return allianceAndAlternativeDTOS.get(0);
     }
+
+    private JSONObject stringifyAlternativeListsJSON(String factionName, List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs) {
+
+        List<JSONObject> result = allAllianceAndAlternativeDTOs
+                .stream()
+                .filter(dto -> dto.getFaction().equals(factionName))
+                .map(AllianceAndAlternativesDTO::getAlternativeSubFaction)
+                .collect(Collectors.toList());
+        return result.get(0);
+    }
+
 }
 
 
