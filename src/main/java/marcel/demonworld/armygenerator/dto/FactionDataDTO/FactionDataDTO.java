@@ -16,5 +16,5 @@ public class FactionDataDTO {
     private Boolean hasAlternativeLists;
     private Integer numberOfAlternativeArmySelections;
     private JSONObject alternativeOptions;
-
+    private Boolean AllyIsAlternativeOption;
 }

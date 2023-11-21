@@ -32,6 +32,6 @@ public class AllianceAndAlternativesDTO {
     @Lob
     @Column(name = "alternativeSubFaction", columnDefinition = "JSON")
     @Convert(converter = JSONObjectConverter.class)
-    private JSONObject alternativeSubFaction;
+    private JSONObject alternativeSubFactions;
 
 }
