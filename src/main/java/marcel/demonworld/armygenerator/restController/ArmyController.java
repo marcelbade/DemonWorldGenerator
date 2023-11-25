@@ -1,8 +1,8 @@
 package marcel.demonworld.armygenerator.restController;
 
 
-import marcel.demonworld.armygenerator.dto.AlliancesDTO.AllianceAndAlternativesDTO;
-import marcel.demonworld.armygenerator.dto.FactionDataDTO.FactionDataDTO;
+import marcel.demonworld.armygenerator.dto.alliancesDTO.AllianceAndAlternativesDTO;
+import marcel.demonworld.armygenerator.dto.factionDataDTO.FactionDataDTO;
 import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
 import marcel.demonworld.armygenerator.mappingInterfaces.UnitCardToFactionDataMapperInterface;
 import marcel.demonworld.armygenerator.services.AllyAndAlternativesService;

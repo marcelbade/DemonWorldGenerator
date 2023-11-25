@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.dto.SubFactionDTO;
+package marcel.demonworld.armygenerator.dto.subFactionDTO;
 
 import lombok.Data;
 import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
