@@ -6,11 +6,7 @@ package marcel.demonworld.armygenerator.dto.statCardDTOs;
  * cost for both items and units.
  */
 public interface DemonWorldCard {
-
     String getName();
-
     String getSubFaction();
-
     int getPoints();
-
 }

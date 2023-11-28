@@ -1,7 +1,6 @@
 package marcel.demonworld.armygenerator.dto.factionDataDTO;
 
 import lombok.Data;
-import marcel.demonworld.armygenerator.dto.subFactionDTO.SubFactionDTO;
 import org.json.simple.JSONObject;
 
 import java.util.List;
