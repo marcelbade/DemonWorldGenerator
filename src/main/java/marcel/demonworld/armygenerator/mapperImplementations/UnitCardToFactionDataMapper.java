@@ -1,5 +1,6 @@
 package marcel.demonworld.armygenerator.mapperImplementations;
 
+import marcel.demonworld.armygenerator.Enums.GameEnums;
 import marcel.demonworld.armygenerator.dto.FactionsDTO.FactionDTO;
 import marcel.demonworld.armygenerator.dto.alliancesDTO.AllianceAndAlternativesDTO;
 import marcel.demonworld.armygenerator.dto.factionDataDTO.FactionDataDTO;
@@ -29,7 +30,7 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
     public List<FactionDataDTO> unitCardToFactionData(List<UnitCard> unitList, List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs) {
 
         List<FactionDataDTO> mappingResult = new ArrayList<>();
-        Set<String> factionNames =  factionService.returnAll().stream().map(FactionDTO::getFactionName).collect(Collectors.toSet());
+        Set<String> factionNames = factionService.returnAll().stream().map(FactionDTO::getFactionName).collect(Collectors.toSet());
 
         for (String factionName : factionNames) {
             FactionDataDTO faction = new FactionDataDTO();
@@ -43,11 +44,10 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
             faction.setAlternativeOptions(stringifyAlternativeListsJSON(factionName, allAllianceAndAlternativeDTOs));
 
             String allyName = allyAndAlts.getAlly();
-            String NONE = "NONE";
 
-            if (allyName.equals(NONE)) {
-                String NO_ALLY = "NO_ALLY";
-                faction.setAlly(NO_ALLY);
+
+            if (allyName.equals(GameEnums.NONE.toString())) {
+                faction.setAlly(GameEnums.NO_ALLY.toString());
                 faction.setAllySubFactions(null);
             } else {
                 faction.setAlly(allyName);

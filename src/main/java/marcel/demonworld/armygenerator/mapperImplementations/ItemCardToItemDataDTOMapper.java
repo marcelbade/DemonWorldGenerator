@@ -1,6 +1,7 @@
 package marcel.demonworld.armygenerator.mapperImplementations;
 
 
+import marcel.demonworld.armygenerator.Enums.GameEnums;
 import marcel.demonworld.armygenerator.dto.FactionsDTO.FactionDTO;
 import marcel.demonworld.armygenerator.dto.ItemDataDTO.ItemDataDTO;
 import marcel.demonworld.armygenerator.dto.ItemDataDTO.ItemFactionDTO;
@@ -21,11 +22,10 @@ public class ItemCardToItemDataDTOMapper implements ItemCardToItemDataDTOMapperI
     @Override
     public ItemDataDTO unitCardToFactionData(List<ItemCard> allItems, List<FactionDTO> AllFactions) {
 
-        String GENERIC = "*";
 
         Set<String> itemTypes = getDistinctItemTypes(allItems);
         Set<String> factionNames = getDistinctFactionNames(AllFactions);
-        factionNames.add(GENERIC);
+        factionNames.add(GameEnums.GENERIC.toString());
 
         ItemDataDTO result = new ItemDataDTO();
 
@@ -44,7 +44,7 @@ public class ItemCardToItemDataDTOMapper implements ItemCardToItemDataDTOMapperI
                 }
             }
 
-            if (faction.equals(GENERIC)) {
+            if (faction.equals(GameEnums.GENERIC.toString())) {
                 result.setGenericItemDTO(itemFactionDTO);
             }
 
