@@ -1,17 +1,20 @@
 package marcel.demonworld.armygenerator.restController;
 
 
+import marcel.demonworld.armygenerator.dto.FactionsDTO.FactionDTO;
 import marcel.demonworld.armygenerator.dto.alliancesDTO.AllianceAndAlternativesDTO;
 import marcel.demonworld.armygenerator.dto.factionDataDTO.FactionDataDTO;
 import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
 import marcel.demonworld.armygenerator.mappingInterfaces.UnitCardToFactionDataMapperInterface;
 import marcel.demonworld.armygenerator.services.AllyAndAlternativesService;
+import marcel.demonworld.armygenerator.services.FactionService;
 import marcel.demonworld.armygenerator.services.SelectArmyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -22,6 +25,9 @@ public class ArmyController {
 
     @Autowired
     AllyAndAlternativesService allyService;
+
+    @Autowired
+    FactionService factionService;
 
     @Autowired
     UnitCardToFactionDataMapperInterface unitCardToFactionDataMapperInterface;
@@ -48,5 +54,15 @@ public class ArmyController {
         List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOS = allyService.returnAll();
 
         return unitCardToFactionDataMapperInterface.unitCardToFactionData(unitCards, allAllianceAndAlternativeDTOS);
+    }
+
+    /**
+     * Returns all faction names in the game. The names are returned as a simple String array.
+     *
+     * @return all faction names as a String array.
+     */
+    @GetMapping("/factionNames")
+    public List<String> getAllFactionNames() {
+        return factionService.returnAll().stream().map(FactionDTO::getFactionName).collect(Collectors.toList());
     }
 }
