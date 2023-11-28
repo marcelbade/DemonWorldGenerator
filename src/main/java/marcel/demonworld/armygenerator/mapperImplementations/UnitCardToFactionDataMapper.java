@@ -1,12 +1,15 @@
 package marcel.demonworld.armygenerator.mapperImplementations;
 
+import marcel.demonworld.armygenerator.dto.FactionsDTO.FactionDTO;
 import marcel.demonworld.armygenerator.dto.alliancesDTO.AllianceAndAlternativesDTO;
 import marcel.demonworld.armygenerator.dto.factionDataDTO.FactionDataDTO;
 import marcel.demonworld.armygenerator.dto.factionDataDTO.SubFactionDTO;
 import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
 import marcel.demonworld.armygenerator.mappingInterfaces.UnitCardToFactionDataMapperInterface;
+import marcel.demonworld.armygenerator.services.FactionService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
@@ -19,11 +22,14 @@ import java.util.stream.Collectors;
 @Primary
 public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperInterface {
 
+    @Autowired
+    FactionService factionService;
+
     @Override
     public List<FactionDataDTO> unitCardToFactionData(List<UnitCard> unitList, List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs) {
 
         List<FactionDataDTO> mappingResult = new ArrayList<>();
-        Set<String> factionNames = createSetOfDistinctFactionNames(unitList);
+        Set<String> factionNames =  factionService.returnAll().stream().map(FactionDTO::getFactionName).collect(Collectors.toSet());
 
         for (String factionName : factionNames) {
             FactionDataDTO faction = new FactionDataDTO();
@@ -37,8 +43,8 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
             faction.setAlternativeOptions(stringifyAlternativeListsJSON(factionName, allAllianceAndAlternativeDTOs));
 
             String allyName = allyAndAlts.getAlly();
-
             String NONE = "NONE";
+
             if (allyName.equals(NONE)) {
                 String NO_ALLY = "NO_ALLY";
                 faction.setAlly(NO_ALLY);
@@ -100,13 +106,6 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
         return result;
     }
 
-    // Method creates set of all faction names in the game.
-    private Set<String> createSetOfDistinctFactionNames(List<UnitCard> list) {
-        return list
-                .stream()
-                .map(UnitCard::getFaction)
-                .collect(Collectors.toSet());
-    }
 
     // Method creates a list containing subFaction objects for one faction.
     private List<String> createSubFactionListForFaction(String factionName, List<UnitCard> units) {
