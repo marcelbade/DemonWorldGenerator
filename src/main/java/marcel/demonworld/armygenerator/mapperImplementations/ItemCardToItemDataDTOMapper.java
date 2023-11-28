@@ -1,0 +1,81 @@
+package marcel.demonworld.armygenerator.mapperImplementations;
+
+
+import marcel.demonworld.armygenerator.dto.FactionsDTO.FactionDTO;
+import marcel.demonworld.armygenerator.dto.ItemDataDTO.ItemDataDTO;
+import marcel.demonworld.armygenerator.dto.ItemDataDTO.ItemFactionDTO;
+import marcel.demonworld.armygenerator.dto.ItemDataDTO.ItemTypeDTO;
+import marcel.demonworld.armygenerator.dto.statCardDTOs.ItemCard;
+import marcel.demonworld.armygenerator.mappingInterfaces.ItemCardToItemDataDTOMapperInterface;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+@Component
+@Primary
+public class ItemCardToItemDataDTOMapper implements ItemCardToItemDataDTOMapperInterface {
+
+    @Override
+    public ItemDataDTO unitCardToFactionData(List<ItemCard> allItems, List<FactionDTO> AllFactions) {
+
+        String GENERIC = "*";
+
+        Set<String> itemTypes = getDistinctItemTypes(allItems);
+        Set<String> factionNames = getDistinctFactionNames(AllFactions);
+        factionNames.add(GENERIC);
+
+        ItemDataDTO result = new ItemDataDTO();
+
+        for (String faction : factionNames) {
+
+            ItemFactionDTO itemFactionDTO = new ItemFactionDTO();
+            itemFactionDTO.setFactionName(faction);
+
+            for (String itemType : itemTypes) {
+                List<ItemCard> filteredItems = filterItemsForFactionAndType(faction, itemType, allItems);
+                ItemTypeDTO itemTypeDTO = buildItemTypeDTO(itemType, filteredItems);
+
+                // skip empty item type groups
+                if (!itemTypeDTO.getItems().isEmpty()) {
+                    itemFactionDTO.addToGroupsOfFactionItemsByType(itemTypeDTO);
+                }
+            }
+
+            if (faction.equals(GENERIC)) {
+                result.setGenericItemDTO(itemFactionDTO);
+            }
+
+            result.addItemFactionDTOToList(itemFactionDTO);
+        }
+
+        return result;
+    }
+
+
+    private Set<String> getDistinctFactionNames(List<FactionDTO> factions) {
+        return factions.stream().map(FactionDTO::getFactionName).collect(Collectors.toSet());
+    }
+
+    private Set<String> getDistinctItemTypes(List<ItemCard> items) {
+        return items.stream().map(ItemCard::getItemType).collect(Collectors.toSet());
+    }
+
+    private List<ItemCard> filterItemsForFactionAndType(String faction, String itemType, List<ItemCard> allItems) {
+        return allItems.stream()
+                .filter(i -> i.getItemType().equals(itemType) && i.getFaction().equals(faction))
+                .collect(Collectors.toList());
+    }
+
+
+    private ItemTypeDTO buildItemTypeDTO(String itemType, List<ItemCard> items) {
+
+        ItemTypeDTO result = new ItemTypeDTO();
+        result.setTypeName(itemType);
+        result.setItems(items);
+        return result;
+    }
+
+}
