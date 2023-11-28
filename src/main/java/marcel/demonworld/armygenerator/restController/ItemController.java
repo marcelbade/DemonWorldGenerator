@@ -1,7 +1,11 @@
 package marcel.demonworld.armygenerator.restController;
 
 
+import marcel.demonworld.armygenerator.dto.FactionsDTO.FactionDTO;
+import marcel.demonworld.armygenerator.dto.ItemDataDTO.ItemDataDTO;
 import marcel.demonworld.armygenerator.dto.statCardDTOs.ItemCard;
+import marcel.demonworld.armygenerator.mappingInterfaces.ItemCardToItemDataDTOMapperInterface;
+import marcel.demonworld.armygenerator.services.FactionService;
 import marcel.demonworld.armygenerator.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +19,12 @@ public class ItemController {
     @Autowired
     ItemService itemService;
 
+    @Autowired
+    FactionService factionService;
+
+    @Autowired
+    ItemCardToItemDataDTOMapperInterface itemCardToItemDataDTOMapperInterface;
+
     /**
      * Returns all item cards of one faction
      *
@@ -22,9 +32,20 @@ public class ItemController {
      */
     @GetMapping("/items")
     public List<ItemCard> getAllItems() {
-        return  itemService.returnAll();
+        return itemService.returnAll();
     }
 
+    /**
+     * Returns a DTO that contains for every faction, all items ordered by type. Generic Items are they own "faction".
+     *
+     * @return a custom DTO.
+     */
+    @GetMapping("/itemDTOs")
+    public ItemDataDTO getAllItemDTOs() {
+        List<ItemCard> allItems = itemService.returnAll();
+        List<FactionDTO> allFactions = factionService.returnAll();
 
+        return itemCardToItemDataDTOMapperInterface.unitCardToFactionData(allItems, allFactions);
+    }
 
 }
