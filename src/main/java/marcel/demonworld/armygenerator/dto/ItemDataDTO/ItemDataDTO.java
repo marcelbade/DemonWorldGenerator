@@ -10,9 +10,6 @@ import java.util.List;
 public class ItemDataDTO {
 
     final private List<ItemFactionDTO> factionItems;
-    private ItemFactionDTO GenericItems;
-
-
 
     public ItemDataDTO() {
         this.factionItems = new ArrayList<>();
@@ -20,10 +17,6 @@ public class ItemDataDTO {
 
     public void addItemFactionDTOToList(ItemFactionDTO dto) {
         factionItems.add(dto);
-    }
-
-    public void setGenericItemDTO(ItemFactionDTO genericItems) {
-        this.GenericItems = genericItems;
     }
 
 }
