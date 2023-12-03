@@ -43,14 +43,8 @@ public class ItemCardToItemDataDTOMapper implements ItemCardToItemDataDTOMapperI
                     itemFactionDTO.addToGroupsOfFactionItemsByType(itemTypeDTO);
                 }
             }
-
-            if (faction.equals(GameEnums.GENERIC.toString())) {
-                result.setGenericItemDTO(itemFactionDTO);
-            }
-
             result.addItemFactionDTOToList(itemFactionDTO);
         }
-
         return result;
     }
 
@@ -65,7 +59,7 @@ public class ItemCardToItemDataDTOMapper implements ItemCardToItemDataDTOMapperI
 
     private List<ItemCard> filterItemsForFactionAndType(String faction, String itemType, List<ItemCard> allItems) {
         return allItems.stream()
-                .filter(i -> i.getItemType().equals(itemType) && i.getFaction().equals(faction))
+                .filter(i -> i.getItemType().equals(itemType) && (i.getFaction().equals(faction) || i.getFaction().equals(GameEnums.GENERIC.toString())))
                 .collect(Collectors.toList());
     }
 
