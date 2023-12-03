@@ -10,6 +10,7 @@ import marcel.demonworld.armygenerator.services.AllyAndAlternativesService;
 import marcel.demonworld.armygenerator.services.FactionService;
 import marcel.demonworld.armygenerator.services.SelectArmyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +38,7 @@ public class ArmyController {
      *
      * @return all unit cards in the game
      */
+    @CrossOrigin
     @GetMapping("/factions")
     public List<UnitCard> getAllUnitCards() {
         return armyService.returnAll();
@@ -48,6 +50,7 @@ public class ArmyController {
      *
      * @return all factions as a list of factionDTO.
      */
+    @CrossOrigin
     @GetMapping("/factionDTOs")
     public List<FactionDataDTO> getAllFactionDTOs() {
         List<UnitCard> unitCards = armyService.returnAll();
@@ -61,6 +64,7 @@ public class ArmyController {
      *
      * @return all faction names as a String array.
      */
+    @CrossOrigin
     @GetMapping("/factionNames")
     public List<String> getAllFactionNames() {
         return factionService.returnAll().stream().map(FactionDTO::getFactionName).collect(Collectors.toList());

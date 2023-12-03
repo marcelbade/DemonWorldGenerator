@@ -8,6 +8,7 @@ import marcel.demonworld.armygenerator.mappingInterfaces.ItemCardToItemDataDTOMa
 import marcel.demonworld.armygenerator.services.FactionService;
 import marcel.demonworld.armygenerator.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +31,7 @@ public class ItemController {
      *
      * @return all item cards
      */
+    @CrossOrigin
     @GetMapping("/items")
     public List<ItemCard> getAllItems() {
         return itemService.returnAll();
@@ -40,6 +42,7 @@ public class ItemController {
      *
      * @return a custom DTO.
      */
+    @CrossOrigin
     @GetMapping("/itemDTOs")
     public ItemDataDTO getAllItemDTOs() {
         List<ItemCard> allItems = itemService.returnAll();
