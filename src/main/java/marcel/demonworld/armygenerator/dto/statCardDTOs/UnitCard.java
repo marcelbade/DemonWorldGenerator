@@ -34,34 +34,34 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "rangedAttackStats", columnDefinition = "text")
     private String rangedAttackStats;
 
-    @Column(name = "isUnique",  columnDefinition = "integer")
+    @Column(name = "isUnique", columnDefinition = "integer")
     private Boolean uniqueUnit;
 
-    @Column(name = "isMounted",  columnDefinition = "integer")
+    @Column(name = "isMounted", columnDefinition = "integer")
     private Boolean isMounted;
 
-    @Column(name = "leader",  columnDefinition = "integer")
+    @Column(name = "leader", columnDefinition = "integer")
     private Boolean leader;
 
-    @Column(name = "standardBearer",  columnDefinition = "integer")
+    @Column(name = "standardBearer", columnDefinition = "integer")
     private Boolean standardBearer;
 
-    @Column(name = "musician",  columnDefinition = "integer")
+    @Column(name = "musician", columnDefinition = "integer")
     private Boolean musician;
 
     @Column(name = "unitType", columnDefinition = "text")
     private String unitType;
 
-    @Column(name = "wedgeFormation",  columnDefinition = "integer")
+    @Column(name = "wedgeFormation", columnDefinition = "integer")
     private Boolean wedgeFormation;
 
-    @Column(name = "skirmishFormation",  columnDefinition = "integer")
+    @Column(name = "skirmishFormation", columnDefinition = "integer")
     private Boolean skirmishFormation;
 
-    @Column(name = "squareFormation",  columnDefinition = "integer")
+    @Column(name = "squareFormation", columnDefinition = "integer")
     private Boolean squareFormation;
 
-    @Column(name = "horde",  columnDefinition = "integer")
+    @Column(name = "horde", columnDefinition = "integer")
     private Boolean horde;
 
     @Column(name = "commandStars")
@@ -148,10 +148,10 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "specialRules", columnDefinition = "text")
     private String specialRules;
 
-    @Column(name = "isHighFlyer",  columnDefinition = "integer")
+    @Column(name = "isHighFlyer", columnDefinition = "integer")
     private Boolean isHighFlyer;
 
-    @Column(name = "isLowFlyer",  columnDefinition = "integer")
+    @Column(name = "isLowFlyer", columnDefinition = "integer")
     private Boolean isLowFlyer;
 
     @Column(name = "hasShield", columnDefinition = "integer")
@@ -163,7 +163,7 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "secondSubFaction", columnDefinition = "text")
     private String secondSubFaction;
 
-    @Column(name = "isMultiStateUnit",  columnDefinition = "integer")
+    @Column(name = "isMultiStateUnit", columnDefinition = "integer")
     private Boolean isMultiStateUnit;
 
     @Column(name = "belongsToUnit", columnDefinition = "text")
@@ -171,6 +171,12 @@ public class UnitCard implements DemonWorldCard {
 
     @Column(name = "multiStateOrderNumber")
     private Integer multiStateOrderNumber;
+
+    @Column(name = "closedOrder", columnDefinition = "bit")
+    private Integer closedOrder;
+
+    @Column(name = "twoHandWeapons", columnDefinition = "bit")
+    private Integer twoHandWeapons;
 
 
     @Override
