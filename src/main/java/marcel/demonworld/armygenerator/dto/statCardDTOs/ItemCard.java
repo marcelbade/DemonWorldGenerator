@@ -108,7 +108,7 @@ public class ItemCard implements DemonWorldCard {
     private Integer altersSkillMelee;
 
     @Column(name = "rangedWeapon", columnDefinition = "text")
-    private String rangedWeapon;
+    private String altersRangedWeapon;
 
     @Column(name = "altersSkillRange")
     private Integer altersSkillRange;
