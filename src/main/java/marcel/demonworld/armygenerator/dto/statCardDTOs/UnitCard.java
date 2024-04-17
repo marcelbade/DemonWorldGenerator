@@ -172,11 +172,16 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "multiStateOrderNumber")
     private Integer multiStateOrderNumber;
 
-    @Column(name = "closedOrder", columnDefinition = "bit")
-    private Integer closedOrder;
+    @Column(name = "multiCardName", columnDefinition = "text")
+    private String multiCardName;
 
-    @Column(name = "twoHandWeapons", columnDefinition = "bit")
-    private Integer twoHandWeapons;
+
+
+/*    @Column(name = "closedOrder", columnDefinition = "bit")
+    private Integer closedOrder;*/
+
+/*    @Column(name = "twoHandWeapons", columnDefinition = "bit")
+    private Integer twoHandWeapons;*/
 
 
     @Override
