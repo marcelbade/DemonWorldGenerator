@@ -172,6 +172,12 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "multiStateOrderNumber")
     private Integer multiStateOrderNumber;
 
+    @Column(name = "leaderIsClosedOrder")
+    private Boolean leaderIsClosedOrder;
+
+    @Column(name = "unitIsClosedOrder")
+    private Boolean unitIsClosedOrder;
+
     @Column(name = "multiCardName", columnDefinition = "text")
     private String multiCardName;
 
