@@ -26,6 +26,12 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
     @Autowired
     FactionService factionService;
 
+    /**
+     * Method maps unitCard objects to FactionDataDTO.
+     * @param unitList list of unitCard objects
+     * @param allAllianceAndAlternativeDTOs list of AllianceAndAlternativesDTO objects.
+     * @return a list containing one FactionTDO object for every in-game faction.
+     */
     @Override
     public List<FactionDataDTO> unitCardToFactionData(List<UnitCard> unitList, List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs) {
 
