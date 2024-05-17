@@ -28,12 +28,15 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
 
     /**
      * Method maps unitCard objects to FactionDataDTO.
-     * @param unitList list of unitCard objects
+     *
+     * @param unitList                      list of unitCard objects
      * @param allAllianceAndAlternativeDTOs list of AllianceAndAlternativesDTO objects.
      * @return a list containing one FactionTDO object for every in-game faction.
      */
     @Override
     public List<FactionDataDTO> unitCardToFactionData(List<UnitCard> unitList, List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs) {
+
+        setMaxCounterForAllUnits(unitList);
 
         List<FactionDataDTO> mappingResult = new ArrayList<>();
         Set<String> factionNames = factionService.returnAll().stream().map(FactionDTO::getFactionName).collect(Collectors.toSet());
@@ -65,6 +68,12 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
             mappingResult.add(faction);
         }
         return mappingResult;
+    }
+
+
+    private List<UnitCard> setMaxCounterForAllUnits(List<UnitCard> unitList) {
+        unitList.forEach(UnitCard::setMaxCounter);
+        return unitList;
     }
 
 

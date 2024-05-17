@@ -54,6 +54,9 @@ public class ArmyController {
     @GetMapping("/factionDTOs")
     public List<FactionDataDTO> getAllFactionDTOs() {
         List<UnitCard> unitCards = armyService.returnAll();
+
+
+
         List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOS = allyService.returnAll();
 
         return unitCardToFactionDataMapperInterface.unitCardToFactionData(unitCards, allAllianceAndAlternativeDTOS);

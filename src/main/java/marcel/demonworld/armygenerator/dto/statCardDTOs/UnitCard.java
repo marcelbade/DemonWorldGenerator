@@ -1,9 +1,13 @@
 package marcel.demonworld.armygenerator.dto.statCardDTOs;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
+import marcel.demonworld.armygenerator.dto.ItemDataDTO.EquipmentTypes;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * one dto for all army cards, no matter what the unit type is.
@@ -181,7 +185,25 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "multiCardName", columnDefinition = "text")
     private String multiCardName;
 
+    @Transient
+    @JsonProperty
+    private List<ItemCard> equipment = new ArrayList<>();
 
+    @Transient
+    @JsonProperty
+    private EquipmentTypes equipmentTypes = new EquipmentTypes();
+
+    @Transient
+    @JsonProperty
+    private Integer lossCounter = 0;
+
+    @Transient
+    @JsonProperty
+    private Integer maxCounter = 0;
+
+    @Transient
+    @JsonProperty
+    private Boolean unitDestroyed = false;
 
 
     @Override
@@ -194,5 +216,8 @@ public class UnitCard implements DemonWorldCard {
         return this.points;
     }
 
+    public void setMaxCounter() {
+        this.maxCounter = this.numberOfElements * this.hitpoints;
+    }
 
 }
