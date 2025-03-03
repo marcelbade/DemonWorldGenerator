@@ -71,62 +71,62 @@ public class ItemCard implements DemonWorldCard {
     @Column(name = "points", columnDefinition = "text")
     private Integer pointCost;
 
-    @Column(name = "altersMove")
-    private Integer altersMove;
+    @Column(name = "move")
+    private Integer move;
 
-    @Column(name = "altersCharge")
-    private Integer altersCharge;
+    @Column(name = "charge")
+    private Integer charge;
 
-    @Column(name = "altersSkirmish")
-    private Integer altersSkirmish;
+    @Column(name = "skirmish")
+    private Integer skirmish;
 
-    @Column(name = "altersHold_maneuvers")
-    private Integer altersHold_maneuvers;
+    @Column(name = "hold_maneuvers")
+    private Integer hold_maneuvers;
 
     @Column(name = "controlZone_OverRun")
     private Integer controlZone_OverRun;
 
-    @Column(name = "altersInitiative")
-    private Integer altersInitiative;
+    @Column(name = "initiative")
+    private Integer initiative;
 
-    @Column(name = "altersSize")
-    private Integer altersSize;
+    @Column(name = "size")
+    private Integer size;
 
-    @Column(name = "altersArmourRange")
-    private Integer altersArmourRange;
+    @Column(name = "armourRange")
+    private Integer armourRange;
 
-    @Column(name = "altersArmourMelee")
-    private Integer altersArmourMelee;
+    @Column(name = "armourMelee")
+    private Integer armourMelee;
 
-    @Column(name = "altersWeapon1")
-    private Integer altersWeapon1;
+    @Column(name = "weapon1")
+    private Integer weapon1;
 
-    @Column(name = "altersWeapon2")
-    private Integer altersWeapon2;
+    @Column(name = "weapon2")
+    private Integer weapon2;
 
-    @Column(name = "altersSkillMelee")
-    private Integer altersSkillMelee;
+    @Column(name = "skillMelee")
+    private Integer skillMelee;
 
     @Column(name = "rangedWeapon", columnDefinition = "text")
-    private String altersRangedWeapon;
+    private String rangedWeapon;
 
-    @Column(name = "altersSkillRange")
-    private Integer altersSkillRange;
+    @Column(name = "skillRange")
+    private Integer skillRange;
 
-    @Column(name = "altersFear")
-    private Integer altersFear;
+    @Column(name = "fear")
+    private Integer fear;
 
-    @Column(name = "altersMoral1")
-    private Integer altersMoral1;
+    @Column(name = "moral1")
+    private Integer moral1;
 
-    @Column(name = "altersMoral2")
-    private Integer altersMoral2;
+    @Column(name = "moral2")
+    private Integer moral2;
 
-    @Column(name = "altersHitpoints")
-    private Integer altersHitpoints;
+    @Column(name = "hitpoints")
+    private Integer hitpoints;
 
-    @Column(name = "specialRules", columnDefinition = "text")
-    private String specialRules;
+    @Column(name = "itemRules", columnDefinition = "text")
+    private String itemRules;
 
     @Column(name = "isAdditionalItem", columnDefinition = "integer")
     private Boolean isAdditionalItem;
