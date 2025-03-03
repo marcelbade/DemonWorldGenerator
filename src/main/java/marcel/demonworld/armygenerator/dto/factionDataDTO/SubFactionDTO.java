@@ -20,6 +20,7 @@ public class SubFactionDTO {
      * selected by the player.
      */
     private boolean hasNoValidUnits;
+    private int numberInvalidUnits;
     // units that belong to this sub faction
     private List<UnitCard> units;
 }

@@ -185,6 +185,9 @@ public class UnitCard implements DemonWorldCard {
     @Column(name = "multiCardName", columnDefinition = "text")
     private String multiCardName;
 
+    @Column(name = "maxFieldsMove", columnDefinition = "integer")
+    private Boolean maxFieldsMove;
+
     @Transient
     @JsonProperty
     private List<ItemCard> equipment = new ArrayList<>();
