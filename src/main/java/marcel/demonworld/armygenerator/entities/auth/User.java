@@ -2,17 +2,19 @@ package marcel.demonworld.armygenerator.entities.auth;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import marcel.demonworld.armygenerator.entities.game.ArmyList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "app_user")
+@Table(name = "app_users")
 public class User {
 
     @Id
@@ -27,4 +29,27 @@ public class User {
     @Column(name = "isAdmin", columnDefinition = "text")
     private Boolean isAdmin;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id")
+    private List<ArmyList> armyLists = new ArrayList<ArmyList>();
+
+    // helper functions
+
+    public void addArmyList(ArmyList list) {
+        this.armyLists.add(list);
+        list.setCreator(this);
+    }
+
+    public void addMultipleArmyLists(List<ArmyList> lists) {
+        this.armyLists.addAll(lists);
+        lists.forEach(l -> l.setCreator(this));
+    }
+
+    public void deleteArmyList(ArmyList list) {
+        this.armyLists.remove(list);
+    }
+
+    public void deleteMultipleArmyLists(List<ArmyList> lists) {
+        this.armyLists.removeAll(lists);
+    }
 }
