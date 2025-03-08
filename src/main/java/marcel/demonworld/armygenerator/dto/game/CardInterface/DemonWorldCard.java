@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.dto.game;
+package marcel.demonworld.armygenerator.dto.game.CardInterface;
 
 
 /**
