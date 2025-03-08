@@ -6,7 +6,7 @@ import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
 
 import java.util.List;
 
-public interface ItemCardToItemDataDTOMapperInterface {
+public interface ItemDataMapperInterface {
     ItemDataDTO unitCardToFactionData(List<ItemCardDTO> itemList, List<FactionDTO> allFactions);
 
 
