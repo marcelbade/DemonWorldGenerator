@@ -18,7 +18,6 @@ import java.nio.CharBuffer;
 import java.util.Optional;
 
 
-
 @RequiredArgsConstructor
 @Service
 public class UserService {
@@ -28,7 +27,7 @@ public class UserService {
 
     private final UserMapperInterface userMapper;
 
-    public UserDTO login(CredentialsDTO credentialsDTO) {
+    public UserDTO loginUser(CredentialsDTO credentialsDTO) {
         User user = userRepository.findByUserName(credentialsDTO.getUserName())
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
 
@@ -38,7 +37,7 @@ public class UserService {
         throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
     }
 
-    public UserDTO register(SignUpDTO userDto) {
+    public UserDTO registerUser(SignUpDTO userDto) {
         Optional<User> optionalUser = userRepository.findByUserName(userDto.getUserName());
 
         if (optionalUser.isPresent()) {
@@ -52,6 +51,34 @@ public class UserService {
 
         return userMapper.userToUserDto(savedUser);
     }
+
+
+    public void deleteUser(UserDTO userDTO) {
+        userRepository.delete(userMapper.userDtoToUser(userDTO));
+    }
+
+    public UserDTO upgradeUserToAdmin(UserDTO userDTO) {
+        User user = userRepository
+                .findByUserName(userDTO.getUserName())
+                .orElseThrow(() -> new AppException("user not found", HttpStatus.NOT_FOUND));
+
+        user.setIsAdmin(true);
+        userRepository.save(user);
+
+        return userMapper.userToUserDto(user);
+    }
+
+    public UserDTO downgradeAdminToUser(UserDTO userDTO) {
+        User user = userRepository
+                .findByUserName(userDTO.getUserName())
+                .orElseThrow(() -> new AppException("user not found", HttpStatus.NOT_FOUND));
+
+        user.setIsAdmin(false);
+        userRepository.save(user);
+
+        return userMapper.userToUserDto(user);
+    }
+
 
     public UserDTO findByUsername(String username) {
         User user = userRepository.findByUserName(username)
