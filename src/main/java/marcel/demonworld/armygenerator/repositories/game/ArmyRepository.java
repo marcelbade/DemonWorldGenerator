@@ -1,6 +1,6 @@
-package marcel.demonworld.armygenerator.repositories;
+package marcel.demonworld.armygenerator.repositories.game;
 
-import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
+import marcel.demonworld.armygenerator.dto.game.statCardDTOs.UnitCard;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

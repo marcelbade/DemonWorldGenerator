@@ -1,6 +1,5 @@
-package marcel.demonworld.armygenerator.dto.ItemDataDTO;
+package marcel.demonworld.armygenerator.dto.game.ItemDataDTO;
 
-import lombok.Data;
 import lombok.Getter;
 
 import java.util.ArrayList;

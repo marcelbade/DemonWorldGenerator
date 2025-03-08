@@ -1,7 +1,7 @@
-package marcel.demonworld.armygenerator.services;
+package marcel.demonworld.armygenerator.services.game;
 
-import marcel.demonworld.armygenerator.dto.alliancesDTO.AllianceAndAlternativesDTO;
-import marcel.demonworld.armygenerator.repositories.AlliesAndAlternativesRepository;
+import marcel.demonworld.armygenerator.dto.game.alliancesDTO.AllianceAndAlternativesDTO;
+import marcel.demonworld.armygenerator.repositories.game.AlliesAndAlternativesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

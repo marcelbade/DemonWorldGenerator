@@ -1,13 +1,13 @@
-package marcel.demonworld.armygenerator.mapperImplementations;
+package marcel.demonworld.armygenerator.mapperImplementations.game;
 
 import marcel.demonworld.armygenerator.Enums.GameEnums;
-import marcel.demonworld.armygenerator.dto.FactionsDTO.FactionDTO;
-import marcel.demonworld.armygenerator.dto.alliancesDTO.AllianceAndAlternativesDTO;
-import marcel.demonworld.armygenerator.dto.factionDataDTO.FactionDataDTO;
-import marcel.demonworld.armygenerator.dto.factionDataDTO.SubFactionDTO;
-import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
-import marcel.demonworld.armygenerator.mappingInterfaces.UnitCardToFactionDataMapperInterface;
-import marcel.demonworld.armygenerator.services.FactionService;
+import marcel.demonworld.armygenerator.dto.game.FactionsDTO.FactionDTO;
+import marcel.demonworld.armygenerator.dto.game.alliancesDTO.AllianceAndAlternativesDTO;
+import marcel.demonworld.armygenerator.dto.game.factionDataDTO.FactionDataDTO;
+import marcel.demonworld.armygenerator.dto.game.factionDataDTO.SubFactionDTO;
+import marcel.demonworld.armygenerator.dto.game.statCardDTOs.UnitCard;
+import marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardToFactionDataMapperInterface;
+import marcel.demonworld.armygenerator.services.game.FactionService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

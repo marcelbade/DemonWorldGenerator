@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.dto.ItemDataDTO;
+package marcel.demonworld.armygenerator.dto.game.ItemDataDTO;
 
  import lombok.Getter;
 

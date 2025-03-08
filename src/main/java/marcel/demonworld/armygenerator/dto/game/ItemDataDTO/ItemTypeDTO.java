@@ -1,8 +1,8 @@
-package marcel.demonworld.armygenerator.dto.ItemDataDTO;
+package marcel.demonworld.armygenerator.dto.game.ItemDataDTO;
 
 
 import lombok.Data;
-import marcel.demonworld.armygenerator.dto.statCardDTOs.ItemCard;
+import marcel.demonworld.armygenerator.dto.game.statCardDTOs.ItemCard;
 
 import java.util.List;
 

@@ -1,14 +1,14 @@
 package marcel.demonworld.armygenerator.restController;
 
 
-import marcel.demonworld.armygenerator.dto.FactionsDTO.FactionDTO;
-import marcel.demonworld.armygenerator.dto.alliancesDTO.AllianceAndAlternativesDTO;
-import marcel.demonworld.armygenerator.dto.factionDataDTO.FactionDataDTO;
-import marcel.demonworld.armygenerator.dto.statCardDTOs.UnitCard;
-import marcel.demonworld.armygenerator.mappingInterfaces.UnitCardToFactionDataMapperInterface;
-import marcel.demonworld.armygenerator.services.AllyAndAlternativesService;
-import marcel.demonworld.armygenerator.services.FactionService;
-import marcel.demonworld.armygenerator.services.SelectArmyService;
+import marcel.demonworld.armygenerator.dto.game.FactionsDTO.FactionDTO;
+import marcel.demonworld.armygenerator.dto.game.alliancesDTO.AllianceAndAlternativesDTO;
+import marcel.demonworld.armygenerator.dto.game.factionDataDTO.FactionDataDTO;
+import marcel.demonworld.armygenerator.dto.game.statCardDTOs.UnitCard;
+import marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardToFactionDataMapperInterface;
+import marcel.demonworld.armygenerator.services.game.AllyAndAlternativesService;
+import marcel.demonworld.armygenerator.services.game.FactionService;
+import marcel.demonworld.armygenerator.services.game.SelectArmyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,11 +1,12 @@
-package marcel.demonworld.armygenerator.dto.statCardDTOs;
+package marcel.demonworld.armygenerator.dto.game.statCardDTOs;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import marcel.demonworld.armygenerator.dto.ItemDataDTO.EquipmentTypes;
+import marcel.demonworld.armygenerator.dto.game.ItemDataDTO.EquipmentTypes;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 

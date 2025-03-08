@@ -1,12 +1,13 @@
-package marcel.demonworld.armygenerator.dto.alliancesDTO;
+package marcel.demonworld.armygenerator.dto.game.alliancesDTO;
 
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import marcel.demonworld.armygenerator.JSONConverter.JSONObjectConverter;
 import org.json.simple.JSONObject;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 
 @Setter
 @Getter

@@ -1,8 +1,8 @@
-package marcel.demonworld.armygenerator.services;
+package marcel.demonworld.armygenerator.services.game;
 
 
-import marcel.demonworld.armygenerator.dto.FactionsDTO.FactionDTO;
-import marcel.demonworld.armygenerator.repositories.FactionRepository;
+import marcel.demonworld.armygenerator.dto.game.FactionsDTO.FactionDTO;
+import marcel.demonworld.armygenerator.repositories.game.FactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public class FactionService {
 
     @Autowired
-    FactionRepository repo;
+    private FactionRepository repo;
 
     public List<FactionDTO> returnAll() {
         return repo.findAll();

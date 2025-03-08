@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.dto.factionDataDTO;
+package marcel.demonworld.armygenerator.dto.game.factionDataDTO;
 
 import lombok.Data;
 import org.json.simple.JSONObject;

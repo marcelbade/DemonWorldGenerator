@@ -1,12 +1,12 @@
 package marcel.demonworld.armygenerator.restController;
 
 
-import marcel.demonworld.armygenerator.dto.FactionsDTO.FactionDTO;
-import marcel.demonworld.armygenerator.dto.ItemDataDTO.ItemDataDTO;
-import marcel.demonworld.armygenerator.dto.statCardDTOs.ItemCard;
-import marcel.demonworld.armygenerator.mappingInterfaces.ItemCardToItemDataDTOMapperInterface;
-import marcel.demonworld.armygenerator.services.FactionService;
-import marcel.demonworld.armygenerator.services.ItemService;
+import marcel.demonworld.armygenerator.dto.game.FactionsDTO.FactionDTO;
+import marcel.demonworld.armygenerator.dto.game.ItemDataDTO.ItemDataDTO;
+import marcel.demonworld.armygenerator.dto.game.statCardDTOs.ItemCard;
+import marcel.demonworld.armygenerator.mappingInterfaces.game.ItemCardToItemDataDTOMapperInterface;
+import marcel.demonworld.armygenerator.services.game.FactionService;
+import marcel.demonworld.armygenerator.services.game.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
