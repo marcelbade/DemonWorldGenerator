@@ -2,9 +2,8 @@ package marcel.demonworld.armygenerator.JSONConverter;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import jakarta.persistence.*;
 
-import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
 
 @Converter(autoApply = true)
 public class JSONObjectConverter implements AttributeConverter<JSONObject, String> {
