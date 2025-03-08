@@ -37,12 +37,12 @@ public class User {
 
     public void addArmyList(ArmyList list) {
         this.armyLists.add(list);
-        list.setCreator(this);
+        list.setUser(this);
     }
 
     public void addMultipleArmyLists(List<ArmyList> lists) {
         this.armyLists.addAll(lists);
-        lists.forEach(l -> l.setCreator(this));
+        lists.forEach(l -> l.setUser(this));
     }
 
     public void deleteArmyList(ArmyList list) {

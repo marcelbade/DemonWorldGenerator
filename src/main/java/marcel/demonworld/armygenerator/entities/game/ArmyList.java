@@ -9,7 +9,6 @@ import org.json.simple.JSONObject;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Getter
 @Setter
 @Entity
@@ -21,7 +20,7 @@ public class ArmyList {
     private Long id;
 
     @Column(name = "name", columnDefinition = "text")
-    private String name;
+    private String listName;
 
     @Lob
     @Column(name = "list", columnDefinition = "JSON")
@@ -31,7 +30,7 @@ public class ArmyList {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
-    private User creator;
+    private User user;
 
 
 }
