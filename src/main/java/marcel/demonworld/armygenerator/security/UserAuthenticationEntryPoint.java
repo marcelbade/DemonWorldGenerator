@@ -15,10 +15,8 @@ import java.io.IOException;
 public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
 
-    // TODO what does ObjectMapper do, exactly?
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    // TODO add to obisidan!
     @Override
     public void commence(HttpServletRequest request, //
                          HttpServletResponse response,

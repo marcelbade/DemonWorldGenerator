@@ -23,12 +23,11 @@ public class UserMapper implements UserMapperInterface {
         return User.builder()
                 .userName(dto.getUserName())
                 .password(Arrays.toString(dto.getPassword()))
-                // TODO you need to put more logic into admin stuff!
                 .isAdmin(false)
                 .build();
     }
-            // TODO make sure that this is ok!
-    @Override
+
+     @Override
     public UserDTO signUpDtoToUserDTO(SignUpDTO dto) {
         return UserDTO.builder()
                 .userName(dto.getUserName())
