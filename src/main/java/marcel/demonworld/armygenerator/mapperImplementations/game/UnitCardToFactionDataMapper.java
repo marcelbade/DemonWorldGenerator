@@ -5,7 +5,7 @@ import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.AllianceAndAlternativesDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.FactionDataDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.SubFactionDTO;
-import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCard;
+import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 import marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardToFactionDataMapperInterface;
 import marcel.demonworld.armygenerator.services.game.FactionService;
 import org.json.simple.JSONArray;
@@ -34,7 +34,7 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
      * @return a list containing one FactionTDO object for every in-game faction.
      */
     @Override
-    public List<FactionDataDTO> unitCardToFactionData(List<UnitCard> unitList, List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs) {
+    public List<FactionDataDTO> unitCardToFactionData(List<UnitCardDTO> unitList, List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs) {
 
         setMaxCounterForAllUnits(unitList);
 
@@ -71,8 +71,8 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
     }
 
 
-    private List<UnitCard> setMaxCounterForAllUnits(List<UnitCard> unitList) {
-        unitList.forEach(UnitCard::setMaxCounter);
+    private List<UnitCardDTO> setMaxCounterForAllUnits(List<UnitCardDTO> unitList) {
+        unitList.forEach(UnitCardDTO::setMaxCounter);
         return unitList;
     }
 
@@ -88,7 +88,7 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
     }
 
 
-    private List<SubFactionDTO> createSubFactionDTOs(String factionName, List<UnitCard> units, List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs, boolean isAlly) {
+    private List<SubFactionDTO> createSubFactionDTOs(String factionName, List<UnitCardDTO> units, List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs, boolean isAlly) {
 
         List<SubFactionDTO> result = new ArrayList<>();
         List<String> distinctSubFactions = createSubFactionListForFaction(factionName, units);
@@ -123,16 +123,16 @@ public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperI
 
 
     // Method creates a list containing subFaction objects for one faction.
-    private List<String> createSubFactionListForFaction(String factionName, List<UnitCard> units) {
+    private List<String> createSubFactionListForFaction(String factionName, List<UnitCardDTO> units) {
         return units
                 .stream()
                 .filter(u -> u.getFaction().equals(factionName))
-                .map(UnitCard::getSubFaction).distinct()
+                .map(UnitCardDTO::getSubFaction).distinct()
                 .collect(Collectors.toList());
     }
 
 
-    private List<UnitCard> findUnitsForSubFaction(String factionName, String subFaction, List<UnitCard> units) {
+    private List<UnitCardDTO> findUnitsForSubFaction(String factionName, String subFaction, List<UnitCardDTO> units) {
         return units.
                 stream()
                 .filter(u -> u.getFaction().equals(factionName) && u.getSubFaction().equals(subFaction))
