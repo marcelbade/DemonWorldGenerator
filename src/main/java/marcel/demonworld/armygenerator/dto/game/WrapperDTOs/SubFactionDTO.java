@@ -1,7 +1,7 @@
 package marcel.demonworld.armygenerator.dto.game.WrapperDTOs;
 
 import lombok.Data;
-import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCard;
+import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 
 import java.util.List;
 
@@ -28,5 +28,5 @@ public class SubFactionDTO {
     private int numberInvalidUnits;
 
     // units that belong to this sub faction
-    private List<UnitCard> units;
+    private List<UnitCardDTO> units;
 }
