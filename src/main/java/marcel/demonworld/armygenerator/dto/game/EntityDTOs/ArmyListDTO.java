@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.dto.game;
+package marcel.demonworld.armygenerator.dto.game.EntityDTOs;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -14,6 +14,6 @@ public class ArmyListDTO {
 
     private String creator;
     private List<String> userWithAccess;
-    private List<UnitCard> armyList;
+    private List<UnitCardDTO> armyList;
 
 }

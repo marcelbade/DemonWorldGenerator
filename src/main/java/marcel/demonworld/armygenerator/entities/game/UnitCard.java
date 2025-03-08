@@ -1,27 +1,18 @@
-package marcel.demonworld.armygenerator.dto.game.EntityDTOs;
+package marcel.demonworld.armygenerator.entities.game;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import marcel.demonworld.armygenerator.dto.game.CardInterface.DemonWorldCard;
-import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.EquipmentTypes;
 
-//import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * one dto for all army cards, no matter what the unit type is.
- * Equipped Items are store in a simple list<ItemCard>
- */
-
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
 @Entity
 @Table(name = "units")
-public class UnitCard implements DemonWorldCard {
+public class UnitCard {
 
     @Id
     private Integer id;
@@ -188,40 +179,5 @@ public class UnitCard implements DemonWorldCard {
 
     @Column(name = "maxFieldsMove", columnDefinition = "integer")
     private Boolean maxFieldsMove;
-
-    @Transient
-    @JsonProperty
-    private List<ItemCardDTO> equipment = new ArrayList<>();
-
-    @Transient
-    @JsonProperty
-    private EquipmentTypes equipmentTypes = new EquipmentTypes();
-
-    @Transient
-    @JsonProperty
-    private Integer lossCounter = 0;
-
-    @Transient
-    @JsonProperty
-    private Integer maxCounter = 0;
-
-    @Transient
-    @JsonProperty
-    private Boolean unitDestroyed = false;
-
-
-    @Override
-    public String getName() {
-        return this.unitName;
-    }
-
-    @Override
-    public int getPoints() {
-        return this.points;
-    }
-
-    public void setMaxCounter() {
-        this.maxCounter = this.numberOfElements * this.hitpoints;
-    }
 
 }
