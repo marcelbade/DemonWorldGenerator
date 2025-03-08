@@ -4,9 +4,14 @@ import marcel.demonworld.armygenerator.dto.auth.SignUpDTO;
 import marcel.demonworld.armygenerator.dto.auth.UserDTO;
 import marcel.demonworld.armygenerator.entities.auth.User;
 import marcel.demonworld.armygenerator.mappingInterfaces.auth.UserMapperInterface;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
+
+@Component
+@Primary
 public class UserMapper implements UserMapperInterface {
     @Override
     public UserDTO userToUserDto(User user) {
