@@ -4,7 +4,7 @@ package marcel.demonworld.armygenerator.restController;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.AllianceAndAlternativesDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.FactionDataDTO;
-import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCard;
+import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 import marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardToFactionDataMapperInterface;
 import marcel.demonworld.armygenerator.services.game.AllyAndAlternativesService;
 import marcel.demonworld.armygenerator.services.game.FactionService;
@@ -40,7 +40,7 @@ public class ArmyController {
      */
     @CrossOrigin
     @GetMapping("/factions")
-    public List<UnitCard> getAllUnitCards() {
+    public List<UnitCardDTO> getAllUnitCards() {
         return armyService.returnAll();
     }
 
@@ -53,7 +53,7 @@ public class ArmyController {
     @CrossOrigin
     @GetMapping("/factionDTOs")
     public List<FactionDataDTO> getAllFactionDTOs() {
-        List<UnitCard> unitCards = armyService.returnAll();
+        List<UnitCardDTO> unitCards = armyService.returnAll();
 
         List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOS = allyService.returnAll();
 
