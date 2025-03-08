@@ -1,19 +1,31 @@
 package marcel.demonworld.armygenerator.services.game;
 
+import lombok.AllArgsConstructor;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.AllianceAndAlternativesDTO;
+import marcel.demonworld.armygenerator.entities.game.AllianceAndAlternatives;
+import marcel.demonworld.armygenerator.mappingInterfaces.game.AlliesAndAlternativesMapper;
 import marcel.demonworld.armygenerator.repositories.game.AlliesAndAlternativesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class AllyAndAlternativesService {
 
     @Autowired
     AlliesAndAlternativesRepository repo;
 
+    @Autowired
+    AlliesAndAlternativesMapper mapper;
+
     public List<AllianceAndAlternativesDTO> returnAll() {
-        return repo.findAll();
+
+        List<AllianceAndAlternatives> all = repo.findAll();
+
+        return all.stream().map(a -> mapper.mapEntityToDTO(a)).collect(Collectors.toList());
+
     }
 }
