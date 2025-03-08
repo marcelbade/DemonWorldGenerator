@@ -1,7 +1,6 @@
-package marcel.demonworld.armygenerator.dto.game.factionDataDTO;
+package marcel.demonworld.armygenerator.dto.game;
 
 import lombok.Data;
-import marcel.demonworld.armygenerator.dto.game.statCardDTOs.UnitCard;
 
 import java.util.List;
 

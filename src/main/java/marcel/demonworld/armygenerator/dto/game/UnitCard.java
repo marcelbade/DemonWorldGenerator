@@ -1,10 +1,9 @@
-package marcel.demonworld.armygenerator.dto.game.statCardDTOs;
+package marcel.demonworld.armygenerator.dto.game;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import marcel.demonworld.armygenerator.dto.game.ItemDataDTO.EquipmentTypes;
 
 //import javax.persistence.*;
 import java.util.ArrayList;
@@ -26,7 +25,6 @@ public class UnitCard implements DemonWorldCard {
     private Integer id;
 
     //mySQL doesn't use text, it uses "text". in order to avoid a code breaking SQL error columnDef. must be set!
-    // TODO: you accidentally used text instead of int for one of the weapon values!
     @Column(name = "faction", columnDefinition = "text")
     private String faction;
 

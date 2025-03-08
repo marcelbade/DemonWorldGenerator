@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.dto.game.alliancesDTO;
+package marcel.demonworld.armygenerator.dto.game;
 
 
 import jakarta.persistence.*;

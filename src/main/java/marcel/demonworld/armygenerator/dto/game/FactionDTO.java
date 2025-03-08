@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.dto.game.FactionsDTO;
+package marcel.demonworld.armygenerator.dto.game;
 
 
 import lombok.Getter;

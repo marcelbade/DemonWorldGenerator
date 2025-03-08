@@ -1,8 +1,8 @@
 package marcel.demonworld.armygenerator.mappingInterfaces.game;
 
-import marcel.demonworld.armygenerator.dto.game.alliancesDTO.AllianceAndAlternativesDTO;
-import marcel.demonworld.armygenerator.dto.game.factionDataDTO.FactionDataDTO;
-import marcel.demonworld.armygenerator.dto.game.statCardDTOs.UnitCard;
+import marcel.demonworld.armygenerator.dto.game.AllianceAndAlternativesDTO;
+import marcel.demonworld.armygenerator.dto.game.FactionDataDTO;
+import marcel.demonworld.armygenerator.dto.game.UnitCard;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
