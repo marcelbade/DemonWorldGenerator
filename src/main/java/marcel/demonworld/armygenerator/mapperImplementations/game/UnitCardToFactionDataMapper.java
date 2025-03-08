@@ -1,11 +1,11 @@
 package marcel.demonworld.armygenerator.mapperImplementations.game;
 
 import marcel.demonworld.armygenerator.Enums.GameEnums;
-import marcel.demonworld.armygenerator.dto.game.FactionDTO;
-import marcel.demonworld.armygenerator.dto.game.AllianceAndAlternativesDTO;
-import marcel.demonworld.armygenerator.dto.game.FactionDataDTO;
-import marcel.demonworld.armygenerator.dto.game.SubFactionDTO;
-import marcel.demonworld.armygenerator.dto.game.UnitCard;
+import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
+import marcel.demonworld.armygenerator.dto.game.EntityDTOs.AllianceAndAlternativesDTO;
+import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.FactionDataDTO;
+import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.SubFactionDTO;
+import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCard;
 import marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardToFactionDataMapperInterface;
 import marcel.demonworld.armygenerator.services.game.FactionService;
 import org.json.simple.JSONArray;

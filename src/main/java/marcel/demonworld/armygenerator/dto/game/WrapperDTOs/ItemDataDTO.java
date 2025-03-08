@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.dto.game;
+package marcel.demonworld.armygenerator.dto.game.WrapperDTOs;
 
 
 import lombok.Getter;
@@ -11,11 +11,11 @@ public class ItemDataDTO {
 
     final private List<ItemFactionDTO> factionItems;
 
-    public ItemDataDTO() {
+    public ItemDataDTO() { //
         this.factionItems = new ArrayList<>();
     }
 
-    public void addItemFactionDTOToList(ItemFactionDTO dto) {
+    public void addItemFactionDTOToList(ItemFactionDTO dto) { //
         factionItems.add(dto);
     }
 

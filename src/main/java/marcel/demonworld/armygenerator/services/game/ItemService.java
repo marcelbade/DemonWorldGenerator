@@ -1,6 +1,6 @@
 package marcel.demonworld.armygenerator.services.game;
 
-import marcel.demonworld.armygenerator.dto.game.ItemCard;
+import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
 import marcel.demonworld.armygenerator.repositories.game.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class ItemService {
      * Method returns all items in the game.
      * @return List<ItemCard>
      */
-    public List<ItemCard> returnAll(){
+    public List<ItemCardDTO> returnAll(){
         return repo.findAll();
     }
 

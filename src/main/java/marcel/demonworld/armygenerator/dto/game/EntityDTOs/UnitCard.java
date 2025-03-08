@@ -1,10 +1,11 @@
-package marcel.demonworld.armygenerator.dto.game;
+package marcel.demonworld.armygenerator.dto.game.EntityDTOs;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import marcel.demonworld.armygenerator.dto.game.CardInterface.DemonWorldCard;
+import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.EquipmentTypes;
 
 //import javax.persistence.*;
 import java.util.ArrayList;
@@ -190,7 +191,7 @@ public class UnitCard implements DemonWorldCard {
 
     @Transient
     @JsonProperty
-    private List<ItemCard> equipment = new ArrayList<>();
+    private List<ItemCardDTO> equipment = new ArrayList<>();
 
     @Transient
     @JsonProperty

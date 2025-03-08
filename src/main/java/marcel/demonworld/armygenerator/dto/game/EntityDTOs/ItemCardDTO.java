@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.dto.game;
+package marcel.demonworld.armygenerator.dto.game.EntityDTOs;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import marcel.demonworld.armygenerator.dto.game.CardInterface.DemonWorldCard;
 @Getter
 @Entity
 @Table(name = "items")
-public class ItemCard implements DemonWorldCard {
+public class ItemCardDTO implements DemonWorldCard {
 
 
     @Id

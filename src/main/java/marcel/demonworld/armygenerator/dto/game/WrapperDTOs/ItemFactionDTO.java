@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.dto.game;
+package marcel.demonworld.armygenerator.dto.game.WrapperDTOs;
 
 import lombok.Getter;
 
@@ -11,15 +11,15 @@ public class ItemFactionDTO {
     private String factionName;
     final private List<ItemTypeDTO> groupsOfFactionItemsByType;
 
-    public ItemFactionDTO() {
+    public ItemFactionDTO() { //
         this.groupsOfFactionItemsByType = new ArrayList<>();
     }
 
-    public void addToGroupsOfFactionItemsByType(ItemTypeDTO dto) {
+    public void addToGroupsOfFactionItemsByType(ItemTypeDTO dto) { //
         groupsOfFactionItemsByType.add(dto);
     }
 
-    public void setFactionName(String factionName) {
+    public void setFactionName(String factionName) { //
         this.factionName = factionName;
     }
 }

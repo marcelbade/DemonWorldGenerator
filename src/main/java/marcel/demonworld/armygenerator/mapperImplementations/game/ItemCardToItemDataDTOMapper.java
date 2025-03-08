@@ -2,11 +2,11 @@ package marcel.demonworld.armygenerator.mapperImplementations.game;
 
 
 import marcel.demonworld.armygenerator.Enums.GameEnums;
-import marcel.demonworld.armygenerator.dto.game.FactionDTO;
-import marcel.demonworld.armygenerator.dto.game.ItemDataDTO;
-import marcel.demonworld.armygenerator.dto.game.ItemFactionDTO;
-import marcel.demonworld.armygenerator.dto.game.ItemTypeDTO;
-import marcel.demonworld.armygenerator.dto.game.ItemCard;
+import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
+import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.ItemDataDTO;
+import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.ItemFactionDTO;
+import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.ItemTypeDTO;
+import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
 import marcel.demonworld.armygenerator.mappingInterfaces.game.ItemCardToItemDataDTOMapperInterface;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class ItemCardToItemDataDTOMapper implements ItemCardToItemDataDTOMapperInterface {
 
     @Override
-    public ItemDataDTO unitCardToFactionData(List<ItemCard> allItems, List<FactionDTO> AllFactions) {
+    public ItemDataDTO unitCardToFactionData(List<ItemCardDTO> allItems, List<FactionDTO> AllFactions) {
 
 
         Set<String> itemTypes = getDistinctItemTypes(allItems);
@@ -35,7 +35,7 @@ public class ItemCardToItemDataDTOMapper implements ItemCardToItemDataDTOMapperI
             itemFactionDTO.setFactionName(faction);
 
             for (String itemType : itemTypes) {
-                List<ItemCard> filteredItems = filterItemsForFactionAndType(faction, itemType, allItems);
+                List<ItemCardDTO> filteredItems = filterItemsForFactionAndType(faction, itemType, allItems);
                 ItemTypeDTO itemTypeDTO = buildItemTypeDTO(itemType, filteredItems);
 
                 // skip empty item type groups
@@ -53,18 +53,18 @@ public class ItemCardToItemDataDTOMapper implements ItemCardToItemDataDTOMapperI
         return factions.stream().map(FactionDTO::getFactionName).collect(Collectors.toSet());
     }
 
-    private Set<String> getDistinctItemTypes(List<ItemCard> items) {
-        return items.stream().map(ItemCard::getItemType).collect(Collectors.toSet());
+    private Set<String> getDistinctItemTypes(List<ItemCardDTO> items) {
+        return items.stream().map(ItemCardDTO::getItemType).collect(Collectors.toSet());
     }
 
-    private List<ItemCard> filterItemsForFactionAndType(String faction, String itemType, List<ItemCard> allItems) {
+    private List<ItemCardDTO> filterItemsForFactionAndType(String faction, String itemType, List<ItemCardDTO> allItems) {
         return allItems.stream()
                 .filter(i -> i.getItemType().equals(itemType) && (i.getFaction().equals(faction) || i.getFaction().equals(GameEnums.GENERIC.toString())))
                 .collect(Collectors.toList());
     }
 
 
-    private ItemTypeDTO buildItemTypeDTO(String itemType, List<ItemCard> items) {
+    private ItemTypeDTO buildItemTypeDTO(String itemType, List<ItemCardDTO> items) {
 
         ItemTypeDTO result = new ItemTypeDTO();
         result.setTypeName(itemType);
