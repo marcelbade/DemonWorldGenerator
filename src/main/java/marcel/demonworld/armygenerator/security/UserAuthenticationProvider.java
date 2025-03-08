@@ -28,12 +28,12 @@ public class UserAuthenticationProvider {
     private UserService userService;
 
     @PostConstruct
-    protected void init() {
+    protected void init() { //
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
 
-    private String createToken(String username) {
+    public String createToken(String username) {
 
         Date now = new Date();
 
