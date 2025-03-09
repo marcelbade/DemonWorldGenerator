@@ -5,7 +5,7 @@ import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.AllianceAndAlternativesDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.FactionDataDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
-import marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardToFactionDataMapperInterface;
+import marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardToFactionDataMapper;
 import marcel.demonworld.armygenerator.services.game.AllyAndAlternativesService;
 import marcel.demonworld.armygenerator.services.game.FactionService;
 import marcel.demonworld.armygenerator.services.game.SelectArmyService;
@@ -31,7 +31,7 @@ public class ArmyController {
     FactionService factionService;
 
     @Autowired
-    UnitCardToFactionDataMapperInterface unitCardToFactionDataMapperInterface;
+    UnitCardToFactionDataMapper unitCardToFactionDataMapper;
 
     /**
      * Returns ALL unit cards currently in the game, as an unordered, unfiltered list.
@@ -57,7 +57,7 @@ public class ArmyController {
 
         List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOS = allyService.returnAll();
 
-        return unitCardToFactionDataMapperInterface.unitCardToFactionData(unitCards, allAllianceAndAlternativeDTOS);
+        return unitCardToFactionDataMapper.unitCardToFactionData(unitCards, allAllianceAndAlternativeDTOS);
     }
 
     /**
