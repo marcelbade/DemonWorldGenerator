@@ -9,7 +9,6 @@ import marcel.demonworld.armygenerator.dto.game.CardInterface.DemonWorldCard;
 @Setter
 @Getter
 @Builder
-
 public class ItemCardDTO implements DemonWorldCard {
 
 
