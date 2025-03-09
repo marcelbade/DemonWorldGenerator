@@ -9,6 +9,6 @@ import java.util.List;
 
 
 @Component
-public interface UnitCardToFactionDataMapperInterface {
+public interface UnitCardToFactionDataMapper {
     List<FactionDataDTO> unitCardToFactionData(List<UnitCardDTO> unitList, List<AllianceAndAlternativesDTO> allyList);
 }
