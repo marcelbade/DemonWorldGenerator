@@ -31,7 +31,7 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id")
-    private List<ArmyList> armyLists = new ArrayList<ArmyList>();
+    private List<ArmyList> armyLists = new ArrayList<>();
 
     // helper functions
 
