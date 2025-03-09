@@ -4,7 +4,7 @@ package marcel.demonworld.armygenerator.restController;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.ItemDataDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
-import marcel.demonworld.armygenerator.mappingInterfaces.game.ItemDataMapperInterface;
+import marcel.demonworld.armygenerator.mappingInterfaces.game.ItemDataMapper;
 import marcel.demonworld.armygenerator.services.game.FactionService;
 import marcel.demonworld.armygenerator.services.game.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class ItemController {
     FactionService factionService;
 
     @Autowired
-    ItemDataMapperInterface itemCardToItemDataDTOMapperInterface;
+    ItemDataMapper itemCardToItemDataDTOMapperInterface;
 
     /**
      * Returns all item cards of one faction
