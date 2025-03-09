@@ -7,6 +7,9 @@ import marcel.demonworld.armygenerator.JSONConverter.JSONObjectConverter;
 import marcel.demonworld.armygenerator.entities.auth.User;
 import org.json.simple.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -33,4 +36,51 @@ public class ArmyList {
     private User user;
 
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id")
+    private List<ListShare> listShares = new ArrayList<>();
+
+
+    // helper functions
+
+    public void addListShare(ListShare share) {
+        this.listShares.add(share);
+        share.setArmyList(this);
+    }
+
+    public void addMultipleShares(List<ListShare> shares) {
+        this.listShares.addAll(shares);
+        shares.forEach(l -> l.setArmyList(this));
+    }
+
+    public void deleteShare(ListShare share) {
+        this.listShares.remove(share);
+    }
+
+    public void deleteShare(List<ListShare> shares) {
+        this.listShares.removeAll(shares);
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
