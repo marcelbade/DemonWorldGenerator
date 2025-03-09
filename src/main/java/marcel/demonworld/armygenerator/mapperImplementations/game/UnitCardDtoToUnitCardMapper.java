@@ -2,14 +2,13 @@ package marcel.demonworld.armygenerator.mapperImplementations.game;
 
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 import marcel.demonworld.armygenerator.entities.game.UnitCard;
-import marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardDtoToUnitCardMapperInterface;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 
 @Component
 @Primary
-public class UnitCardDtoToUnitCardMapper implements UnitCardDtoToUnitCardMapperInterface {
+public class UnitCardDtoToUnitCardMapper implements marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardDtoToUnitCardMapper {
 
 
     @Override

@@ -6,7 +6,6 @@ import marcel.demonworld.armygenerator.dto.game.EntityDTOs.AllianceAndAlternativ
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.FactionDataDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.SubFactionDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
-import marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardToFactionDataMapperInterface;
 import marcel.demonworld.armygenerator.services.game.FactionService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -21,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Component
 @Primary
-public class UnitCardToFactionDataMapper implements UnitCardToFactionDataMapperInterface {
+public class UnitCardToFactionDataMapper implements marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardToFactionDataMapper {
 
     @Autowired
     FactionService factionService;

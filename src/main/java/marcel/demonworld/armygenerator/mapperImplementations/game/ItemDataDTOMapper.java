@@ -7,7 +7,7 @@ import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.ItemDataDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.ItemFactionDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.ItemTypeDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
-import marcel.demonworld.armygenerator.mappingInterfaces.game.ItemDataMapperInterface;
+import marcel.demonworld.armygenerator.mappingInterfaces.game.ItemDataMapper;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Component
 @Primary
-public class ItemDataDTOMapper implements ItemDataMapperInterface {
+public class ItemDataDTOMapper implements ItemDataMapper {
 
     @Override
     public ItemDataDTO unitCardToFactionData(List<ItemCardDTO> allItems, List<FactionDTO> AllFactions) {
