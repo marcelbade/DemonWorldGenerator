@@ -1,9 +1,6 @@
 package marcel.demonworld.armygenerator.entities.game;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +15,7 @@ import lombok.Setter;
 public class Faction {
 
     @Id
-    @Column(name = "id", columnDefinition = "text")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "factionName", columnDefinition = "text")

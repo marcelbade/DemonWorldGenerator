@@ -16,6 +16,7 @@ import org.json.simple.JSONObject;
 public class AllianceAndAlternatives {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "faction", columnDefinition = "text")

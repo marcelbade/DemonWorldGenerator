@@ -15,6 +15,7 @@ import lombok.Setter;
 public class UnitCard {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     //mySQL doesn't use text, it uses "text". in order to avoid a code breaking SQL error columnDef. must be set!
