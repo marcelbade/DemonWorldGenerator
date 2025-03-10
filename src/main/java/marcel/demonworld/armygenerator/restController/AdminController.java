@@ -26,15 +26,16 @@ public class AdminController {
     private ItemCardService itemCardService;
 
 
-    // TODO unfinished
     @DeleteMapping("/removeUser")
-    public ResponseEntity<UserDTO> removeUser() {
+    public ResponseEntity removeUser(@RequestBody String userName) {
 
-        return null;
+        UserDTO byUsername = userService.findByUsername(userName);
+
+        userService.deleteUser(byUsername);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
 
-    // TODO unfinished
     @PostMapping("/createNewUnit")
     public ResponseEntity createNewUnit(@RequestBody UnitCardDTO newUnit) {
         unitCardService.createNewUnit(newUnit);
@@ -42,7 +43,6 @@ public class AdminController {
     }
 
 
-    // TODO unfinished
     @PostMapping("/createNewItem")
     public ResponseEntity createNewItem(@RequestBody ItemCardDTO newItem) {
         itemCardService.createNewItem(newItem);
