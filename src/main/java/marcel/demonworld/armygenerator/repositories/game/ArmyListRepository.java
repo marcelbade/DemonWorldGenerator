@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface ArmyListRepository extends JpaRepository<ArmyList, Long> {
 
-    @Query("SELECT a FROM ArmyList a WHERE a.user.userName = :userName,")
+    @Query("SELECT a FROM ArmyList a WHERE a.user.userName = :userName")
     List<ArmyList> findAllListsByUser(@Param("userName") String userName);
 
 }
