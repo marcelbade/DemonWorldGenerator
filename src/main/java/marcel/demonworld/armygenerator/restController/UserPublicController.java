@@ -2,25 +2,29 @@ package marcel.demonworld.armygenerator.restController;
 
 
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import marcel.demonworld.armygenerator.dto.auth.CredentialsDTO;
 import marcel.demonworld.armygenerator.dto.auth.SignUpDTO;
 import marcel.demonworld.armygenerator.dto.auth.UserDTO;
 import marcel.demonworld.armygenerator.security.UserAuthenticationProvider;
 import marcel.demonworld.armygenerator.services.auth.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 
 @RestController
-@RequestMapping("/auth/user")
-@RequiredArgsConstructor
-public class UserController {
+@RequestMapping("/public/user")
+public class UserPublicController {
 
+    @Autowired
+    private UserService userService;
 
-    private final UserService userService;
-    private final UserAuthenticationProvider userAuthenticationProvider;
+    @Autowired
+    private UserAuthenticationProvider userAuthenticationProvider;
 
 
     @PostMapping("/login")
@@ -40,16 +44,4 @@ public class UserController {
         createdUser.setToken(userAuthenticationProvider.createToken(user.getUserName()));
         return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);
     }
-
-
-
-
-//    @PostMapping("/delete")
-//    public ResponseEntity<UserDTO> register((@RequestBody CredentialsDTO credentialsDTO) {
-//
-//        UserDTO userdto = userService.logout(credentialsDTO);
-//        userdto.setToken(userAuthenticationProvider.createToken(user.getLogin));
-//
-//        return ResponseEntity.ok(userdto);
-//    }
 }

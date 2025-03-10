@@ -10,21 +10,23 @@ import marcel.demonworld.armygenerator.services.game.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/public/game")
 public class ItemController {
 
     @Autowired
-    ItemService itemService;
+    private ItemService itemService;
 
     @Autowired
-    FactionService factionService;
+    private FactionService factionService;
 
     @Autowired
-    ItemDataMapper itemCardToItemDataDTOMapperInterface;
+    private  ItemDataMapper itemCardToItemDataDTOMapperInterface;
 
     /**
      * Returns all item cards of one faction
@@ -32,7 +34,7 @@ public class ItemController {
      * @return all item cards
      */
     @CrossOrigin
-    @GetMapping("/items")
+    @GetMapping("/allItems")
     public List<ItemCardDTO> getAllItems() {
         return itemService.returnAll();
     }

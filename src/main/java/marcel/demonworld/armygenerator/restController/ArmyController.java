@@ -12,6 +12,7 @@ import marcel.demonworld.armygenerator.services.game.SelectArmyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,19 +20,20 @@ import java.util.stream.Collectors;
 
 
 @RestController
+@RequestMapping("/public/game")
 public class ArmyController {
 
     @Autowired
-    SelectArmyService armyService;
+    private SelectArmyService armyService;
 
     @Autowired
-    AllyAndAlternativesService allyService;
+    private AllyAndAlternativesService allyService;
 
     @Autowired
-    FactionService factionService;
+    private FactionService factionService;
 
     @Autowired
-    UnitCardToFactionDataMapper unitCardToFactionDataMapper;
+    private UnitCardToFactionDataMapper unitCardToFactionDataMapper;
 
     /**
      * Returns ALL unit cards currently in the game, as an unordered, unfiltered list.
@@ -39,7 +41,7 @@ public class ArmyController {
      * @return all unit cards in the game
      */
     @CrossOrigin
-    @GetMapping("/factions")
+    @GetMapping("/allUnits")
     public List<UnitCardDTO> getAllUnitCards() {
         return armyService.returnAll();
     }
