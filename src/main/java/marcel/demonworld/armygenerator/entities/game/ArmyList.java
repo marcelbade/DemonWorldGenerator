@@ -22,7 +22,7 @@ public class ArmyList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", columnDefinition = "text")
+    @Column(name = "listName", columnDefinition = "text")
     private String listName;
 
     @Lob
@@ -31,11 +31,11 @@ public class ArmyList {
     private JSONObject list;
 
 
-    @Column(name = "isPublicForOrganizer", columnDefinition = "integer")
-    private Boolean isPublicForOrganizer;
+    @Column(name = "isVisibleToOrganizer", columnDefinition = "integer")
+    private Boolean isVisibleToOrganizer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
+        @JoinColumn(name = "userId")
     private User user;
 
 

@@ -15,14 +15,14 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-@Table(name = "list_sharedWith")
+@Table(name = "events")
 public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", columnDefinition = "text")
+    @Column(name = "eventName", columnDefinition = "text")
     private String eventName;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -30,11 +30,9 @@ public class Event {
     private List<ArmyList> armyLists;
 
     @ManyToOne()
-    @JoinColumn(name ="organizer")
+    @JoinColumn(name = "organizer")
     private User organizer;
 
-//    @Column( name ="", columnDefinition = "")
-//    Date eventDate;
 
     // helper functions
     public void addArmyList(ArmyList list) {
