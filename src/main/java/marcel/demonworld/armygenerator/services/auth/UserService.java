@@ -26,6 +26,11 @@ public class UserService {
     private final UserMapper userMapper;
 
 
+    /**
+     * Method attempts to find user in the DB and checks the supplied pw.
+     * @param credentialsDTO login Data supplied by user.
+     * @return a user DTO if the user is found and pw is correct.
+     */
     public UserDTO loginUser(CredentialsDTO credentialsDTO) {
         User user = userRepository.findByUserName(credentialsDTO.getUserName())
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
@@ -36,15 +41,21 @@ public class UserService {
         throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
     }
 
-    public UserDTO registerUser(SignUpDTO userDto) {
-        Optional<User> optionalUser = userRepository.findByUserName(userDto.getUserName());
+    /**
+     * Method attempts to register user by first checking if they already exist, then
+     * saving the user in the DB if the answer is false.
+     * @param signUpDTO login data supplied by user.
+     * @return UserDTO of the newly registered user.
+     */
+    public UserDTO registerUser(SignUpDTO signUpDTO) {
+        Optional<User> optionalUser = userRepository.findByUserName(signUpDTO.getUserName());
 
         if (optionalUser.isPresent()) {
             throw new AppException("Login already exists", HttpStatus.BAD_REQUEST);
         }
 
-        User user = userMapper.signUpDtoToEntity(userDto);
-        user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.getPassword())));
+        User user = userMapper.signUpDtoToEntity(signUpDTO);
+        user.setPassword(passwordEncoder.encode(CharBuffer.wrap(signUpDTO.getPassword())));
 
         User savedUser = userRepository.save(user);
 
@@ -56,6 +67,7 @@ public class UserService {
         userRepository.delete(userMapper.dtoToEntity(userDTO));
     }
 
+    // turn another user to admin
     public UserDTO upgradeUserToAdmin(UserDTO userDTO) {
         User user = userRepository
                 .findByUserName(userDTO.getUserName())
@@ -67,6 +79,7 @@ public class UserService {
         return userMapper.entityToDTO(user);
     }
 
+    // turn another admin to user
     public UserDTO downgradeAdminToUser(UserDTO userDTO) {
         User user = userRepository
                 .findByUserName(userDTO.getUserName())
