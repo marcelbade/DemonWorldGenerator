@@ -4,16 +4,17 @@ package marcel.demonworld.armygenerator.entities.auth;
 import jakarta.persistence.*;
 import lombok.*;
 import marcel.demonworld.armygenerator.entities.game.ArmyList;
+import marcel.demonworld.armygenerator.entities.game.Event;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "app_users")
 public class User {
 
@@ -21,11 +22,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column(name = "userName", columnDefinition = "text")
     private String userName;
+
     @Column(name = "userPassword", columnDefinition = "text")
     private String password;
+
     @Column(name = "isAdmin", columnDefinition = "text")
     private Boolean isAdmin;
 
@@ -33,7 +35,11 @@ public class User {
     @JoinColumn(name = "id")
     private List<ArmyList> armyLists = new ArrayList<>();
 
-    // helper functions
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id")
+    private List<Event> events = new ArrayList<>();
+
+    // helper functions - ArmyLists
 
     public void addArmyList(ArmyList list) {
         this.armyLists.add(list);
@@ -52,4 +58,24 @@ public class User {
     public void deleteMultipleArmyLists(List<ArmyList> lists) {
         this.armyLists.removeAll(lists);
     }
+
+    // helper functions - Events
+
+    public void addEvent(Event event) {
+        this.events.add(event);
+    }
+
+    public void addAllEvent(List<Event> events) {
+        this.events.addAll(events);
+    }
+
+    public void deleteEvent(Event event) {
+        this.events.remove(event);
+    }
+
+    public void deleteMultipleEvents(List<Event> events) {
+        this.events.removeAll(events);
+    }
+
+
 }
