@@ -34,5 +34,14 @@ public class EventService {
         return all.stream().map(a -> mapper.entityToDto(a)).collect(Collectors.toList());
     }
 
+    public void addEvent(EventDTO eventDTO) {
+        repo.save(mapper.dtoToEntity(eventDTO));
+    }
+
+    public void deleteEvent(EventDTO eventDTO) {
+        repo.delete(mapper.dtoToEntity(eventDTO));
+    }
+
+
 
 }

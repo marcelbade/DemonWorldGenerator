@@ -19,4 +19,14 @@ public class EventMapperImplementation implements EventMapper {
                 .organizer(event.getOrganizer())
                 .build();
     }
+
+    @Override
+    public Event dtoToEntity(EventDTO eventDTO) {
+        return Event.builder()
+                .id(eventDTO.getId())
+                .eventName(eventDTO.getEventName())
+                .armyLists(eventDTO.getArmyLists())
+                .organizer(eventDTO.getOrganizer())
+                .build();
+    }
 }

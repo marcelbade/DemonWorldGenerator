@@ -1,13 +1,14 @@
 package marcel.demonworld.armygenerator.restController;
 
 
-import jakarta.validation.Valid;
-import marcel.demonworld.armygenerator.dto.auth.UserDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.EventDTO;
 import marcel.demonworld.armygenerator.services.game.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/auth/event")
@@ -17,33 +18,29 @@ public class EventController {
     private EventService eventService;
 
 
-    // TODO unfinished
     @GetMapping("/allEvents")
-    public ResponseEntity<UserDTO> allEvents() {
-
-        return null;
+    public List<EventDTO> allEvents() {
+        return eventService.returnAll();
     }
 
-
-    // TODO unfinished
     @GetMapping("/allEventsOrganizedByUser")
-    public ResponseEntity<UserDTO> allEventsOrganizedByUser() {
+    public List<EventDTO> allEventsOrganizedByUser(@RequestParam String organizer) {
 
-        return null;
+        return eventService.returnAllForOrganizer(organizer);
     }
 
-
-    // TODO unfinished
     @PostMapping("/addEvent")
-    public ResponseEntity<UserDTO> addEvent(@RequestBody EventDTO eventDTO) {
+    public ResponseEntity addEvent(@RequestBody EventDTO eventDTO) {
 
-        return null;
+        eventService.addEvent(eventDTO);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    // TODO unfinished
     @DeleteMapping("/deleteEvent")
-    public ResponseEntity<UserDTO> deleteEvent(@RequestBody @Valid String eventName) {
-        return null;
+    public ResponseEntity deleteEvent(@RequestBody EventDTO eventDTO) {
+
+        eventService.deleteEvent(eventDTO);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
 
