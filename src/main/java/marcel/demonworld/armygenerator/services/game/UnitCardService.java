@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 import marcel.demonworld.armygenerator.entities.game.UnitCard;
 import marcel.demonworld.armygenerator.mapperImplementations.game.UnitCardDtoToUnitCardMapper;
-import marcel.demonworld.armygenerator.repositories.game.ArmyRepository;
+import marcel.demonworld.armygenerator.repositories.game.UnitCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class SelectArmyService {
+public class UnitCardService {
 
     @Autowired
-    private final ArmyRepository repo;
+    private final UnitCardRepository repo;
 
     @Autowired
     private final UnitCardDtoToUnitCardMapper mapper;

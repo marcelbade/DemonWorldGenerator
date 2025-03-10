@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
 import marcel.demonworld.armygenerator.entities.game.ItemCard;
 import marcel.demonworld.armygenerator.mapperImplementations.game.ItemCardMapperImplementation;
-import marcel.demonworld.armygenerator.repositories.game.ItemRepository;
+import marcel.demonworld.armygenerator.repositories.game.ItemCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class ItemService {
+public class ItemCardService {
 
     @Autowired
-    private final ItemRepository repo;
+    private final ItemCardRepository repo;
 
     @Autowired
     private final ItemCardMapperImplementation mapper;
