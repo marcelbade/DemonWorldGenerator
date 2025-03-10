@@ -3,7 +3,6 @@ package marcel.demonworld.armygenerator.services.game;
 import lombok.AllArgsConstructor;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
 import marcel.demonworld.armygenerator.entities.game.ItemCard;
-import marcel.demonworld.armygenerator.entities.game.UnitCard;
 import marcel.demonworld.armygenerator.mapperImplementations.game.ItemCardMapperImplementation;
 import marcel.demonworld.armygenerator.repositories.game.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +16,10 @@ import java.util.stream.Collectors;
 public class ItemService {
 
     @Autowired
-    ItemRepository repo;
+    private final ItemRepository repo;
 
     @Autowired
-    ItemCardMapperImplementation mapper;
+    private final ItemCardMapperImplementation mapper;
 
     /**
      * Method returns all items in the game.
@@ -31,7 +30,7 @@ public class ItemService {
 
         List<ItemCard> all = repo.findAll();
 
-        return all.stream().map(a -> mapper.itemCardToItemCardDto(a)).collect(Collectors.toList());
+        return all.stream().map(mapper::itemCardToItemCardDto).collect(Collectors.toList());
     }
 
 }

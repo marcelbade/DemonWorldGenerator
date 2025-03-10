@@ -16,16 +16,16 @@ import java.util.stream.Collectors;
 public class AllyAndAlternativesService {
 
     @Autowired
-    AlliesAndAlternativesRepository repo;
+    private final AlliesAndAlternativesRepository repo;
 
     @Autowired
-    AlliesAndAlternativesMapper mapper;
+    private final AlliesAndAlternativesMapper mapper;
 
     public List<AllianceAndAlternativesDTO> returnAll() {
 
         List<AllianceAndAlternatives> all = repo.findAll();
 
-        return all.stream().map(a -> mapper.mapEntityToDTO(a)).collect(Collectors.toList());
+        return all.stream().map(mapper::mapEntityToDTO).collect(Collectors.toList());
 
     }
 }

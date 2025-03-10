@@ -2,7 +2,6 @@ package marcel.demonworld.armygenerator.services.game;
 
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
 import marcel.demonworld.armygenerator.entities.game.Faction;
 import marcel.demonworld.armygenerator.mappingInterfaces.game.FactionMapper;
@@ -18,14 +17,14 @@ import java.util.stream.Collectors;
 public class FactionService {
 
     @Autowired
-    private FactionRepository repo;
+    private final FactionRepository repo;
 
     @Autowired
-    private FactionMapper mapper;
+    private final FactionMapper mapper;
 
     public List<FactionDTO> returnAll() {
         List<Faction> all = repo.findAll();
-        return all.stream().map(a -> mapper.factionToFactionDTO(a) ).collect(Collectors.toList());
+        return all.stream().map(mapper::factionToFactionDTO).collect(Collectors.toList());
     }
 
 }

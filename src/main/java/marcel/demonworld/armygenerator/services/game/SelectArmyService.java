@@ -16,10 +16,10 @@ import java.util.stream.Collectors;
 public class SelectArmyService {
 
     @Autowired
-    ArmyRepository repo;
+    private final ArmyRepository repo;
 
     @Autowired
-    UnitCardDtoToUnitCardMapper mapper;
+    private final UnitCardDtoToUnitCardMapper mapper;
 
     /**
      * Method returns all units in the game.
@@ -29,6 +29,6 @@ public class SelectArmyService {
     public List<UnitCardDTO> returnAll() { //
         List<UnitCard> all = repo.findAll();
 
-        return all.stream().map(a -> mapper.UnitCardToUnitCardDto(a)).collect(Collectors.toList());
+        return all.stream().map(mapper::UnitCardToUnitCardDto).collect(Collectors.toList());
     }
 }
