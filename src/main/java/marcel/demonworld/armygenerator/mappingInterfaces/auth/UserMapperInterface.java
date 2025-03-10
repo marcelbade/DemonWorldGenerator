@@ -9,16 +9,16 @@ public interface UserMapperInterface {
 
 
     // user entity -> UserDTO
-    UserDTO userToUserDto(User user);
+    UserDTO entityToDTO(User user);
 
     // SignUpDTO -> UserDTO
-    User signUpDtoToUser(SignUpDTO dto);
+    User signUpDtoToEntity(SignUpDTO dto);
 
     // SignUpDTO -> UserDTO
     UserDTO signUpDtoToUserDTO(SignUpDTO dto);
 
     //  UserDTO  -> User
-    User userDtoToUser(UserDTO dto);
+    User dtoToEntity(UserDTO dto);
 
 
 }

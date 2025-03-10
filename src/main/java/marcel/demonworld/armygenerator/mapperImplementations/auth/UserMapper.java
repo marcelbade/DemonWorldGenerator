@@ -14,7 +14,7 @@ import java.util.Arrays;
 @Primary
 public class UserMapper implements UserMapperInterface {
     @Override
-    public UserDTO userToUserDto(User user) {
+    public UserDTO entityToDTO(User user) {
 
         return UserDTO.builder().id(user.getId())
                 .userName(user.getUserName())
@@ -23,14 +23,19 @@ public class UserMapper implements UserMapperInterface {
                 .build();
     }
 
+
+
     @Override
-    public User signUpDtoToUser(SignUpDTO dto) {
+    public User signUpDtoToEntity(SignUpDTO dto) {
         return User.builder()
                 .userName(dto.getUserName())
                 .password(Arrays.toString(dto.getPassword()))
-                .isAdmin(false)
+                .isAdmin(false) // ?
                 .build();
     }
+
+
+
 
      @Override
     public UserDTO signUpDtoToUserDTO(SignUpDTO dto) {
@@ -41,7 +46,7 @@ public class UserMapper implements UserMapperInterface {
     }
 
     @Override
-    public User userDtoToUser(UserDTO dto) {
+    public User dtoToEntity(UserDTO dto) {
         return User.builder()
                 .id(dto.getId())
                 .userName(dto.getUserName())
