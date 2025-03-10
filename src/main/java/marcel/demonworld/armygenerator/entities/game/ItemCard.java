@@ -1,10 +1,7 @@
 package marcel.demonworld.armygenerator.entities.game;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @AllArgsConstructor
@@ -12,6 +9,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
+@Builder
 @Table(name = "items")
 public class ItemCard {
 

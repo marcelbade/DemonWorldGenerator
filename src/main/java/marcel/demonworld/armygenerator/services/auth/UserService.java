@@ -64,6 +64,7 @@ public class UserService {
 
 
     public void deleteUser(UserDTO userDTO) {
+
         userRepository.delete(userMapper.dtoToEntity(userDTO));
     }
 

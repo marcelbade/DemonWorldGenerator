@@ -5,6 +5,8 @@ import marcel.demonworld.armygenerator.entities.game.ItemCard;
 
 public interface ItemCardMapper {
 
-    ItemCardDTO itemCardToItemCardDto(ItemCard itemCard);
+    ItemCardDTO entityToDTO(ItemCard itemCard);
+
+    ItemCard DtoToEntity(ItemCardDTO itemCardDTO);
 
 }

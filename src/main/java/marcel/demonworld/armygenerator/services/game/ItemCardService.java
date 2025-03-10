@@ -30,7 +30,11 @@ public class ItemCardService {
 
         List<ItemCard> all = repo.findAll();
 
-        return all.stream().map(mapper::itemCardToItemCardDto).collect(Collectors.toList());
+        return all.stream().map(mapper::entityToDTO).collect(Collectors.toList());
+    }
+
+    public void createNewItem(ItemCardDTO newItem) {
+        repo.save(mapper.DtoToEntity(newItem));
     }
 
 }

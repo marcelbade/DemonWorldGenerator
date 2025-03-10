@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Primary
 public class ItemCardMapperImplementation implements ItemCardMapper {
     @Override
-    public ItemCardDTO itemCardToItemCardDto(ItemCard itemCard) {
+    public ItemCardDTO entityToDTO(ItemCard itemCard) {
         return ItemCardDTO.builder()
                 .id(itemCard.getId())
                 .armourMelee(itemCard.getArmourMelee())
@@ -52,6 +52,51 @@ public class ItemCardMapperImplementation implements ItemCardMapper {
                 .unitType(itemCard.getUnitType())
                 .weapon1(itemCard.getWeapon1())
                 .weapon2(itemCard.getWeapon2())
+                .build();
+    }
+
+    @Override
+    public ItemCard DtoToEntity(ItemCardDTO itemCardDTO) {
+        return ItemCard.builder()
+                .id(itemCardDTO.getId())
+                .armourMelee(itemCardDTO.getArmourMelee())
+                .armourRange(itemCardDTO.getArmourRange())
+                .charge(itemCardDTO.getCharge())
+                .controlZone_OverRun(itemCardDTO.getControlZone_OverRun())
+                .everyElement(itemCardDTO.getEveryElement())
+                .faction(itemCardDTO.getFaction())
+                .fear(itemCardDTO.getFear())
+                .hitpoints(itemCardDTO.getHitpoints())
+                .itemName(itemCardDTO.getItemName())
+                .itemRules(itemCardDTO.getItemRules())
+                .itemType(itemCardDTO.getItemType())
+                .initiative(itemCardDTO.getInitiative())
+                .isGeneric(itemCardDTO.getIsGeneric())
+                .hold_maneuvers(itemCardDTO.getHold_maneuvers())
+                .isAdditionalItem(itemCardDTO.getIsAdditionalItem())
+                .limitedToUnit(itemCardDTO.getLimitedToUnit())
+                .maxRangeArmor(itemCardDTO.getMaxRangeArmor())
+                .magicUsersOnly(itemCardDTO.getMagicUsersOnly())
+                .maxSize(itemCardDTO.getMaxSize())
+                .moral1(itemCardDTO.getMoral1())
+                .moral2(itemCardDTO.getMoral2())
+                .move(itemCardDTO.getMove())
+                .mustBeMounted(itemCardDTO.getMustBeMounted())
+                .pointCost(itemCardDTO.getPointCost())
+                .rangedWeapon(itemCardDTO.getRangedWeapon())
+                .requiresBanner(itemCardDTO.getRequiresBanner())
+                .requiresMusician(itemCardDTO.getRequiresMusician())
+                .requiresShield(itemCardDTO.getRequiresShield())
+                .requiresWeaponType(itemCardDTO.getRequiresWeaponType())
+                .size(itemCardDTO.getSize())
+                .skillMelee(itemCardDTO.getSkillMelee())
+                .skillRange(itemCardDTO.getSkillRange())
+                .skirmish(itemCardDTO.getSkirmish())
+                .subfaction(itemCardDTO.getSubFaction())
+                .usableByCav(itemCardDTO.getUsableByCav())
+                .unitType(itemCardDTO.getUnitType())
+                .weapon1(itemCardDTO.getWeapon1())
+                .weapon2(itemCardDTO.getWeapon2())
                 .build();
     }
 }
