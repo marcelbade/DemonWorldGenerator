@@ -2,10 +2,7 @@ package marcel.demonworld.armygenerator.entities.game;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import marcel.demonworld.armygenerator.JSONConverter.JSONObjectConverter;
 import marcel.demonworld.armygenerator.entities.auth.User;
 import org.json.simple.JSONObject;
@@ -15,6 +12,7 @@ import org.json.simple.JSONObject;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "armylists")
 public class ArmyList {
 

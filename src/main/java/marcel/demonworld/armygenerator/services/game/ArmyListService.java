@@ -30,4 +30,20 @@ public class ArmyListService {
         return all.stream().map(mapper::entityToDTO).collect(Collectors.toList());
     }
 
+    public ArmyListDTO findListByName(String listName) {
+        ArmyList list = repo.findListByName(listName);
+        return mapper.entityToDTO(list);
+    }
+
+
+    public void addArmyList(ArmyListDTO armyListDTO) {
+        repo.save(mapper.dtoToEntity(armyListDTO));
+    }
+
+    public void deleteList(ArmyListDTO listToDelete) {
+        repo.delete(mapper.dtoToEntity(listToDelete));
+    }
+
+    ;
+
 }

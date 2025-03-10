@@ -15,4 +15,7 @@ public interface ArmyListRepository extends JpaRepository<ArmyList, Long> {
     @Query("SELECT a FROM ArmyList a WHERE a.user.userName = :userName")
     List<ArmyList> findAllListsByUser(@Param("userName") String userName);
 
+    @Query("SELECT a FROM ArmyList a Where a.listName = :passedName")
+    ArmyList findListByName(@Param("passedName") String listName);
+
 }

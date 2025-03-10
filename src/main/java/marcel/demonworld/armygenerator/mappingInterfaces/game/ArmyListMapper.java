@@ -5,6 +5,8 @@ import marcel.demonworld.armygenerator.entities.game.ArmyList;
 
 public interface ArmyListMapper {
 
-       ArmyListDTO entityToDTO(ArmyList list);
+    ArmyListDTO entityToDTO(ArmyList list);
+
+    ArmyList dtoToEntity(ArmyListDTO armyListDTO);
 
 }

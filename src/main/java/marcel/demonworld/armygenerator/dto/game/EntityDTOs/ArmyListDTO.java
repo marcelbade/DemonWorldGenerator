@@ -3,6 +3,7 @@ package marcel.demonworld.armygenerator.dto.game.EntityDTOs;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import marcel.demonworld.armygenerator.dto.auth.UserDTO;
 import marcel.demonworld.armygenerator.entities.game.Event;
 import org.json.simple.JSONObject;
 
@@ -12,10 +13,10 @@ import org.json.simple.JSONObject;
 public class ArmyListDTO {
 
     private Long id;
-    private String userName;
-    private String armyListName;
-    private JSONObject armyList;
-    private Boolean isPublicForOrganizer;
+    private UserDTO user;
+    private String listName;
+    private JSONObject list;
+    private Boolean isVisibleToOrganizer;
     private Event event;
 
 }

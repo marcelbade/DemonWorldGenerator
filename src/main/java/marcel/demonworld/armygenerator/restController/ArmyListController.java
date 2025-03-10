@@ -5,6 +5,7 @@ import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ArmyListDTO;
 import marcel.demonworld.armygenerator.security.UserAuthenticationProvider;
 import marcel.demonworld.armygenerator.services.game.ArmyListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,26 +22,26 @@ public class ArmyListController {
     private UserAuthenticationProvider userAuthenticationProvider;
 
     @GetMapping("/getListsForUser")
-    public List<ArmyListDTO> getAllListsForUser() {
-
-
-        return null;
+    public List<ArmyListDTO> getAllListsForUser(@RequestParam String userName) {
+        return listService.returnListsForUser(userName);
     }
 
-    // TODO unfinished
     // add and update!
     @PostMapping("/addList")
-    public ResponseEntity<ArmyListDTO> saveList(@RequestBody ArmyListDTO listDTO) {
+    public ResponseEntity saveList(@RequestBody ArmyListDTO listDTO) {
 
-        return null;
+        listService.addArmyList(listDTO);
+
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    // TODO unfinished
     @DeleteMapping("/deleteList")
-    public ResponseEntity<ArmyListDTO> deleteList(@RequestBody ArmyListDTO listDTO) {
+    public ResponseEntity deleteList(@RequestParam String listName) {
 
-        return null;
+        ArmyListDTO listByName = listService.findListByName(listName);
+        listService.deleteList(listByName);
+
+        return ResponseEntity.ok(HttpStatus.OK);
     }
-
 
 }
