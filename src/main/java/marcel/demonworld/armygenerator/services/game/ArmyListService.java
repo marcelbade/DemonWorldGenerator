@@ -17,17 +17,17 @@ import java.util.stream.Collectors;
 public class ArmyListService {
 
     @Autowired
-    ArmyListRepository repo;
+    private final ArmyListRepository repo;
 
     @Autowired
-    ArmyListMapper mapper;
+    private final ArmyListMapper mapper;
 
 
     public List<ArmyListDTO> returnListsForUser(String userName) {
 
         List<ArmyList> all = repo.findAllListsByUser(userName);
 
-        return all.stream().map(a -> mapper.entityToDTO(a)).collect(Collectors.toList());
+        return all.stream().map(mapper::entityToDTO).collect(Collectors.toList());
     }
 
 }

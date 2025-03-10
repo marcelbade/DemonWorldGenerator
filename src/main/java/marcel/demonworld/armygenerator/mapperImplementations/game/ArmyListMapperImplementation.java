@@ -19,6 +19,8 @@ public class ArmyListMapperImplementation implements ArmyListMapper {
                 .userName(list.getUser().getUserName())
                 .armyListName(list.getListName())
                 .armyList(list.getList())
+                .isPublicForOrganizer(list.getIsPublicForOrganizer())
+                .event(list.getEvent())
                 .build();
     }
 }
