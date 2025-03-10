@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ItemRepository extends JpaRepository<ItemCard, Integer> {
+public interface ItemCardRepository extends JpaRepository<ItemCard, Integer> {
 }

@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface ArmyRepository extends JpaRepository<UnitCard, Integer> {
+public interface UnitCardRepository extends JpaRepository<UnitCard, Integer> {
 }
