@@ -2,13 +2,13 @@ package marcel.demonworld.armygenerator.entities.game;
 
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import marcel.demonworld.armygenerator.JSONConverter.JSONObjectConverter;
 import marcel.demonworld.armygenerator.entities.auth.User;
 import org.json.simple.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,35 +31,17 @@ public class ArmyList {
     private JSONObject list;
 
 
+    @Column(name = "isPublicForOrganizer", columnDefinition = "integer")
+    private Boolean isPublicForOrganizer;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User user;
 
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "id")
-    private List<ListShare> listShares = new ArrayList<>();
-
-
-    // helper functions
-
-    public void addListShare(ListShare share) {
-        this.listShares.add(share);
-        share.setArmyList(this);
-    }
-
-    public void addMultipleShares(List<ListShare> shares) {
-        this.listShares.addAll(shares);
-        shares.forEach(l -> l.setArmyList(this));
-    }
-
-    public void deleteShare(ListShare share) {
-        this.listShares.remove(share);
-    }
-
-    public void deleteShare(List<ListShare> shares) {
-        this.listShares.removeAll(shares);
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "eventId")
+    Event event;
 
 }
 
