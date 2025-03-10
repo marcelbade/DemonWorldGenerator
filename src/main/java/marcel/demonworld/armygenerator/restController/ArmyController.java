@@ -8,7 +8,7 @@ import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 import marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardToFactionDataMapper;
 import marcel.demonworld.armygenerator.services.game.AllyAndAlternativesService;
 import marcel.demonworld.armygenerator.services.game.FactionService;
-import marcel.demonworld.armygenerator.services.game.SelectArmyService;
+import marcel.demonworld.armygenerator.services.game.UnitCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public class ArmyController {
 
     @Autowired
-    private SelectArmyService armyService;
+    private UnitCardService armyService;
 
     @Autowired
     private AllyAndAlternativesService allyService;
