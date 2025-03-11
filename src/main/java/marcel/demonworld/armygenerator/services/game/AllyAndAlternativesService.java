@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,7 +26,7 @@ public class AllyAndAlternativesService {
 
         List<AllianceAndAlternatives> all = repo.findAll();
 
-        return all.stream().map(mapper::mapEntityToDTO).collect(Collectors.toList());
+        return all.stream().filter(Objects::nonNull).map(mapper::mapEntityToDTO).collect(Collectors.toList());
 
     }
 }

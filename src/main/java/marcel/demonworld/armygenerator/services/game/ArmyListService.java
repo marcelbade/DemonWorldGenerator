@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,7 +28,7 @@ public class ArmyListService {
 
         List<ArmyList> all = repo.findAllListsByUser(userName);
 
-        return all.stream().map(mapper::entityToDTO).collect(Collectors.toList());
+        return all.stream().filter(Objects::nonNull).map(mapper::entityToDTO).collect(Collectors.toList());
     }
 
     public ArmyListDTO findListByName(String listName) {

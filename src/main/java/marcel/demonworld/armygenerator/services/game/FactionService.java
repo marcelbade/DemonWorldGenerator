@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,7 +25,7 @@ public class FactionService {
 
     public List<FactionDTO> returnAll() {
         List<Faction> all = repo.findAll();
-        return all.stream().map(mapper::factionToFactionDTO).collect(Collectors.toList());
+        return all.stream().filter(Objects::nonNull).map(mapper::factionToFactionDTO).collect(Collectors.toList());
     }
 
 }

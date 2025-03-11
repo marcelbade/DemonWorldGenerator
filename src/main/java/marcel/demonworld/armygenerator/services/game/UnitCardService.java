@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -32,7 +33,7 @@ public class UnitCardService {
     public List<UnitCardDTO> returnAll() { //
         List<UnitCard> all = repo.findAll();
 
-        return all.stream().map(mapper::entityToDto).collect(Collectors.toList());
+        return all.stream().filter(Objects::nonNull).map(mapper::entityToDto).collect(Collectors.toList());
     }
 
     public void updateUnitCard(UnitCardDTO unit) {
