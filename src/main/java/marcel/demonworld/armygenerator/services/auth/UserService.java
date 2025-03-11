@@ -65,9 +65,14 @@ public class UserService {
     }
 
 
-    public void deleteUser(UserDTO userDTO) {
+    public void deleteUser(String userName) {
 
-        userRepository.delete(userMapper.dtoToEntity(userDTO));
+        User user = userRepository
+                .findByUserName(userName)
+                .orElseThrow(() -> new AppException("user not found", HttpStatus.NOT_FOUND));
+
+        user.setIsDeleted(true);
+        userRepository.save(user);
     }
 
     // turn another user to admin
