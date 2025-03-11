@@ -9,10 +9,7 @@ import marcel.demonworld.armygenerator.services.game.ItemCardService;
 import marcel.demonworld.armygenerator.services.game.UnitCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth/admin")
@@ -69,6 +66,20 @@ public class AdminController {
         itemCardService.updateItem(item);
 
         return ResponseEntity.ok("unit updated");
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteUser(@RequestParam String userName) {
+
+        try {
+            userService.deleteUser(userName);
+        } catch (AppException appException) {
+            return ResponseEntity
+                    .status(appException.getStatus())
+                    .body(appException.getMessage());
+        }
+
+        return ResponseEntity.ok(userName);
     }
 
 }
