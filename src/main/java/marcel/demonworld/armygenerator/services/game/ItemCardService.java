@@ -41,7 +41,7 @@ public class ItemCardService {
         Optional<ItemCard> foundItem = repo.findByNameAndFaction(newItem.getItemName(), newItem.getFaction());
 
         if (foundItem.isPresent()) {
-            throw new AppException("unit already exists for this faction!", HttpStatus.BAD_REQUEST);
+            throw new AppException(newItem.getItemName() + " already exists for this faction!", HttpStatus.BAD_REQUEST);
         } else {
             repo.save(mapper.DtoToEntity(newItem));
         }
@@ -51,6 +51,20 @@ public class ItemCardService {
     public void updateItem(ItemCardDTO item) {
 
         repo.save(mapper.DtoToEntity(item));
+    }
+
+
+    public void deleteItem(String customIconName, String faction) {
+
+        Optional<ItemCard> foundItem = repo.findByNameAndFaction(customIconName, faction);
+        if (!foundItem.isPresent()) {
+            throw new AppException(customIconName + " not found ", HttpStatus.BAD_REQUEST);
+        } else if (foundItem.get().getIsDeleted()) {
+            throw new AppException(customIconName + " already deleted", HttpStatus.NOT_FOUND);
+        } else {
+            foundItem.get().setIsDeleted(true);
+            repo.save(foundItem.get());
+        }
     }
 
 }
