@@ -45,9 +45,31 @@ public class UnitCardService {
 
         if (foundUnit.isPresent()) {
             throw new AppException("unit already exists for this faction!", HttpStatus.BAD_REQUEST);
+        }
+
+        repo.save(mapper.dtoToEntity(newUnit));
+    }
+
+    public void deleteUnit(String customItemName, String faction) {
+
+        Optional<UnitCard> foundUnit = repo.findByNameAndFaction(customItemName, faction);
+        if (!foundUnit.isPresent()) {
+            throw new AppException(customItemName + " not found ", HttpStatus.BAD_REQUEST);
+        } else if (foundUnit.get().getIsDeleted()) {
+            throw new AppException(customItemName + " already deleted", HttpStatus.NOT_FOUND);
         } else {
-            repo.save(mapper.dtoToEntity(newUnit));
+            foundUnit.get().setIsDeleted(true);
+            repo.save(foundUnit.get());
         }
     }
 
 }
+
+
+
+
+
+
+
+
+
