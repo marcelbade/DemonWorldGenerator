@@ -90,6 +90,8 @@ public class ItemCardDTO implements DemonWorldCard {
 
     private Boolean isAdditionalItem;
 
+    private Boolean isDeleted;
+
     @Override
     public int getPoints() { //
         return this.pointCost;

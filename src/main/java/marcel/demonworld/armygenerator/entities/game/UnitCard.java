@@ -179,4 +179,14 @@ public class UnitCard {
     @Column(name = "maxFieldsMove", columnDefinition = "integer")
     private Boolean maxFieldsMove;
 
+    @Column(name = "isCustom", columnDefinition = "integer")
+    private Boolean isCustom;
+
+    @Column(name = "createdBy", columnDefinition = "text")
+    private String createdBy;
+
+    @Column(name = "isDeleted", columnDefinition = "integer")
+    private Boolean isDeleted;
+
+
 }

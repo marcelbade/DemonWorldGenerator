@@ -129,6 +129,12 @@ public class UnitCardDTO implements DemonWorldCard {
 
     private Boolean maxFieldsMove;
 
+    private Boolean isCustom;
+
+    private String  createdBy;
+
+    private Boolean isDeleted;
+
     private final List<ItemCardDTO> equipment = new ArrayList<>();
 
     private final EquipmentTypes equipmentTypes = new EquipmentTypes();
@@ -136,7 +142,6 @@ public class UnitCardDTO implements DemonWorldCard {
     private final Integer lossCounter = 0;
 
     private final Boolean unitDestroyed = false;
-
 
     @Override
     public String getName() { //

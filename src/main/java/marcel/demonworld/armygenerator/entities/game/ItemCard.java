@@ -16,7 +16,7 @@ public class ItemCard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private Integer id;
+    private Integer id;
 
     @Column(name = "faction", columnDefinition = "text")
     private String faction;
@@ -132,5 +132,13 @@ public class ItemCard {
     @Column(name = "isAdditionalItem", columnDefinition = "integer")
     private Boolean isAdditionalItem;
 
+    @Column(name = "isCustom", columnDefinition = "integer")
+    private Boolean isCustom;
+
+    @Column(name = "createdBy", columnDefinition = "text")
+    private String createdBy;
+
+    @Column(name = "isDeleted", columnDefinition = "integer")
+    private Boolean isDeleted;
 
 }

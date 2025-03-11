@@ -72,6 +72,9 @@ public class unitCardMapperImplementation implements UnitCardMapper {
                 .weapon3(unitCard.getWeapon3())
                 .weapon3Name(unitCard.getWeapon3Name())
                 .wedgeFormation(unitCard.getWedgeFormation())
+                .isCustom(unitCard.getIsCustom())
+                .createdBy(unitCard.getCreatedBy())
+                .isDeleted(unitCard.getIsDeleted())
                 .build();
 
 
@@ -137,6 +140,9 @@ public class unitCardMapperImplementation implements UnitCardMapper {
                 .weapon3(unitCardDTO.getWeapon3())
                 .weapon3Name(unitCardDTO.getWeapon3Name())
                 .wedgeFormation(unitCardDTO.getWedgeFormation())
+                .isCustom(unitCardDTO.getIsCustom())
+                .createdBy(unitCardDTO.getCreatedBy())
+                .isDeleted(unitCardDTO.getIsDeleted())
                 .build();
     }
 }
