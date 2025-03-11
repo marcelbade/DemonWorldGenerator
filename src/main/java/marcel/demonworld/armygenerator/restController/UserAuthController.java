@@ -2,7 +2,7 @@ package marcel.demonworld.armygenerator.restController;
 
 
 import jakarta.validation.Valid;
-import marcel.demonworld.armygenerator.dto.auth.CredentialsDTO;
+import marcel.demonworld.armygenerator.Exceptions.AppException;
 import marcel.demonworld.armygenerator.dto.auth.UserDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
@@ -19,18 +19,22 @@ public class UserAuthController {
     @Autowired
     private UserService userService;
 
-    // TODO unfinished
-//    @Autowired
-//    private CustomUnitService;
-
     @Autowired
     private UserAuthenticationProvider userAuthenticationProvider;
 
     // TODO unfinished
     @DeleteMapping("/delete")
-    public ResponseEntity<UserDTO> deleteUser(@RequestBody CredentialsDTO credentialsDTO) {
+    public ResponseEntity<String> deleteUser(@RequestParam String userName) {
 
-        return null;
+        try {
+            userService.deleteUser(userName);
+        } catch (AppException appException) {
+            return ResponseEntity
+                    .status(appException.getStatus())
+                    .body(appException.getMessage());
+        }
+
+        return ResponseEntity.ok(userName);
     }
 
     // TODO unfinished
