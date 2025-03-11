@@ -12,6 +12,6 @@ import java.util.Optional;
 @Repository
 public interface UnitCardRepository extends JpaRepository<UnitCard, Integer> {
 
-    @Query("SELECT UnitCard u FROM units u WHERE u.unitName = :passedName AND u.faction = :passedFaction")
+    @Query("SELECT u FROM UnitCard u WHERE u.unitName = :passedName AND u.faction = :passedFaction")
     Optional<UnitCard> findByNameAndFaction(@Param("passedName") String name, @Param("passedFaction") String faction);
 }
