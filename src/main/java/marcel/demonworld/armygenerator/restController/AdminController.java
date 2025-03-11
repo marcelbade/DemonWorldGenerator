@@ -1,16 +1,18 @@
 package marcel.demonworld.armygenerator.restController;
 
 
-import marcel.demonworld.armygenerator.dto.auth.UserDTO;
+import marcel.demonworld.armygenerator.Exceptions.AppException;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 import marcel.demonworld.armygenerator.services.auth.UserService;
 import marcel.demonworld.armygenerator.services.game.ItemCardService;
 import marcel.demonworld.armygenerator.services.game.UnitCardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth/admin")
@@ -26,28 +28,47 @@ public class AdminController {
     private ItemCardService itemCardService;
 
 
-    @DeleteMapping("/removeUser")
-    public ResponseEntity removeUser(@RequestBody String userName) {
+    @PostMapping("/createNewUnit")
+    public ResponseEntity<String> createNewUnit(@RequestBody UnitCardDTO newUnit) {
 
-        UserDTO byUsername = userService.findByUsername(userName);
+        try {
+            unitCardService.createNewUnit(newUnit);
+        } catch (AppException appException) {
+            return ResponseEntity
+                    .status(appException.getStatus())
+                    .body(appException.getMessage());
+        }
 
-        userService.deleteUser(byUsername);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return ResponseEntity.ok("unit created");
     }
 
+    public ResponseEntity<String> updateUnit(@RequestBody UnitCardDTO unit) {
 
-    @PostMapping("/createNewUnit")
-    public ResponseEntity createNewUnit(@RequestBody UnitCardDTO newUnit) {
-        unitCardService.createNewUnit(newUnit);
-        return ResponseEntity.ok(HttpStatus.OK);
+        unitCardService.updateUnitCard(unit);
+
+        return ResponseEntity.ok("unit updated");
     }
 
 
     @PostMapping("/createNewItem")
-    public ResponseEntity createNewItem(@RequestBody ItemCardDTO newItem) {
-        itemCardService.createNewItem(newItem);
-        return ResponseEntity.ok(HttpStatus.OK);
+    public ResponseEntity<String> createNewItem(@RequestBody ItemCardDTO newItem) {
+
+        try {
+            itemCardService.createNewItem(newItem);
+        } catch (AppException appException) {
+            return ResponseEntity
+                    .status(appException.getStatus())
+                    .body(appException.getMessage());
+        }
+
+        return ResponseEntity.ok("unit created");
     }
 
+    public ResponseEntity<String> updateItem(@RequestBody ItemCardDTO item) {
+
+        itemCardService.updateItem(item);
+
+        return ResponseEntity.ok("unit updated");
+    }
 
 }
