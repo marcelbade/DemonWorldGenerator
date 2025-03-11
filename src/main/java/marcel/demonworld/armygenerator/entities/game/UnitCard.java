@@ -10,6 +10,7 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "units")
+@ToString
 public class UnitCard {
 
     @Id
@@ -187,6 +188,7 @@ public class UnitCard {
 
     @Column(name = "isDeleted", columnDefinition = "integer")
     private Boolean isDeleted;
+
 
 
 }
