@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.restController;
+package marcel.demonworld.armygenerator.Controllers;
 
 
 import marcel.demonworld.armygenerator.services.auth.UserService;
