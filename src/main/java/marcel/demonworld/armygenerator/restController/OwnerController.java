@@ -1,12 +1,13 @@
 package marcel.demonworld.armygenerator.restController;
 
 
-import marcel.demonworld.armygenerator.dto.auth.UserDTO;
-import marcel.demonworld.armygenerator.dto.game.EntityDTOs.EventDTO;
 import marcel.demonworld.armygenerator.services.auth.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth/owner")
@@ -15,29 +16,27 @@ public class OwnerController {
     @Autowired
     private UserService userService;
 
-
-    // TODO unfinished
     @PostMapping("/changeToAdmin")
-    public ResponseEntity<UserDTO> changeToAdmin() {
+    public ResponseEntity<String> changeToAdmin(@RequestParam String userName) {
 
-        return null;
+        userService.upgradeUserToAdmin(userName);
+        return ResponseEntity.ok(userName);
     }
 
 
-    // TODO unfinished
     @PostMapping("/changeToUser")
-    public ResponseEntity<UserDTO> changeToUser() {
+    public ResponseEntity<String> changeToUser(@RequestParam String userName) {
 
-        return null;
+        userService.downgradeAdminToUser(userName);
+        return ResponseEntity.ok(userName);
     }
 
 
-    // TODO unfinished
     @PostMapping("/createNewOwner")
-    public ResponseEntity<UserDTO> createNewOwner(@RequestBody EventDTO eventDTO) {
+    public ResponseEntity<String> createNewOwner(@RequestParam String userName) {
 
-        return null;
+        userService.upgradeUserToOwner(userName);
+        return ResponseEntity.ok(userName);
     }
-
 
 }

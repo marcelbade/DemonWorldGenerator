@@ -28,6 +28,7 @@ public class UserService {
 
     /**
      * Method attempts to find user in the DB and checks the supplied pw.
+     *
      * @param credentialsDTO login Data supplied by user.
      * @return a user DTO if the user is found and pw is correct.
      */
@@ -44,6 +45,7 @@ public class UserService {
     /**
      * Method attempts to register user by first checking if they already exist, then
      * saving the user in the DB if the answer is false.
+     *
      * @param signUpDTO login data supplied by user.
      * @return UserDTO of the newly registered user.
      */
@@ -69,9 +71,9 @@ public class UserService {
     }
 
     // turn another user to admin
-    public UserDTO upgradeUserToAdmin(UserDTO userDTO) {
+    public UserDTO upgradeUserToAdmin(String userName) {
         User user = userRepository
-                .findByUserName(userDTO.getUserName())
+                .findByUserName(userName)
                 .orElseThrow(() -> new AppException("user not found", HttpStatus.NOT_FOUND));
 
         user.setIsAdmin(true);
@@ -81,9 +83,9 @@ public class UserService {
     }
 
     // turn another admin to user
-    public UserDTO downgradeAdminToUser(UserDTO userDTO) {
+    public UserDTO downgradeAdminToUser(String userName) {
         User user = userRepository
-                .findByUserName(userDTO.getUserName())
+                .findByUserName(userName)
                 .orElseThrow(() -> new AppException("user not found", HttpStatus.NOT_FOUND));
 
         user.setIsAdmin(false);
@@ -96,6 +98,20 @@ public class UserService {
     public UserDTO findByUsername(String username) {
         User user = userRepository.findByUserName(username)
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+        return userMapper.entityToDTO(user);
+    }
+
+    // turn another user to admin
+    public UserDTO upgradeUserToOwner(String userName) {
+        User user = userRepository
+                .findByUserName(userName)
+                .orElseThrow(() -> new AppException("user not found", HttpStatus.NOT_FOUND));
+
+        user.setIsAdmin(false);
+        user.setIsOwner(true);
+
+        userRepository.save(user);
+
         return userMapper.entityToDTO(user);
     }
 

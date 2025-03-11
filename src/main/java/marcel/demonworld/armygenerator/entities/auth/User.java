@@ -28,8 +28,12 @@ public class User {
     @Column(name = "userPassword", columnDefinition = "text")
     private String password;
 
-    @Column(name = "isAdmin", columnDefinition = "text")
+    @Column(name = "isAdmin", columnDefinition = "integer")
     private Boolean isAdmin;
+
+    @Column(name = "isOwner", columnDefinition = "integer")
+    private Boolean isOwner;
+
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id")
