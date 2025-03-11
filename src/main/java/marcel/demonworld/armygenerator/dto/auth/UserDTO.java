@@ -17,6 +17,7 @@ public class UserDTO {
     private String password;
     private Boolean isAdmin;
     private Boolean isOwner;
+    private Boolean isDeleted;
     private String token;
 
 }

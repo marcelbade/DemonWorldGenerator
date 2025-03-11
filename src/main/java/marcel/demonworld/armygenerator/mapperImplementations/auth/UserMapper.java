@@ -21,6 +21,7 @@ public class UserMapper implements UserMapperInterface {
                 .password(user.getPassword())
                 .isAdmin(user.getIsAdmin())
                 .isOwner(user.getIsOwner())
+                .isDeleted(user.getIsDeleted())
                 .build();
     }
 
@@ -53,7 +54,8 @@ public class UserMapper implements UserMapperInterface {
                 .userName(dto.getUserName())
                 .password(dto.getPassword())
                 .isAdmin(dto.getIsAdmin())
-                .isOwner(dto.getIsOwner()) // ?
+                .isOwner(dto.getIsOwner())
+                .isDeleted(dto.getIsDeleted())
                 .build();
     }
 }
