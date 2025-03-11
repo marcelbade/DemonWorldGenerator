@@ -34,6 +34,9 @@ public class User {
     @Column(name = "isOwner", columnDefinition = "integer")
     private Boolean isOwner;
 
+    @Column(name = "isDeleted", columnDefinition = "integer")
+    private Boolean isDeleted;
+
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id")
