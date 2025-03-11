@@ -26,7 +26,6 @@ public class UserPublicController {
     @Autowired
     private UserAuthenticationProvider userAuthenticationProvider;
 
-
     @PostMapping("/login")
     public ResponseEntity<UserDTO> login(@RequestBody CredentialsDTO credentialsDTO) {
 
@@ -36,7 +35,6 @@ public class UserPublicController {
         return ResponseEntity.ok(userdto);
 
     }
-
 
     @PostMapping("/register")
     public ResponseEntity<UserDTO> register(@RequestBody @Valid SignUpDTO user) {
