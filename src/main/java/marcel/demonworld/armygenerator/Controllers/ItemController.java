@@ -2,13 +2,12 @@ package marcel.demonworld.armygenerator.Controllers;
 
 
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
-import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.ItemDataDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
+import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.ItemDataDTO;
 import marcel.demonworld.armygenerator.mappingInterfaces.game.ItemDataMapper;
 import marcel.demonworld.armygenerator.services.game.FactionService;
 import marcel.demonworld.armygenerator.services.game.ItemCardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,14 +25,13 @@ public class ItemController {
     private FactionService factionService;
 
     @Autowired
-    private  ItemDataMapper itemCardToItemDataDTOMapperInterface;
+    private ItemDataMapper itemCardToItemDataDTOMapperInterface;
 
     /**
      * Returns all item cards of one faction
      *
      * @return all item cards
      */
-    @CrossOrigin
     @GetMapping("/allItems")
     public List<ItemCardDTO> getAllItems() {
         return itemCardService.returnAll();
@@ -44,7 +42,6 @@ public class ItemController {
      *
      * @return a custom DTO.
      */
-    @CrossOrigin
     @GetMapping("/itemDTOs")
     public ItemDataDTO getAllItemDTOs() {
         List<ItemCardDTO> allItems = itemCardService.returnAll();

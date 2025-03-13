@@ -1,16 +1,15 @@
 package marcel.demonworld.armygenerator.Controllers;
 
 
-import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.AllianceAndAlternativesDTO;
-import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.FactionDataDTO;
+import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
+import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.FactionDataDTO;
 import marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardToFactionDataMapper;
 import marcel.demonworld.armygenerator.services.game.AllyAndAlternativesService;
 import marcel.demonworld.armygenerator.services.game.FactionService;
 import marcel.demonworld.armygenerator.services.game.UnitCardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +39,6 @@ public class ArmyController {
      *
      * @return all unit cards in the game
      */
-    @CrossOrigin
     @GetMapping("/allUnits")
     public List<UnitCardDTO> getAllUnitCards() {
         return armyService.returnAll();
@@ -52,7 +50,6 @@ public class ArmyController {
      *
      * @return all factions as a list of factionDTO.
      */
-    @CrossOrigin
     @GetMapping("/factionDTOs")
     public List<FactionDataDTO> getAllFactionDTOs() {
         List<UnitCardDTO> unitCards = armyService.returnAll();
@@ -67,7 +64,6 @@ public class ArmyController {
      *
      * @return all faction names as a String array.
      */
-    @CrossOrigin
     @GetMapping("/factionNames")
     public List<String> getAllFactionNames() {
         return factionService.returnAll().stream().map(FactionDTO::getFactionName).collect(Collectors.toList());
