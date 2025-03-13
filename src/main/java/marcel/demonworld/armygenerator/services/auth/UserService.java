@@ -21,7 +21,7 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
+    private final UserRepository repo;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
 
@@ -33,7 +33,7 @@ public class UserService {
      * @return a user DTO if the user is found and pw is correct.
      */
     public UserDTO loginUser(CredentialsDTO credentialsDTO) {
-        User user = userRepository.findByUserName(credentialsDTO.getUserName())
+        User user = repo.findByUserName(credentialsDTO.getUserName())
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
 
         if (passwordEncoder.matches(CharBuffer.wrap(credentialsDTO.getPassword()), user.getPassword())) {
@@ -50,7 +50,7 @@ public class UserService {
      * @return UserDTO of the newly registered user.
      */
     public UserDTO registerUser(SignUpDTO signUpDTO) {
-        Optional<User> optionalUser = userRepository.findByUserName(signUpDTO.getUserName());
+        Optional<User> optionalUser = repo.findByUserName(signUpDTO.getUserName());
 
         if (optionalUser.isPresent()) {
             throw new AppException("Login already exists", HttpStatus.BAD_REQUEST);
@@ -59,65 +59,80 @@ public class UserService {
         User user = userMapper.signUpDtoToEntity(signUpDTO);
         user.setPassword(passwordEncoder.encode(CharBuffer.wrap(signUpDTO.getPassword())));
 
-        User savedUser = userRepository.save(user);
+        User savedUser = repo.save(user);
 
         return userMapper.entityToDTO(savedUser);
     }
 
 
+    public void updatePassword(CredentialsDTO credentials) {
+
+        Optional<User> optionalUser = repo.findByUserName(credentials.getUserName());
+        if (!optionalUser.isPresent()) {
+            throw new AppException("Login already exists", HttpStatus.BAD_REQUEST);
+        }
+
+        String encodedPW = passwordEncoder.encode(CharBuffer.wrap(credentials.getPassword()));
+
+        if (encodedPW.equals(optionalUser.get().getPassword())) {
+            throw new AppException("new password must differ from current password!", HttpStatus.FOUND);
+        }
+
+        optionalUser.get().setPassword(encodedPW);
+        repo.save(optionalUser.get());
+    }
+
+
     public void deleteUser(String userName) {
 
-        User user = userRepository
+        User user = repo
                 .findByUserName(userName)
                 .orElseThrow(() -> new AppException("user not found", HttpStatus.NOT_FOUND));
 
         user.setIsDeleted(true);
-        userRepository.save(user);
+        repo.save(user);
     }
 
     // turn another user to admin
-    public UserDTO upgradeUserToAdmin(String userName) {
-        User user = userRepository
+    public void upgradeUserToAdmin(String userName) {
+        User user = repo
                 .findByUserName(userName)
                 .orElseThrow(() -> new AppException("user not found", HttpStatus.NOT_FOUND));
 
         user.setIsAdmin(true);
-        userRepository.save(user);
+        repo.save(user);
 
-        return userMapper.entityToDTO(user);
     }
 
     // turn another admin to user
-    public UserDTO downgradeAdminToUser(String userName) {
-        User user = userRepository
+    public void downgradeAdminToUser(String userName) {
+        User user = repo
                 .findByUserName(userName)
                 .orElseThrow(() -> new AppException("user not found", HttpStatus.NOT_FOUND));
 
         user.setIsAdmin(false);
-        userRepository.save(user);
+        repo.save(user);
 
-        return userMapper.entityToDTO(user);
     }
 
 
     public UserDTO findByUsername(String username) {
-        User user = userRepository.findByUserName(username)
+        User user = repo.findByUserName(username)
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
         return userMapper.entityToDTO(user);
     }
 
     // turn another user to admin
-    public UserDTO upgradeUserToOwner(String userName) {
-        User user = userRepository
+    public void upgradeUserToOwner(String userName) {
+        User user = repo
                 .findByUserName(userName)
                 .orElseThrow(() -> new AppException("user not found", HttpStatus.NOT_FOUND));
 
         user.setIsAdmin(false);
         user.setIsOwner(true);
 
-        userRepository.save(user);
+        repo.save(user);
 
-        return userMapper.entityToDTO(user);
     }
 
 }
