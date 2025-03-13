@@ -3,6 +3,7 @@ package marcel.demonworld.armygenerator.Controllers;
 
 import jakarta.validation.Valid;
 import marcel.demonworld.armygenerator.Exceptions.AppException;
+import marcel.demonworld.armygenerator.dto.auth.CredentialsDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 import marcel.demonworld.armygenerator.security.UserAuthenticationProvider;
@@ -29,7 +30,23 @@ public class UserAuthController {
     @Autowired
     private ItemCardService itemCardService;
 
-    @DeleteMapping("/delete")
+
+    @PostMapping("/updatePassword")
+    public ResponseEntity<String> updatePassword(@RequestBody CredentialsDTO dto) {
+
+        try {
+            userService.updatePassword(dto);
+        } catch (AppException appException) {
+            return ResponseEntity
+                    .status(appException.getStatus())
+                    .body(appException.getMessage());
+        }
+
+        return ResponseEntity.ok("password changed");
+    }
+
+
+    @DeleteMapping("/deleteUser")
     public ResponseEntity<String> deleteUser(@RequestParam String userName) {
 
         try {
