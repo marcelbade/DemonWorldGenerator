@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final  UserAuthenticationEntryPoint userAuthenticationEntryPoint;
+    private final UserAuthenticationEntryPoint userAuthenticationEntryPoint;
     private final UserAuthenticationProvider userAuthenticationProvider;
 
 
@@ -29,10 +29,12 @@ public class SecurityConfig {
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
-                        .anyRequest().permitAll())
-        ;
+                .authorizeHttpRequests(
+                        (requests) -> requests
+                                .requestMatchers(HttpMethod.GET, "/auth/**").authenticated()
+                                .requestMatchers(HttpMethod.POST, "/auth/**").authenticated()
+                                .anyRequest().permitAll()
+                );
         return http.build();
     }
 
