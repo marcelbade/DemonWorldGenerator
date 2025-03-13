@@ -68,7 +68,7 @@ public class AdminController {
         return ResponseEntity.ok("unit updated");
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/deleteUser")
     public ResponseEntity<String> deleteUser(@RequestParam String userName) {
 
         try {
