@@ -8,8 +8,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import marcel.demonworld.armygenerator.dto.auth.UserDTO;
-import marcel.demonworld.armygenerator.services.auth.UserService;
 import org.springframework.beans.factory.annotation.Value;
+import marcel.demonworld.armygenerator.services.auth.UserService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -22,8 +22,8 @@ import java.util.Date;
 @Component
 public class UserAuthenticationProvider {
 
-    @Value("$security.jwt.token.secret-key")
-    private String secretKey;
+    @Value("${security.jwt.token.secret-key}")
+    private String secretKey = "testKey";
 
     private UserService userService;
 
