@@ -29,10 +29,12 @@ public class UserMapper implements UserMapperInterface {
     @Override
     public User signUpDtoToEntity(SignUpDTO dto) {
         return User.builder()
+                .id(null)
                 .userName(dto.getUserName())
                 .password(Arrays.toString(dto.getPassword()))
-                .isAdmin(false) // ?
-                .isOwner(false) // ?
+                .isAdmin(false)
+                .isOwner(false)
+                .isDeleted(false)
                 .build();
     }
 
@@ -42,8 +44,9 @@ public class UserMapper implements UserMapperInterface {
         return UserDTO.builder()
                 .userName(dto.getUserName())
                 .password(Arrays.toString(dto.getPassword()))
-                .isAdmin(false) // ?
-                .isOwner(false) // ?
+                .isAdmin(false)
+                .isOwner(false)
+                .isDeleted(false)
                 .build();
     }
 
