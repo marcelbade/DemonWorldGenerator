@@ -32,7 +32,7 @@ public class UserPublicController {
         UserDTO userdto = userService.loginUser(credentialsDTO);
         userdto.setToken(userAuthenticationProvider.createToken(userdto.getUserName()));
 
-        return ResponseEntity.ok(userdto);
+        return ResponseEntity.ok( userdto);
 
     }
 
