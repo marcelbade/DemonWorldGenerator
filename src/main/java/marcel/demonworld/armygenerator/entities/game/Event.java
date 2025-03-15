@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Builder
 @Entity
-@Table(name = "events")
+@Table(name = "dwEvents")
 public class Event {
 
     @Id
