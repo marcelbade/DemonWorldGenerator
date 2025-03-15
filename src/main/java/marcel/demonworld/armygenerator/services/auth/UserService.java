@@ -36,6 +36,10 @@ public class UserService {
         User user = repo.findByUserName(credentialsDTO.getUserName())
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
 
+        if(user.getIsDeleted()){
+            throw  new AppException("user deleted", HttpStatus.NOT_FOUND);
+        }
+
         if (passwordEncoder.matches(CharBuffer.wrap(credentialsDTO.getPassword()), user.getPassword())) {
             return userMapper.entityToDTO(user);
         }
