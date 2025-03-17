@@ -2,8 +2,7 @@ package marcel.demonworld.armygenerator.dto.game.EntityDTOs;
 
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import marcel.demonworld.armygenerator.dto.game.CardInterface.DemonWorldCard;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.EquipmentTypes;
 
@@ -14,8 +13,7 @@ import java.util.List;
  * one dto for all army cards, no matter what the unit type is.
  * Equipped Items are store in a simple list<ItemCard>
  */
-@Setter
-@Getter
+@Data
 @Builder
 public class UnitCardDTO implements DemonWorldCard {
 
