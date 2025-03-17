@@ -11,7 +11,9 @@ import marcel.demonworld.armygenerator.services.auth.UserService;
 import marcel.demonworld.armygenerator.services.game.ItemCardService;
 import marcel.demonworld.armygenerator.services.game.UnitCardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,6 +32,12 @@ public class UserAuthController {
     @Autowired
     private ItemCardService itemCardService;
 
+
+    @PostMapping("/auth/user/logout")
+    public ResponseEntity<String> logout(){
+        SecurityContextHolder.clearContext();
+        return new ResponseEntity<String>("Logout Successfully!", HttpStatus.OK);
+    }
 
     @PostMapping("/updatePassword")
     public ResponseEntity<String> updatePassword(@RequestBody CredentialsDTO dto) {
