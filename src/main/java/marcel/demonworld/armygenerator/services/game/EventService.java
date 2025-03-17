@@ -2,11 +2,13 @@ package marcel.demonworld.armygenerator.services.game;
 
 
 import lombok.AllArgsConstructor;
+import marcel.demonworld.armygenerator.Exceptions.AppException;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.EventDTO;
 import marcel.demonworld.armygenerator.entities.game.Event;
 import marcel.demonworld.armygenerator.mappingInterfaces.game.EventMapper;
 import marcel.demonworld.armygenerator.repositories.game.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,5 +46,9 @@ public class EventService {
     }
 
 
+    public Event findByEventname(String eventName) {
+        Event eventByName = repo.findEventByName(eventName).orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
 
+        return eventByName;
+    }
 }
