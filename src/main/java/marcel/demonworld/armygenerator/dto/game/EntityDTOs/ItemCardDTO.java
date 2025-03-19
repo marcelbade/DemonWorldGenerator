@@ -90,6 +90,10 @@ public class ItemCardDTO implements DemonWorldCard {
 
     private Boolean isAdditionalItem;
 
+    private Boolean isCustom;
+
+    private String createdBy;
+
     private Boolean isDeleted;
 
     @Override
