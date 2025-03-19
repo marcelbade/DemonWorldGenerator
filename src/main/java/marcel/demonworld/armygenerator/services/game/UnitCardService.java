@@ -40,7 +40,7 @@ public class UnitCardService {
         repo.save(mapper.dtoToEntity(unit));
     }
 
-    public void createNewUnit(UnitCardDTO newUnit) {
+    public UnitCard createNewUnit(UnitCardDTO newUnit) {
 
         Optional<UnitCard> foundUnit = repo.findByNameAndFaction(newUnit.getUnitName(), newUnit.getFaction());
 
@@ -48,7 +48,9 @@ public class UnitCardService {
             throw new AppException("unit already exists for this faction!", HttpStatus.BAD_REQUEST);
         }
 
-        repo.save(mapper.dtoToEntity(newUnit));
+        UnitCard save = repo.save(mapper.dtoToEntity(newUnit));
+
+        return save;
     }
 
     public void deleteUnit(String customItemName, String faction) {
