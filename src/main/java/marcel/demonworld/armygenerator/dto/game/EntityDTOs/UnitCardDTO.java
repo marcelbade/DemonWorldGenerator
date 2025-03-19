@@ -17,8 +17,6 @@ import java.util.List;
 @Builder
 public class UnitCardDTO implements DemonWorldCard {
 
-    private Integer id;
-
     private String faction;
 
     private String unitName;
@@ -129,7 +127,7 @@ public class UnitCardDTO implements DemonWorldCard {
 
     private Boolean isCustom;
 
-    private String  createdBy;
+    private String createdBy;
 
     private Boolean isDeleted;
 
