@@ -6,6 +6,7 @@ import marcel.demonworld.armygenerator.Exceptions.AppException;
 import marcel.demonworld.armygenerator.dto.auth.CredentialsDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
+import marcel.demonworld.armygenerator.entities.game.UnitCard;
 import marcel.demonworld.armygenerator.security.UserAuthenticationProvider;
 import marcel.demonworld.armygenerator.services.auth.UserService;
 import marcel.demonworld.armygenerator.services.game.ItemCardService;
@@ -34,7 +35,7 @@ public class UserAuthController {
 
 
     @PostMapping("/auth/user/logout")
-    public ResponseEntity<String> logout(){
+    public ResponseEntity<String> logout() {
         SecurityContextHolder.clearContext();
         return new ResponseEntity<String>("Logout Successfully!", HttpStatus.OK);
     }
@@ -71,15 +72,18 @@ public class UserAuthController {
 
     @PostMapping("/createCustomUnit")
     public ResponseEntity<String> createCustomUnit(@RequestBody @Valid UnitCardDTO newCustomUnit) {
+
+        UnitCard newUnit = null;
+
         try {
-            unitCardService.createNewUnit(newCustomUnit);
+              newUnit = unitCardService.createNewUnit(newCustomUnit);
         } catch (AppException appException) {
             return ResponseEntity
                     .status(appException.getStatus())
                     .body(appException.getMessage());
         }
 
-        return ResponseEntity.ok(" custom unit created");
+        return ResponseEntity.ok(" custom unit created:" + newUnit.toString());
     }
 
 
