@@ -52,6 +52,8 @@ public class ItemCardMapperImplementation implements ItemCardMapper {
                 .unitType(itemCard.getUnitType())
                 .weapon1(itemCard.getWeapon1())
                 .weapon2(itemCard.getWeapon2())
+                .createdBy(itemCard.getCreatedBy())
+                .isCustom(itemCard.getIsCustom())
                 .isDeleted(itemCard.getIsDeleted())
                 .build();
     }
@@ -98,6 +100,8 @@ public class ItemCardMapperImplementation implements ItemCardMapper {
                 .unitType(itemCardDTO.getUnitType())
                 .weapon1(itemCardDTO.getWeapon1())
                 .weapon2(itemCardDTO.getWeapon2())
+                .isCustom(itemCardDTO.getIsCustom())
+                .createdBy(itemCardDTO.getCreatedBy())
                 .isDeleted(itemCardDTO.getIsDeleted())
                 .build();
     }
