@@ -168,10 +168,10 @@ public class UnitCard {
     @Column(name = "multiStateOrderNumber")
     private Integer multiStateOrderNumber;
 
-    @Column(name = "leaderIsClosedOrder")
+    @Column(name = "leaderIsClosedOrder", columnDefinition = "integer")
     private Boolean leaderIsClosedOrder;
 
-    @Column(name = "unitIsClosedOrder")
+    @Column(name = "unitIsClosedOrder",  columnDefinition = "integer")
     private Boolean unitIsClosedOrder;
 
     @Column(name = "multiCardName", columnDefinition = "text")
@@ -188,7 +188,6 @@ public class UnitCard {
 
     @Column(name = "isDeleted", columnDefinition = "integer")
     private Boolean isDeleted;
-
 
 
 }
