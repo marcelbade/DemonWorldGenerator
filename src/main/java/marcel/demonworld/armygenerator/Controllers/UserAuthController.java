@@ -73,15 +73,8 @@ public class UserAuthController {
     @PostMapping("/createCustomUnit")
     public ResponseEntity<String> createCustomUnit(@RequestBody @Valid UnitCardDTO newCustomUnit) {
 
-        UnitCard newUnit = null;
 
-        try {
-              newUnit = unitCardService.createNewUnit(newCustomUnit);
-        } catch (AppException appException) {
-            return ResponseEntity
-                    .status(appException.getStatus())
-                    .body(appException.getMessage());
-        }
+        UnitCard newUnit = unitCardService.createNewUnit(newCustomUnit);
 
         return ResponseEntity.ok(" custom unit created:" + newUnit.toString());
     }
