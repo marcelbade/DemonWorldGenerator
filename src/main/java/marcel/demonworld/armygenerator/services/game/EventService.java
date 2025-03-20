@@ -46,9 +46,7 @@ public class EventService {
     }
 
 
-    public Event findByEventname(String eventName) {
-        Event eventByName = repo.findEventByName(eventName).orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
-
-        return eventByName;
+    public Event findByEventName(String eventName) {
+        return repo.findEventByName(eventName).orElseThrow(() -> new AppException("unknown event", HttpStatus.NOT_FOUND));
     }
 }
