@@ -6,7 +6,6 @@ import lombok.Data;
 import marcel.demonworld.armygenerator.dto.game.CardInterface.DemonWorldCard;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.EquipmentTypes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +15,8 @@ import java.util.List;
 @Data
 @Builder
 public class UnitCardDTO implements DemonWorldCard {
+
+    private Integer Id;
 
     private String faction;
 
@@ -131,9 +132,9 @@ public class UnitCardDTO implements DemonWorldCard {
 
     private Boolean isDeleted;
 
-    private final List<ItemCardDTO> equipment = new ArrayList<>();
+    private List<ItemCardDTO> equipment;
 
-    private final EquipmentTypes equipmentTypes = new EquipmentTypes();
+    private EquipmentTypes equipmentTypes;
 
     private final Integer lossCounter = 0;
 

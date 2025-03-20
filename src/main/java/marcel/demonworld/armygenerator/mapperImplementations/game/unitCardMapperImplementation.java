@@ -6,6 +6,8 @@ import marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardMapper;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
+
 
 @Component
 @Primary
@@ -22,12 +24,15 @@ public class unitCardMapperImplementation implements UnitCardMapper {
                 .chargeBonus(unitCard.getChargeBonus())
                 .commandStars(unitCard.getCommandStars())
                 .controlZone(unitCard.getControlZone())
+                //  The table unis does not have this field. So it initialized here as an empty list.
+                .equipment(Collections.emptyList())
                 .faction(unitCard.getFaction())
                 .fear(unitCard.getFear())
                 .hasShield(unitCard.getHasShield())
                 .hitpoints(unitCard.getHitpoints())
                 .hold_maneuvers(unitCard.getHold_maneuvers())
                 .horde(unitCard.getHorde())
+                .Id(unitCard.getId())
                 .initiative(unitCard.getInitiative())
                 .isHighFlyer(unitCard.getIsHighFlyer())
                 .isLowFlyer(unitCard.getIsLowFlyer())

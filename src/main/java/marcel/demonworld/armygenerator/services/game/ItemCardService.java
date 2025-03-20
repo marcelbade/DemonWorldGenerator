@@ -68,6 +68,16 @@ public class ItemCardService {
         }
     }
 
+    /**
+     * @param faction
+     * @return
+     */
+    public List<ItemCard> findAllFactionItemCards(String faction) {
+        return repo.findAllForFaction(faction);
+    }
+
+
+
 }
 
 
