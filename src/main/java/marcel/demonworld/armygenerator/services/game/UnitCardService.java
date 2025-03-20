@@ -66,6 +66,14 @@ public class UnitCardService {
         }
     }
 
+    /**
+     * @param faction
+     * @return
+     */
+    public List<UnitCard> findAllFactionUnitCards(String faction) {
+        return repo.findAllForFaction(faction);
+    }
+
 }
 
 
