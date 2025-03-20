@@ -29,8 +29,7 @@ public class ArmyListController {
     @PostMapping("/addList")
     public ResponseEntity<String> saveList(@RequestBody ArmyListDTO listDTO) {
 
-        listService.addArmyList(listDTO);
-
+      listService.addArmyList(listDTO);
         return ResponseEntity.ok(listDTO.getListName());
     }
 

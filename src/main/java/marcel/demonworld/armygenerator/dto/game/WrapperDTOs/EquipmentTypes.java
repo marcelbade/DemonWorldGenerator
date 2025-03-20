@@ -1,13 +1,12 @@
 package marcel.demonworld.armygenerator.dto.game.WrapperDTOs;
 
- import lombok.Getter;
+import lombok.Data;
 
-
-@Getter
+@Data
 public class EquipmentTypes {
-    private final Boolean magicItem = false;
-    private final Boolean banner = false;
-    private final Boolean instrument = false;
-    private final Boolean unit = false;
-    private final Boolean fortifications = false;
+    private Boolean magicItem = false;
+    private Boolean banner = false;
+    private Boolean instrument = false;
+    private Boolean unit = false;
+    private Boolean fortifications = false;
 }

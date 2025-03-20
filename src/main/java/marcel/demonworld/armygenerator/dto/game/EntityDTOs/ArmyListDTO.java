@@ -1,22 +1,20 @@
 package marcel.demonworld.armygenerator.dto.game.EntityDTOs;
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import marcel.demonworld.armygenerator.dto.auth.UserDTO;
-import marcel.demonworld.armygenerator.entities.game.Event;
-import org.json.simple.JSONObject;
+import lombok.Data;
 
-@Setter
-@Getter
+import java.util.List;
+
+@Data
 @Builder
 public class ArmyListDTO {
 
-    private Long id;
-    private UserDTO user;
+
+    private String userName;
+    private String faction;
     private String listName;
-    private JSONObject list;
+    private List<UnitCardDTO> list;
     private Boolean isVisibleToOrganizer;
-    private Event event;
+    private String eventName;
 
 }
