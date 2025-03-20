@@ -121,8 +121,10 @@ public class UserService {
 
 
     public UserDTO findByUsername(String username) {
-        User user = repo.findByUserName(username)
+        User user = repo
+                .findByUserName(username)
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+
         return userMapper.entityToDTO(user);
     }
 
