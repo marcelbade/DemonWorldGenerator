@@ -2,7 +2,7 @@ package marcel.demonworld.armygenerator.Controllers;
 
 
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ArmyListDTO;
-import marcel.demonworld.armygenerator.security.UserAuthenticationProvider;
+import marcel.demonworld.armygenerator.security.MethodLevelSecurityConfig;
 import marcel.demonworld.armygenerator.services.game.ArmyListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +17,12 @@ public class ArmyListController {
     @Autowired
     private ArmyListService listService;
 
-    @Autowired
-    private UserAuthenticationProvider userAuthenticationProvider;
-
+    
     @GetMapping("/getListsForUser")
     public List<ArmyListDTO> getAllListsForUser(@RequestParam String userName) {
+
+        MethodLevelSecurityConfig.authenticateUser(userName);
+
         return listService.returnListsForUser(userName);
     }
 
@@ -29,12 +30,16 @@ public class ArmyListController {
     @PostMapping("/addList")
     public ResponseEntity<String> saveList(@RequestBody ArmyListDTO listDTO) {
 
-      listService.addArmyList(listDTO);
+        MethodLevelSecurityConfig.authenticateUser(listDTO.getUserName());
+
+        listService.addArmyList(listDTO);
         return ResponseEntity.ok(listDTO.getListName());
     }
 
     @DeleteMapping("/deleteList")
-    public ResponseEntity<String> deleteList(@RequestParam String listName) {
+    public ResponseEntity<String> deleteList(@RequestParam String listName, @RequestParam String userName) {
+
+        MethodLevelSecurityConfig.authenticateUser(userName);
 
         ArmyListDTO listByName = listService.findListByName(listName);
         listService.deleteList(listByName);
