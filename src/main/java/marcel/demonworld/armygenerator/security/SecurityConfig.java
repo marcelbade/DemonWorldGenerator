@@ -33,9 +33,8 @@ public class SecurityConfig {
                         (requests) -> requests
                                 .requestMatchers(HttpMethod.GET, "/auth/**").authenticated()
                                 .requestMatchers(HttpMethod.POST, "/auth/**").authenticated()
-                                .requestMatchers(HttpMethod.GET,"public/**").permitAll()
-                                .requestMatchers(HttpMethod.POST,"public/**").permitAll()
-
+                                .requestMatchers(HttpMethod.GET, "public/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "public/**").permitAll()
                 );
         return http.build();
     }
