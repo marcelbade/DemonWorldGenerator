@@ -14,8 +14,6 @@ public interface UserMapperInterface {
     // SignUpDTO -> UserDTO
     User signUpDtoToEntity(SignUpDTO dto);
 
-    // SignUpDTO -> UserDTO
-    UserDTO signUpDtoToUserDTO(SignUpDTO dto);
 
     //  UserDTO  -> User
     User dtoToEntity(UserDTO dto);

@@ -40,18 +40,6 @@ public class UserMapper implements UserMapperInterface {
 
 
     @Override
-    public UserDTO signUpDtoToUserDTO(SignUpDTO dto) {
-        return UserDTO.builder()
-                .userName(dto.getUserName())
-                .password(Arrays.toString(dto.getPassword()))
-                .isAdmin(false)
-                .isOwner(false)
-                .isDeleted(false)
-                .build();
-    }
-
-
-    @Override
     public User dtoToEntity(UserDTO dto) {
         return User.builder()
                 .id(dto.getId())
