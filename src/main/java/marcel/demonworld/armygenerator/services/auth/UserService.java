@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.nio.CharBuffer;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -97,6 +98,7 @@ public class UserService {
         repo.save(user);
     }
 
+
     // turn another user to admin
     public void upgradeUserToAdmin(String userName) {
         User user = repo
@@ -105,8 +107,8 @@ public class UserService {
 
         user.setIsAdmin(true);
         repo.save(user);
-
     }
+
 
     // turn another admin to user
     public void downgradeAdminToUser(String userName) {
@@ -116,7 +118,6 @@ public class UserService {
 
         user.setIsAdmin(false);
         repo.save(user);
-
     }
 
 
@@ -128,6 +129,7 @@ public class UserService {
         return userMapper.entityToDTO(user);
     }
 
+
     // turn another user to admin
     public void upgradeUserToOwner(String userName) {
         User user = repo
@@ -138,7 +140,10 @@ public class UserService {
         user.setIsOwner(true);
 
         repo.save(user);
-
     }
 
+
+    public List<String> findAllUsers() {
+        return repo.findAllUserNames();
+    }
 }

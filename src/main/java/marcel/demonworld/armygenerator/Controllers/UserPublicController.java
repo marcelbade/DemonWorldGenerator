@@ -9,12 +9,10 @@ import marcel.demonworld.armygenerator.security.UserAuthenticationProvider;
 import marcel.demonworld.armygenerator.services.auth.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/public/user")
@@ -32,7 +30,7 @@ public class UserPublicController {
         UserDTO userdto = userService.loginUser(credentialsDTO);
         userdto.setToken(userAuthenticationProvider.createToken(userdto.getUserName()));
 
-        return ResponseEntity.ok( userdto);
+        return ResponseEntity.ok(userdto);
 
     }
 
@@ -42,4 +40,10 @@ public class UserPublicController {
         createdUser.setToken(userAuthenticationProvider.createToken(user.getUserName()));
         return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);
     }
+
+    @GetMapping("/allUserNames")
+    public List<String> allUserNames() {
+        return userService.findAllUsers();
+    }
+
 }
