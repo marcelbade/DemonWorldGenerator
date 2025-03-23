@@ -1,6 +1,7 @@
 package marcel.demonworld.armygenerator.mapperImplementations.game;
 
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
+import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.EquipmentTypes;
 import marcel.demonworld.armygenerator.entities.game.UnitCard;
 import marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardMapper;
 import org.springframework.context.annotation.Primary;
@@ -24,8 +25,9 @@ public class unitCardMapperImplementation implements UnitCardMapper {
                 .chargeBonus(unitCard.getChargeBonus())
                 .commandStars(unitCard.getCommandStars())
                 .controlZone(unitCard.getControlZone())
-                //  The table unis does not have this field. So it initialized here as an empty list.
+                //  The table unis does not have these fields. So it initialized here as an empty list.
                 .equipment(Collections.emptyList())
+                .equipmentTypes(new EquipmentTypes())
                 .faction(unitCard.getFaction())
                 .fear(unitCard.getFear())
                 .hasShield(unitCard.getHasShield())
