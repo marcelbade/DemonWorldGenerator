@@ -5,7 +5,7 @@ import marcel.demonworld.armygenerator.dto.game.EntityDTOs.AllianceAndAlternativ
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.FactionDataDTO;
-import marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardToFactionDataMapper;
+import marcel.demonworld.armygenerator.mappingInterfaces.UnitCardToFactionDataMapper;
 import marcel.demonworld.armygenerator.services.game.AllyAndAlternativesService;
 import marcel.demonworld.armygenerator.services.game.FactionService;
 import marcel.demonworld.armygenerator.services.game.UnitCardService;

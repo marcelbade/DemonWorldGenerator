@@ -1,6 +1,6 @@
 package marcel.demonworld.armygenerator.repositories.game;
 
-import marcel.demonworld.armygenerator.entities.game.UnitCard;
+import marcel.demonworld.armygenerator.entities.UnitCard;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

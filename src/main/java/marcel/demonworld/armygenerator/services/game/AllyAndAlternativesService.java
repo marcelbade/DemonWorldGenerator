@@ -2,8 +2,8 @@ package marcel.demonworld.armygenerator.services.game;
 
 import lombok.AllArgsConstructor;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.AllianceAndAlternativesDTO;
-import marcel.demonworld.armygenerator.entities.game.AllianceAndAlternatives;
-import marcel.demonworld.armygenerator.mappingInterfaces.game.AlliesAndAlternativesMapper;
+import marcel.demonworld.armygenerator.entities.AllianceAndAlternatives;
+import marcel.demonworld.armygenerator.mappingInterfaces.AlliesAndAlternativesMapper;
 import marcel.demonworld.armygenerator.repositories.game.AlliesAndAlternativesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

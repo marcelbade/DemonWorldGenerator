@@ -6,15 +6,13 @@ import marcel.demonworld.armygenerator.Exceptions.AppException;
 import marcel.demonworld.armygenerator.dto.auth.CredentialsDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
-import marcel.demonworld.armygenerator.entities.game.UnitCard;
+import marcel.demonworld.armygenerator.entities.UnitCard;
 import marcel.demonworld.armygenerator.security.UserAuthenticationProvider;
 import marcel.demonworld.armygenerator.services.auth.UserService;
 import marcel.demonworld.armygenerator.services.game.ItemCardService;
 import marcel.demonworld.armygenerator.services.game.UnitCardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -34,10 +32,12 @@ public class UserAuthController {
     private ItemCardService itemCardService;
 
 
+//     TODO fix this :D
     @PostMapping("/auth/user/logout")
     public ResponseEntity<String> logout() {
-        SecurityContextHolder.clearContext();
-        return new ResponseEntity<String>("Logout Successfully!", HttpStatus.OK);
+//        SecurityContextHolder.clearContext();
+//        return new ResponseEntity<String>("Logout Successfully!", HttpStatus.OK);
+        return null;
     }
 
     @PostMapping("/updatePassword")

@@ -1,7 +1,7 @@
 package marcel.demonworld.armygenerator.repositories.auth;
 
 
-import marcel.demonworld.armygenerator.entities.auth.User;
+import marcel.demonworld.armygenerator.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

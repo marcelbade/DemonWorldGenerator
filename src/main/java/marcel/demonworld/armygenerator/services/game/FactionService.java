@@ -3,8 +3,8 @@ package marcel.demonworld.armygenerator.services.game;
 
 import lombok.AllArgsConstructor;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
-import marcel.demonworld.armygenerator.entities.game.Faction;
-import marcel.demonworld.armygenerator.mappingInterfaces.game.FactionMapper;
+import marcel.demonworld.armygenerator.entities.Faction;
+import marcel.demonworld.armygenerator.mappingInterfaces.FactionMapper;
 import marcel.demonworld.armygenerator.repositories.game.FactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -4,7 +4,7 @@ package marcel.demonworld.armygenerator.Controllers;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.ItemDataDTO;
-import marcel.demonworld.armygenerator.mappingInterfaces.game.ItemDataMapper;
+import marcel.demonworld.armygenerator.mappingInterfaces.ItemDataMapper;
 import marcel.demonworld.armygenerator.services.game.FactionService;
 import marcel.demonworld.armygenerator.services.game.ItemCardService;
 import org.springframework.beans.factory.annotation.Autowired;
