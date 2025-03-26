@@ -2,12 +2,10 @@ package marcel.demonworld.armygenerator.dto.game.EntityDTOs;
 
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.json.simple.JSONObject;
 
-@Setter
-@Getter
+@Data
 @Builder
 public class AllianceAndAlternativesDTO {
 

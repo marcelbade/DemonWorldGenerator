@@ -2,15 +2,13 @@ package marcel.demonworld.armygenerator.dto.game.EntityDTOs;
 
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import marcel.demonworld.armygenerator.entities.auth.User;
-import marcel.demonworld.armygenerator.entities.game.ArmyList;
+import lombok.Data;
+import marcel.demonworld.armygenerator.entities.ArmyList;
+import marcel.demonworld.armygenerator.entities.User;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Builder
 public class EventDTO {
 
