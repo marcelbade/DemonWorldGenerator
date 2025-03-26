@@ -1,10 +1,9 @@
-package marcel.demonworld.armygenerator.mapperImplementations.game;
+package marcel.demonworld.armygenerator.mapperImplementations;
 
 import marcel.demonworld.armygenerator.Encoding.ArmyListEncoder;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ArmyListDTO;
-import marcel.demonworld.armygenerator.entities.game.ArmyList;
-import marcel.demonworld.armygenerator.mapperImplementations.auth.UserMapper;
-import marcel.demonworld.armygenerator.mappingInterfaces.game.ArmyListMapper;
+import marcel.demonworld.armygenerator.entities.ArmyList;
+import marcel.demonworld.armygenerator.mappingInterfaces.ArmyListMapper;
 import marcel.demonworld.armygenerator.services.auth.UserService;
 import marcel.demonworld.armygenerator.services.game.EventService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
-package marcel.demonworld.armygenerator.mappingInterfaces.game;
+package marcel.demonworld.armygenerator.mappingInterfaces;
 
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
-import marcel.demonworld.armygenerator.entities.game.ItemCard;
+import marcel.demonworld.armygenerator.entities.ItemCard;
 
 public interface ItemCardMapper {
 

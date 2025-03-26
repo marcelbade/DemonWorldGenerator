@@ -1,8 +1,8 @@
-package marcel.demonworld.armygenerator.mapperImplementations.game;
+package marcel.demonworld.armygenerator.mapperImplementations;
 
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.EventDTO;
-import marcel.demonworld.armygenerator.entities.game.Event;
-import marcel.demonworld.armygenerator.mappingInterfaces.game.EventMapper;
+import marcel.demonworld.armygenerator.entities.Event;
+import marcel.demonworld.armygenerator.mappingInterfaces.EventMapper;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ public class EventMapperImplementation implements EventMapper {
                 .id(event.getId())
                 .eventName(event.getEventName())
                 .armyLists(event.getArmyLists())
-                .organizer(event.getOrganizer())
+                .organizer(event.getEventOrganizer())
                 .build();
     }
 

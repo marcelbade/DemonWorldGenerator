@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.entities.game;
+package marcel.demonworld.armygenerator.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,4 +20,5 @@ public class Faction {
 
     @Column(name = "factionName", columnDefinition = "text")
     private String factionName;
+
 }

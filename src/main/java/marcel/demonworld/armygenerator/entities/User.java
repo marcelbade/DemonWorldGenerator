@@ -1,10 +1,8 @@
-package marcel.demonworld.armygenerator.entities.auth;
+package marcel.demonworld.armygenerator.entities;
 
 
 import jakarta.persistence.*;
 import lombok.*;
-import marcel.demonworld.armygenerator.entities.game.ArmyList;
-import marcel.demonworld.armygenerator.entities.game.Event;
 
 import java.util.ArrayList;
 import java.util.List;

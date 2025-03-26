@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.entities.game;
+package marcel.demonworld.armygenerator.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

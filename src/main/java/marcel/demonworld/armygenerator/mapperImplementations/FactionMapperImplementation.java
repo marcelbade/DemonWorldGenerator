@@ -1,8 +1,8 @@
-package marcel.demonworld.armygenerator.mapperImplementations.game;
+package marcel.demonworld.armygenerator.mapperImplementations;
 
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
-import marcel.demonworld.armygenerator.entities.game.Faction;
-import marcel.demonworld.armygenerator.mappingInterfaces.game.FactionMapper;
+import marcel.demonworld.armygenerator.entities.Faction;
+import marcel.demonworld.armygenerator.mappingInterfaces.FactionMapper;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 

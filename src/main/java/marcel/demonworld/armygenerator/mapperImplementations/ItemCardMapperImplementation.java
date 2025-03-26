@@ -1,9 +1,9 @@
-package marcel.demonworld.armygenerator.mapperImplementations.game;
+package marcel.demonworld.armygenerator.mapperImplementations;
 
 
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
-import marcel.demonworld.armygenerator.entities.game.ItemCard;
-import marcel.demonworld.armygenerator.mappingInterfaces.game.ItemCardMapper;
+import marcel.demonworld.armygenerator.entities.ItemCard;
+import marcel.demonworld.armygenerator.mappingInterfaces.ItemCardMapper;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 

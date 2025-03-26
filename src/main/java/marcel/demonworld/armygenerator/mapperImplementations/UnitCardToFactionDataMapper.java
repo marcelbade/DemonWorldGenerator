@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.mapperImplementations.game;
+package marcel.demonworld.armygenerator.mapperImplementations;
 
 import marcel.demonworld.armygenerator.Enums.GameEnums;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Component
 @Primary
-public class UnitCardToFactionDataMapper implements marcel.demonworld.armygenerator.mappingInterfaces.game.UnitCardToFactionDataMapper {
+public class UnitCardToFactionDataMapper implements marcel.demonworld.armygenerator.mappingInterfaces.UnitCardToFactionDataMapper {
 
     @Autowired
     FactionService factionService;

@@ -1,7 +1,7 @@
-package marcel.demonworld.armygenerator.mappingInterfaces.game;
+package marcel.demonworld.armygenerator.mappingInterfaces;
 
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ArmyListDTO;
-import marcel.demonworld.armygenerator.entities.game.ArmyList;
+import marcel.demonworld.armygenerator.entities.ArmyList;
 
 public interface ArmyListMapper {
 

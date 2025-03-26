@@ -1,9 +1,9 @@
-package marcel.demonworld.armygenerator.mappingInterfaces.auth;
+package marcel.demonworld.armygenerator.mappingInterfaces;
 
 
 import marcel.demonworld.armygenerator.dto.auth.SignUpDTO;
 import marcel.demonworld.armygenerator.dto.auth.UserDTO;
-import marcel.demonworld.armygenerator.entities.auth.User;
+import marcel.demonworld.armygenerator.entities.User;
 
 public interface UserMapperInterface {
 

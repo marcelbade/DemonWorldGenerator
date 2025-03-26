@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.mappingInterfaces.game;
+package marcel.demonworld.armygenerator.mappingInterfaces;
 
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.ItemDataDTO;
