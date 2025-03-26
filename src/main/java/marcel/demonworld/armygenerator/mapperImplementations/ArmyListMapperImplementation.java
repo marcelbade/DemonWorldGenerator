@@ -3,12 +3,16 @@ package marcel.demonworld.armygenerator.mapperImplementations;
 import marcel.demonworld.armygenerator.Encoding.ArmyListEncoder;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ArmyListDTO;
 import marcel.demonworld.armygenerator.entities.ArmyList;
+import marcel.demonworld.armygenerator.entities.ArmyListAccess;
+import marcel.demonworld.armygenerator.mappingInterfaces.ArmyListAccessMapper;
 import marcel.demonworld.armygenerator.mappingInterfaces.ArmyListMapper;
 import marcel.demonworld.armygenerator.services.auth.UserService;
-import marcel.demonworld.armygenerator.services.game.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
+
+import java.util.Collections;
+import java.util.stream.Collectors;
 
 
 @Component
@@ -19,10 +23,10 @@ public class ArmyListMapperImplementation implements ArmyListMapper {
     UserMapper userMapper;
 
     @Autowired
-    UserService userService;
+    ArmyListAccessMapper armyListAccessMapper;
 
     @Autowired
-    EventService eventService;
+    UserService userService;
 
     @Autowired
     ArmyListEncoder armyListEncoder;
@@ -30,12 +34,15 @@ public class ArmyListMapperImplementation implements ArmyListMapper {
     @Override
     public ArmyListDTO entityToDTO(ArmyList list) {
         return ArmyListDTO.builder()
-                .userName(userMapper.entityToDTO(list.getUser()).getUserName())
+                .userName(list.getUser().getUserName())
                 .listName(list.getListName())
-                .list(armyListEncoder.decode(list.getList(), list.getFaction()))
-                .isVisibleToOrganizer(list.getIsVisibleToOrganizer())
-                .eventName(list.getEvent().getEventName())
                 .faction(list.getFaction())
+                .list(armyListEncoder.decode(list.getList(), list.getFaction()))
+                .eventName(list.getEventName())
+                .userWithAccess(list.getUsersWithAccess()
+                        .stream()
+                        .map(ArmyListAccess::getSharedWithUser)
+                        .collect(Collectors.toList()))
                 .build();
     }
 
@@ -46,9 +53,9 @@ public class ArmyListMapperImplementation implements ArmyListMapper {
                 .user(userMapper.dtoToEntity(userService.findByUsername(listDTO.getUserName())))
                 .listName(listDTO.getListName())
                 .list(armyListEncoder.encode(listDTO.getList()))
-                .isVisibleToOrganizer(listDTO.getIsVisibleToOrganizer())
-                .event(eventService.findByEventName(listDTO.getEventName()))
+                .eventName(listDTO.getEventName())
                 .faction(listDTO.getFaction())
+                .usersWithAccess(Collections.emptyList())
                 .build();
     }
 }

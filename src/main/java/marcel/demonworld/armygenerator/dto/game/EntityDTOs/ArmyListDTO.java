@@ -9,12 +9,11 @@ import java.util.List;
 @Builder
 public class ArmyListDTO {
 
-
     private String userName;
     private String faction;
     private String listName;
     private List<UnitCardDTO> list;
-    private Boolean isVisibleToOrganizer;
     private String eventName;
+    private List<String> userWithAccess;
 
 }
