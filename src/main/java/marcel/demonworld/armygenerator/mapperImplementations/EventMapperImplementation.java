@@ -6,6 +6,8 @@ import marcel.demonworld.armygenerator.mappingInterfaces.EventMapper;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 
 @Component
 @Primary
@@ -14,9 +16,11 @@ public class EventMapperImplementation implements EventMapper {
     public EventDTO entityToDto(Event event) {
         return EventDTO.builder()
                 .id(event.getId())
+                .eventOrganizer(event.getEventOrganizer())
                 .eventName(event.getEventName())
-                .armyLists(event.getArmyLists())
-                .organizer(event.getEventOrganizer())
+                .location(event.getLocation())
+                .url(event.getUrl())
+                .eventDate(new Date(event.getEventDate().getTime()))
                 .build();
     }
 
@@ -24,9 +28,11 @@ public class EventMapperImplementation implements EventMapper {
     public Event dtoToEntity(EventDTO eventDTO) {
         return Event.builder()
                 .id(eventDTO.getId())
+                .eventOrganizer(eventDTO.getEventOrganizer())
                 .eventName(eventDTO.getEventName())
-                .armyLists(eventDTO.getArmyLists())
-                .organizer(eventDTO.getOrganizer())
+                .location(eventDTO.getLocation())
+                .url(eventDTO.getUrl())
+                .eventDate(new java.sql.Date(eventDTO.getEventDate().getTime()))
                 .build();
     }
 }
