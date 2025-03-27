@@ -3,7 +3,6 @@ package marcel.demonworld.armygenerator.dto.game.EntityDTOs;
 
 import lombok.Builder;
 import lombok.Data;
-import marcel.demonworld.armygenerator.entities.User;
 
 import java.util.Date;
 
@@ -16,7 +15,7 @@ public class EventDTO {
     private String url;
     private String location;
     private Date eventDate;
-    private User eventOrganizer;
+    private String eventOrganizer;
 
 
 }

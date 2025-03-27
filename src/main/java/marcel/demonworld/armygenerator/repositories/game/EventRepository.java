@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface EventRepository extends JpaRepository<Event, Long> {
 
 
-    @Query("SELECT e from Event e WHERE e.organizer.userName = :userName")
+    @Query("SELECT e from Event e WHERE e.eventOrganizer.userName = :userName")
     List<Event> findAllEventsForUser(@Param("userName") String userName);
 
     @Query("SELECT e from Event e WHERE e.eventName = :eventName")
