@@ -26,7 +26,6 @@ public class ArmyList {
     @Column(name = "list", columnDefinition = "text")
     private String list;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "String", columnDefinition = "text")
     private String faction;
 
