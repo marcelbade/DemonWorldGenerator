@@ -129,6 +129,14 @@ public class UserService {
         return userMapper.entityToDTO(user);
     }
 
+    public User findEntityByUsername(String username) {
+        User user = repo
+                .findByUserName(username)
+                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+
+        return user;
+    }
+
 
     // turn another user to admin
     public void upgradeUserToOwner(String userName) {
