@@ -89,7 +89,7 @@ public class ArmyListEncoderImpl implements ArmyListEncoder {
     @Override
     public List<UnitCardDTO> decode(String encodedList, String faction) {
 
-        String[] encodedUnits = encodedList.split("[.]"); //  5:4,3,2 | 5
+        String[] encodedUnits = encodedList.split("[.]");
 
         List<UnitCardDTO> decodedArmyList = new ArrayList<>();
 
@@ -202,7 +202,9 @@ public class ArmyListEncoderImpl implements ArmyListEncoder {
                 .findFirst();
 
         if (optional.isPresent()) {
-            return unitCardMapper.entityToDto(optional.get());
+            UnitCardDTO unitCardDTO = unitCardMapper.entityToDto(optional.get());
+            unitCardDTO.setMaxCounter();
+            return unitCardDTO;
         } else {
             throw new AppException("cannot decode stored army list - unit" + encodedUnit + " not found by decoder", HttpStatus.NOT_FOUND);
         }
