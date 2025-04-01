@@ -31,8 +31,10 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(
                         (requests) -> requests
+//                                .anyRequest().permitAll()
                                 .requestMatchers(HttpMethod.GET, "/auth/**").authenticated()
                                 .requestMatchers(HttpMethod.POST, "/auth/**").authenticated()
+                                .requestMatchers(HttpMethod.DELETE, "/auth/**").authenticated()
                                 .requestMatchers(HttpMethod.GET, "public/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "public/**").permitAll()
                 );
