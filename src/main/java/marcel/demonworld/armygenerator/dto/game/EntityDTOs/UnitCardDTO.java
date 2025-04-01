@@ -140,6 +140,8 @@ public class UnitCardDTO implements DemonWorldCard {
 
     private final Boolean unitDestroyed = false;
 
+    private Integer maxCounter;
+
     @Override
     public String getName() { //
         return this.unitName;
@@ -156,7 +158,7 @@ public class UnitCardDTO implements DemonWorldCard {
     }
 
     public void setMaxCounter() { //
-        Integer maxCounter = this.numberOfElements * this.hitpoints;
+        this.maxCounter = this.numberOfElements * this.hitpoints;
     }
 
 }
