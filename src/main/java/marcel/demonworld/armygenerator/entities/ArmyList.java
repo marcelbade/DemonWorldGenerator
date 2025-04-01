@@ -47,16 +47,16 @@ public class ArmyList {
         access.setSharedList(this);
     }
 
-    public void addMultipleArmyLists(List<ArmyListAccess> accesses) {
+    public void addMultipleAccesses(List<ArmyListAccess> accesses) {
         this.usersWithAccess.addAll(accesses);
         accesses.forEach(l -> l.setSharedList(this));
     }
 
-    public void deleteArmyList(ArmyListAccess access) {
+    public void deleteAccess(ArmyListAccess access) {
         this.usersWithAccess.remove(access);
     }
 
-    public void deleteMultipleArmyLists(List<ArmyListAccess> accesses) {
+    public void deleteMultipleAccesses(List<ArmyListAccess> accesses) {
         this.usersWithAccess.removeAll(accesses);
     }
 
