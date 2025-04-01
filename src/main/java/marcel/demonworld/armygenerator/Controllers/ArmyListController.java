@@ -37,7 +37,7 @@ public class ArmyListController {
     }
 
     @DeleteMapping("/deleteList")
-    public ResponseEntity<String> deleteList(@RequestParam String listName, @RequestParam String userName) {
+    public ResponseEntity<String> deleteList( @RequestParam String userName, @RequestParam String listName) {
 
         MethodLevelSecurityConfig.authenticateUser(userName);
 
