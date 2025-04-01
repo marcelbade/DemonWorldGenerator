@@ -4,6 +4,7 @@ package marcel.demonworld.armygenerator.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,13 @@ public class ArmyList {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id")
     private List<ArmyListAccess> usersWithAccess = new ArrayList<>();
+
+    @Column(name = "creationDate", columnDefinition = "Date")
+    private Date creationDate;
+
+    @Column(name = "teamName", columnDefinition = "text")
+    private String teamName;
+
 
     // helper functions - Access
 

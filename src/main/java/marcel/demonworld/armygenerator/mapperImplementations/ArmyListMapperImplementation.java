@@ -39,6 +39,8 @@ public class ArmyListMapperImplementation implements ArmyListMapper {
                 .faction(list.getFaction())
                 .list(armyListEncoder.decode(list.getList(), list.getFaction()))
                 .eventName(list.getEventName())
+                .creationDate(list.getCreationDate())
+                .teamName(list.getTeamName())
                 .userWithAccess(list.getUsersWithAccess()
                         .stream()
                         .map(ArmyListAccess::getSharedWithUser)
@@ -55,6 +57,8 @@ public class ArmyListMapperImplementation implements ArmyListMapper {
                 .list(armyListEncoder.encode(listDTO.getList()))
                 .eventName(listDTO.getEventName())
                 .faction(listDTO.getFaction())
+                .creationDate(new java.sql.Date(listDTO.getCreationDate().getTime()))
+                .teamName(listDTO.getTeamName())
                 .usersWithAccess(Collections.emptyList())
                 .build();
     }
