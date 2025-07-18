@@ -8,6 +8,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import marcel.demonworld.armygenerator.dto.auth.UserDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import marcel.demonworld.armygenerator.services.auth.UserService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,6 +26,7 @@ public class UserAuthenticationProvider {
     @Value("${security.jwt.token.secret-key}")
     private String secretKey = "testKey";
 
+    @Autowired
     private UserService userService;
 
     @PostConstruct
@@ -52,7 +54,8 @@ public class UserAuthenticationProvider {
 
         DecodedJWT decoded = verifier.verify(token);
 
-        UserDTO user = userService.findByUsername(decoded.getSubject());
+        // TODO getSubject -> getIssuer : why is the user in issuer, not subject?
+        UserDTO user = userService.findByUsername(decoded.getIssuer());
 
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
     }
