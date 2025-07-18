@@ -99,14 +99,14 @@ public class ArmyListEncoderImpl implements ArmyListEncoder {
             if (encodedUnit.contains(":")) {
                 String[] parts = encodedUnit.split("[:]");
 
-                UnitCardDTO unit = decodeUnit(parts[0], faction);
+                UnitCardDTO unit = decodeUnit(parts[0]);
 
                 unit.setEquipment(decodeItems(parts[1], faction));
 
                 setEquipmentFlags(unit);
                 decodedArmyList.add(unit);
             } else {
-                decodedArmyList.add(decodeUnit(encodedUnit, faction));
+                decodedArmyList.add(decodeUnit(encodedUnit));
             }
         }
         return decodedArmyList;
@@ -190,12 +190,11 @@ public class ArmyListEncoderImpl implements ArmyListEncoder {
 
     /**
      * @param encodedUnit String following the rules laid out in the class description.
-     * @param faction     String, faction name.
      * @return List<ItemCardDTO>
      */
-    private UnitCardDTO decodeUnit(String encodedUnit, String faction) {
+    private UnitCardDTO decodeUnit(String encodedUnit) {
 
-        List<UnitCard> allFactionUnitCards = unitCardService.findAllFactionUnitCards(faction);
+        List<UnitCard> allFactionUnitCards = unitCardService.findAllUnitEntities();
 
         Optional<UnitCard> optional = allFactionUnitCards.stream()
                 .filter(card -> card.getId().equals(Integer.decode(encodedUnit)))
