@@ -34,6 +34,7 @@ public class ArmyListMapperImplementation implements ArmyListMapper {
     @Override
     public ArmyListDTO entityToDTO(ArmyList list) {
         return ArmyListDTO.builder()
+                .id(list.getId())
                 .userName(list.getUser().getUserName())
                 .listName(list.getListName())
                 .faction(list.getFaction())

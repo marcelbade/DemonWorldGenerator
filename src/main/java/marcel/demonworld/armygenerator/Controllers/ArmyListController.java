@@ -37,14 +37,14 @@ public class ArmyListController {
     }
 
     @DeleteMapping("/deleteList")
-    public ResponseEntity<String> deleteList( @RequestParam String userName, @RequestParam String listName) {
+    public ResponseEntity<String> deleteList( @RequestParam String userName, @RequestParam Long listId) {
 
         MethodLevelSecurityConfig.authenticateUser(userName);
 
-        ArmyListDTO listByName = listService.findListByName(listName);
-        listService.deleteList(listByName);
 
-        return ResponseEntity.ok(listName);
+        listService.deleteList(listId);
+
+        return ResponseEntity.ok(listId.toString());
     }
 
 }

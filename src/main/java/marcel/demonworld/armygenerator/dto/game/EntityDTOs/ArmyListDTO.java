@@ -10,6 +10,7 @@ import java.util.List;
 @Builder
 public class ArmyListDTO {
 
+    private Long id;
     private String userName;
     private String faction;
     private String listName;
