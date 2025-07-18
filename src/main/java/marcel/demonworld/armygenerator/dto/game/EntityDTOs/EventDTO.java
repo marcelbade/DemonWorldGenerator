@@ -10,13 +10,11 @@ import java.util.Date;
 @Builder
 public class EventDTO {
 
-    private Long id;
     private String eventName;
     private String url;
     private String location;
     private Date eventDate;
     private String eventOrganizer;
-
 
 }
 
