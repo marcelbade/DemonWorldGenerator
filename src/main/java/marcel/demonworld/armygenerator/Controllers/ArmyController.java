@@ -41,7 +41,7 @@ public class ArmyController {
      */
     @GetMapping("/allUnits")
     public List<UnitCardDTO> getAllUnitCards() {
-        return armyService.returnAll();
+        return armyService.findAllUnitDTOs();
     }
 
     /**
@@ -52,7 +52,7 @@ public class ArmyController {
      */
     @GetMapping("/factionDTOs")
     public List<FactionDataDTO> getAllFactionDTOs() {
-        List<UnitCardDTO> unitCards = armyService.returnAll();
+        List<UnitCardDTO> unitCards = armyService.findAllUnitDTOs();
 
         List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOS = allyService.returnAll();
 
