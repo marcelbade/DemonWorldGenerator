@@ -30,11 +30,16 @@ public class UnitCardService {
      *
      * @return List<UnitCard>
      */
-    public List<UnitCardDTO> returnAll() { //
+    public List<UnitCardDTO> findAllUnitDTOs() { //
         List<UnitCard> all = repo.findAll();
 
         return all.stream().filter(Objects::nonNull).map(mapper::entityToDto).collect(Collectors.toList());
     }
+
+    public List<UnitCard> findAllUnitEntities() { //
+        return repo.findAll();
+    }
+
 
     public void updateUnitCard(UnitCardDTO unit) {
         repo.save(mapper.dtoToEntity(unit));
