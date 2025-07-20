@@ -19,5 +19,6 @@ public class UserDTO {
     private Boolean isOwner;
     private Boolean isDeleted;
     private String token;
+    private String emailAddress;
 
 }

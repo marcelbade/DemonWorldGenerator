@@ -36,6 +36,9 @@ public class User {
     @Column(name = "isDeleted", columnDefinition = "integer")
     private Boolean isDeleted;
 
+    @Column(name = "emailAddress", columnDefinition = "text")
+    private String emailAddress;
+
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id")
