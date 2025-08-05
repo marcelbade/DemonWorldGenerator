@@ -53,6 +53,7 @@ public class ArmyListMapperImplementation implements ArmyListMapper {
     @Override
     public ArmyList dtoToEntity(ArmyListDTO listDTO) {
         return ArmyList.builder()
+                .id(listDTO.getId())
                 .user(userMapper.dtoToEntity(userService.findByUsername(listDTO.getUserName())))
                 .listName(listDTO.getListName())
                 .list(armyListEncoder.encode(listDTO.getList()))

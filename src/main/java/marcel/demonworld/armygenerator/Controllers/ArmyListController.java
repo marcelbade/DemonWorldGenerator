@@ -32,7 +32,7 @@ public class ArmyListController {
 
         MethodLevelSecurityConfig.authenticateUser(listDTO.getUserName());
 
-        listService.addArmyList(listDTO);
+        listService.saveOrUpdateArmyList(listDTO);
         return ResponseEntity.ok(listDTO.getListName());
     }
 
