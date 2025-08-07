@@ -27,7 +27,7 @@ public class ArmyListController {
     }
 
     // add and update!
-    @PostMapping("/addList")
+    @PostMapping("/storeList")
     public ResponseEntity<String> saveList(@RequestBody ArmyListDTO listDTO) {
 
         MethodLevelSecurityConfig.authenticateUser(listDTO.getUserName());
