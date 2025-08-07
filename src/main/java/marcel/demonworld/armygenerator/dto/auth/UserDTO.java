@@ -20,5 +20,6 @@ public class UserDTO {
     private Boolean isDeleted;
     private String token;
     private String emailAddress;
-
+    private Boolean displayDeleteConfirmation;
+    private Boolean displayOverrideConfirmation;
 }

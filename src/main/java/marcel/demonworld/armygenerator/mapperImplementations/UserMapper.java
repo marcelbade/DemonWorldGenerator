@@ -23,6 +23,8 @@ public class UserMapper implements UserMapperInterface {
                 .isAdmin(user.getIsAdmin())
                 .isOwner(user.getIsOwner())
                 .isDeleted(user.getIsDeleted())
+                .displayDeleteConfirmation(user.getDisplayDeleteConfirmation())
+                .displayOverrideConfirmation(user.getDisplayOverrideConfirmation())
                 .build();
     }
 
@@ -37,6 +39,8 @@ public class UserMapper implements UserMapperInterface {
                 .isAdmin(false)
                 .isOwner(false)
                 .isDeleted(false)
+                .displayDeleteConfirmation(true)
+                .displayOverrideConfirmation(true)
                 .build();
     }
 
@@ -51,6 +55,8 @@ public class UserMapper implements UserMapperInterface {
                 .isAdmin(dto.getIsAdmin())
                 .isOwner(dto.getIsOwner())
                 .isDeleted(dto.getIsDeleted())
+                .displayDeleteConfirmation(dto.getDisplayDeleteConfirmation())
+                .displayOverrideConfirmation(dto.getDisplayOverrideConfirmation())
                 .build();
     }
 }

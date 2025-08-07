@@ -39,6 +39,12 @@ public class User {
     @Column(name = "emailAddress", columnDefinition = "text")
     private String emailAddress;
 
+    @Column(name = "displayDeleteConfirmation", columnDefinition = "integer")
+    private Boolean displayDeleteConfirmation;
+
+    @Column(name = "displayOverrideConfirmation", columnDefinition = "integer")
+    private Boolean displayOverrideConfirmation;
+
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id")

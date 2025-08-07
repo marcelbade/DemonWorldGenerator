@@ -152,6 +152,19 @@ public class UserService {
 
 
     public List<String> findAllUsers() {
-        return repo.findAllUserNames();
+        return repo.findAllUserNames(); //
+    }
+
+    public void setDisplayDeleteConfirmation(Boolean displayDeleteDialog, String userName) {
+        repo.setDisplayDeleteConfirmation(displayDeleteDialog, userName);
+
+    }
+
+    public void setDisplayOverrideConfirmation(Boolean displayOverrideDialog, String userName) {
+
+        System.out.println("displayOverrideDialog > " + displayOverrideDialog);
+        System.out.println("Id > " + userName);
+
+        repo.setDisplayOverrideConfirmation(displayOverrideDialog, userName);
     }
 }

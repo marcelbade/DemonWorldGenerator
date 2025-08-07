@@ -4,6 +4,7 @@ package marcel.demonworld.armygenerator.Controllers;
 import jakarta.validation.Valid;
 import marcel.demonworld.armygenerator.Exceptions.AppException;
 import marcel.demonworld.armygenerator.dto.auth.CredentialsDTO;
+import marcel.demonworld.armygenerator.dto.auth.UserDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 import marcel.demonworld.armygenerator.entities.UnitCard;
@@ -32,7 +33,7 @@ public class UserAuthController {
     private ItemCardService itemCardService;
 
 
-//     TODO fix this :D
+    //     TODO fix this :D
     @PostMapping("/auth/user/logout")
     public ResponseEntity<String> logout() {
 //        SecurityContextHolder.clearContext();
@@ -50,7 +51,6 @@ public class UserAuthController {
                     .status(appException.getStatus())
                     .body(appException.getMessage());
         }
-
         return ResponseEntity.ok("password changed");
     }
 
@@ -65,7 +65,6 @@ public class UserAuthController {
                     .status(appException.getStatus())
                     .body(appException.getMessage());
         }
-
         return ResponseEntity.ok(userName);
     }
 
@@ -116,6 +115,22 @@ public class UserAuthController {
         }
         return ResponseEntity.ok(customUnitName + " deleted!");
     }
+
+    @PostMapping("/setDisplayDeleteConfirmation")
+    public ResponseEntity<String> setDisplayDeleteConfirmation(@RequestBody @Valid UserDTO userData) {
+        userService.setDisplayDeleteConfirmation(userData.getDisplayDeleteConfirmation(), userData.getUserName());
+
+        return ResponseEntity.ok("Delete dialog setting changed.");
+    }
+
+    @PostMapping("/setDisplayOverrideConfirmation")
+    public ResponseEntity<String> setDisplayOverrideConfirmation(@RequestBody @Valid UserDTO userData) {
+        userService.setDisplayOverrideConfirmation(userData.getDisplayOverrideConfirmation(), userData.getUserName());
+
+        return ResponseEntity.ok("Override dialog setting changed.");
+    }
+
+
 }
 
 
