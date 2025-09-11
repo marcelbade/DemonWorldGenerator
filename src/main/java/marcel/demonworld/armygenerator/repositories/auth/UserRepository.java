@@ -29,7 +29,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE app_users set displayDeleteConfirmation = :displayDeleteDialog where userName = :userName;", nativeQuery = true)
-    void setDisplayOverrideConfirmation(@Param("displayDeleteDialog") Boolean displayDeleteDialog, @Param("userName") String userName);
+    @Query(value = "UPDATE app_users set displayOverrideConfirmation = :displayOverrideConfirmation where userName = :userName;", nativeQuery = true)
+    void setDisplayOverrideConfirmation(@Param("displayOverrideConfirmation") Boolean displayOverrideDialog, @Param("userName") String userName);
 
 }
+    
