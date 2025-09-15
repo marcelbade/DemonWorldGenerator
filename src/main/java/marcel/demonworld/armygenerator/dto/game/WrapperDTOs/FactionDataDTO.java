@@ -1,9 +1,16 @@
 package marcel.demonworld.armygenerator.dto.game.WrapperDTOs;
 
 import lombok.Data;
+import marcel.demonworld.armygenerator.dto.game.EntityDTOs.SecondSubFactionDTO;
 import org.json.simple.JSONObject;
 
 import java.util.List;
+
+/**
+ * main data structure for the army builder. Contains structured
+ *
+ *
+ */
 
 @Data
 public class FactionDataDTO {
@@ -15,4 +22,7 @@ public class FactionDataDTO {
     private Integer numberOfAlternativeArmySelections;
     private JSONObject alternativeOptions;
     private Boolean AllyIsAlternativeOption;
+    private Boolean hasSecondSubFactions;
+    private List<SecondSubFactionDTO> secondSubFactionDTOS;
+    private  List<String> SubFactionsIneligibleFor2ndSubFactions;
 }

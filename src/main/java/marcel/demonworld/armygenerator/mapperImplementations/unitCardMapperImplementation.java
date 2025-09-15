@@ -81,6 +81,7 @@ public class unitCardMapperImplementation implements UnitCardMapper {
                 .isCustom(unitCard.getIsCustom())
                 .createdBy(unitCard.getCreatedBy())
                 .isDeleted(unitCard.getIsDeleted())
+                .isEligibleFor2ndSubFaction(unitCard.getIsEligibleFor2ndSubFaction())
                 .build();
 
 
@@ -148,6 +149,7 @@ public class unitCardMapperImplementation implements UnitCardMapper {
                 .isCustom(unitCardDTO.getIsCustom())
                 .createdBy(unitCardDTO.getCreatedBy())
                 .isDeleted(unitCardDTO.getIsDeleted())
+                .isEligibleFor2ndSubFaction(unitCardDTO.getIsEligibleFor2ndSubFaction())
                 .build();
     }
 }

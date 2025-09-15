@@ -1,11 +1,12 @@
 package marcel.demonworld.armygenerator.mapperImplementations;
 
 import marcel.demonworld.armygenerator.Enums.GameEnums;
-import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.AllianceAndAlternativesDTO;
+import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
+import marcel.demonworld.armygenerator.dto.game.EntityDTOs.SecondSubFactionDTO;
+import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.FactionDataDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.SubFactionDTO;
-import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 import marcel.demonworld.armygenerator.services.game.FactionService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,6 +19,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
+/**
+ * Class creates FactionDataDTO objects via its sole public factory method. See FactionDataDTO class for more info about it.
+ */
+
 @Component
 @Primary
 public class UnitCardToFactionDataMapper implements marcel.demonworld.armygenerator.mappingInterfaces.UnitCardToFactionDataMapper {
@@ -26,59 +32,87 @@ public class UnitCardToFactionDataMapper implements marcel.demonworld.armygenera
     FactionService factionService;
 
     /**
-     * Method maps unitCard objects to FactionDataDTO.
+     * Method maps information from unitCardDTO, AllianceAndAlternativesDTO and SecondSubFactionDTO to FactionDataDTO
+     * and returns a list w. one FactionDataDTO per faction.
      *
-     * @param unitList                      list of unitCard objects
+     * @param unitList                      list of unitCardDTO objects
      * @param allAllianceAndAlternativeDTOs list of AllianceAndAlternativesDTO objects.
+     * @param secondSubFactionList          list of SecondSubFactionDTO objects.
      * @return a list containing one FactionTDO object for every in-game faction.
      */
     @Override
-    public List<FactionDataDTO> unitCardToFactionData(List<UnitCardDTO> unitList, List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs) {
+    public List<FactionDataDTO> unitCardToFactionData(List<UnitCardDTO> unitList,
+                                                      List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs,//
+                                                      List<SecondSubFactionDTO> secondSubFactionList) {
+
+        List<FactionDataDTO> resultingFactionDataDTOList = new ArrayList<>();
 
         setMaxCounterForAllUnits(unitList);
 
-        List<FactionDataDTO> mappingResult = new ArrayList<>();
+        // get all distinct faction names
         Set<String> factionNames = factionService.returnAll().stream().map(FactionDTO::getFactionName).collect(Collectors.toSet());
 
+        // build factionDataDTOs for every faction
         for (String factionName : factionNames) {
-            FactionDataDTO faction = new FactionDataDTO();
+            FactionDataDTO factionDataDTO = new FactionDataDTO();
 
-            faction.setFactionName(factionName);
-            faction.setSubFactions(createSubFactionDTOs(factionName, unitList, allAllianceAndAlternativeDTOs, false));
+            factionDataDTO.setFactionName(factionName);
+            factionDataDTO.setSubFactions(createSubFactionDTOs(factionName, unitList, allAllianceAndAlternativeDTOs, false));
 
             AllianceAndAlternativesDTO allyAndAlts = findAlly(factionName, allAllianceAndAlternativeDTOs);
-            faction.setHasAlternativeLists(allyAndAlts.getHasAlternativeLists());
-            faction.setNumberOfAlternativeArmySelections(allyAndAlts.getNumberOfChoices());
-            faction.setAlternativeOptions(stringifyAlternativeListsJSON(factionName, allAllianceAndAlternativeDTOs));
+            factionDataDTO.setHasAlternativeLists(allyAndAlts.getHasAlternativeLists());
+            factionDataDTO.setNumberOfAlternativeArmySelections(allyAndAlts.getNumberOfChoices());
+            factionDataDTO.setAlternativeOptions(getAlternativeSubFactionsForFaction(factionName, allAllianceAndAlternativeDTOs));
 
             String allyName = allyAndAlts.getAlly();
 
-
             if (allyName.equals(GameEnums.NONE.toString())) {
-                faction.setAlly(GameEnums.NO_ALLY.toString());
-                faction.setAllySubFactions(null);
+                factionDataDTO.setAlly(GameEnums.NO_ALLY.toString());
+                factionDataDTO.setAllySubFactions(null);
             } else {
-                faction.setAlly(allyName);
-                faction.setAllySubFactions(createSubFactionDTOs(allyName, unitList, allAllianceAndAlternativeDTOs, true));
+                factionDataDTO.setAlly(allyName);
+                factionDataDTO.setAllySubFactions(createSubFactionDTOs(allyName, unitList, allAllianceAndAlternativeDTOs, true));
             }
 
-            faction.setAllyIsAlternativeOption(findIfAllyIsAlternativeFaction(allAllianceAndAlternativeDTOs, factionName, allyName));
+            factionDataDTO.setHasSecondSubFactions(hasSecondSubFactions(factionName, secondSubFactionList));
+            factionDataDTO.setSecondSubFactionDTOS(addSecondSubFactionsForFaction(factionName, secondSubFactionList));
+            factionDataDTO.setSubFactionsIneligibleFor2ndSubFactions(findSubFactionsIneligibleFor2ndSubFaction(unitList, createSubFactionListForFaction(factionName, unitList)));
 
-            mappingResult.add(faction);
+            factionDataDTO.setAllyIsAlternativeOption(findIfAllyIsAlternativeFaction(allAllianceAndAlternativeDTOs, factionName, allyName));
+
+            resultingFactionDataDTOList.add(factionDataDTO);
         }
-        return mappingResult;
+
+        return resultingFactionDataDTOList;
     }
 
 
+    /**
+     * Method sets the correct value for the MaxHitpointCounter property. This property represents the maximum
+     * hit points (# of elements x hit points per element ) for a unit card and is used in the loss calculator feature
+     * of the UI.
+     *
+     * @param unitList List<unitCard>
+     * @return A list of unitCard objects with the property set.
+     */
     private List<UnitCardDTO> setMaxCounterForAllUnits(List<UnitCardDTO> unitList) {
-        unitList.forEach(UnitCardDTO::setMaxCounter);
+        unitList.forEach(UnitCardDTO::setMaxHitpointCounter);
         return unitList;
     }
 
 
+    /**
+     * Method checks whether if the ally of a faction is also one of the alternative sub factions the player can pick from.
+     * See the rule book for the Dwarves for an example.
+     *
+     * @param allAllianceAndAlternativeDTOs List<AllianceAndAlternativesDTO>
+     * @param factionName                   String
+     * @param allyName                      String
+     * @return true, if the faction's ally is also an alternative sub faction.
+     */
     private boolean findIfAllyIsAlternativeFaction(List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs, String factionName, String allyName) {
         boolean result = false;
-        JSONArray alternatives = (JSONArray) stringifyAlternativeListsJSON(factionName, allAllianceAndAlternativeDTOs).get("subFactions");
+        JSONArray alternatives = (JSONArray) getAlternativeSubFactionsForFaction(factionName, allAllianceAndAlternativeDTOs).get("subFactions");
 
         for (Object alt : alternatives) {
             result = alt.equals(allyName);
@@ -86,7 +120,15 @@ public class UnitCardToFactionDataMapper implements marcel.demonworld.armygenera
         return result;
     }
 
-
+    /**
+     * Method creates a list of subfaction DTOs that are part of the nested FactionDataDTO objects.
+     *
+     * @param factionName                   String, name of the faction
+     * @param units,                        List<UnitCardDTO>
+     * @param allAllianceAndAlternativeDTOs List<AllianceAndAlternativesDTO>
+     * @param isAlly                        boolean
+     * @return a complete and unordered list of all <SubFactionDTO> objects for the given faction.
+     */
     private List<SubFactionDTO> createSubFactionDTOs(String factionName, List<UnitCardDTO> units, List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs, boolean isAlly) {
 
         List<SubFactionDTO> result = new ArrayList<>();
@@ -121,7 +163,13 @@ public class UnitCardToFactionDataMapper implements marcel.demonworld.armygenera
     }
 
 
-    // Method creates a list containing subFaction objects for one faction.
+    /**
+     * Method creates a list of all distinct sub faction names for the passed faction name.
+     *
+     * @param factionName String
+     * @param units       List<UnitCardDTO>
+     * @return a List<String> containing all distinct sub faction names.
+     */
     private List<String> createSubFactionListForFaction(String factionName, List<UnitCardDTO> units) {
         return units
                 .stream()
@@ -130,7 +178,14 @@ public class UnitCardToFactionDataMapper implements marcel.demonworld.armygenera
                 .collect(Collectors.toList());
     }
 
-
+    /**
+     * Method returns a list containing all unitCards for the passed faction
+     *
+     * @param factionName String
+     * @param subFaction  String
+     * @param units       List<UnitCardDTO>
+     * @return a filtered List<UnitCardDTO> containing only the List<UnitCardDTO> with the passed faction name.
+     */
     private List<UnitCardDTO> findUnitsForSubFaction(String factionName, String subFaction, List<UnitCardDTO> units) {
         return units.
                 stream()
@@ -139,7 +194,14 @@ public class UnitCardToFactionDataMapper implements marcel.demonworld.armygenera
     }
 
 
-    // Method finds the faction's ally.
+    /**
+     * Method searches a list of AllianceAndAlternativesDTO objects. If the matching one for the passed faction is found,
+     * it is returned.
+     *
+     * @param factionName String
+     * @param allyList    List<AllianceAndAlternativesDTO>
+     * @return the matching allianceAndAlternativeDTO object fot the passed faction name.
+     */
     private AllianceAndAlternativesDTO findAlly(String factionName, List<AllianceAndAlternativesDTO> allyList) {
         List<AllianceAndAlternativesDTO> allianceAndAlternativeDTOS = allyList
                 .stream()
@@ -148,7 +210,14 @@ public class UnitCardToFactionDataMapper implements marcel.demonworld.armygenera
         return allianceAndAlternativeDTOS.get(0);
     }
 
-    private JSONObject stringifyAlternativeListsJSON(String factionName, List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs) {
+    /**
+     * Method returns the list of alternative sub factions for the passed faction.
+     *
+     * @param factionName                   String
+     * @param allAllianceAndAlternativeDTOs List<AllianceAndAlternativesDTO>
+     * @return JSONObject containing all alternative sub factions for the faction.
+     */
+    private JSONObject getAlternativeSubFactionsForFaction(String factionName, List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs) {
 
         List<JSONObject> result = allAllianceAndAlternativeDTOs
                 .stream()
@@ -158,6 +227,64 @@ public class UnitCardToFactionDataMapper implements marcel.demonworld.armygenera
         return result.get(0);
     }
 
-}
+
+    private Boolean hasSecondSubFactions(String factionName, List<SecondSubFactionDTO> secondSubFactionList) {
+
+        Boolean result = Boolean.FALSE;
+
+        List<SecondSubFactionDTO> filteredForFaction = secondSubFactionList
+                .stream() //
+                .filter(secondSubFactionDTO -> secondSubFactionDTO.getFaction().equals(factionName))
+                .collect(Collectors.toList());
+
+        if (filteredForFaction.size() > 0) {
+            result = true;
+
+        }
+        return result;
+    }
+
+    /**
+     * Method finds the second sub factions for the given faction name.
+     *
+     * @param factionName          String
+     * @param secondSubFactionList List<SecondSubFactionDTO>
+     * @return a list of second sub factions filtered by faction name.
+     */
+    private List<SecondSubFactionDTO> addSecondSubFactionsForFaction(String factionName, List<SecondSubFactionDTO> secondSubFactionList) {
+
+        return secondSubFactionList
+                .stream() //
+                .filter(secondSubFactionDTO -> secondSubFactionDTO.getFaction().equals(factionName))
+                .collect(Collectors.toList());
+    }
+
+
+    /**
+     * Method takes the list of sub factions for a faction and finds those that contain no units that are
+     * eligible for a 2nd sub faction.
+     *
+     * @param unitList             List<UnitCardDTO>
+     * @param distinctFactionNames List<String> distinctFactionNames - all sub factions for one faction.
+     * @return a list of sub factions that contain no unit that is eligible for a 2nd sub faction.
+     */
+    private List<String> findSubFactionsIneligibleFor2ndSubFaction(List<UnitCardDTO> unitList, List<String> distinctFactionNames) {
+
+        List<String> ineligibleSubFactions = new ArrayList<>();
+
+        distinctFactionNames.forEach(s -> {
+            List<UnitCardDTO> subFactionUnits = unitList.stream().filter(unitCardDTO -> unitCardDTO.getSubFaction().equals(s)).collect(Collectors.toList());
+
+            // if the property IsEligibleFor2ndSubFaction is false for all elements (unitCards), then noneMatches returns true (duh)
+            if (subFactionUnits.stream().noneMatch(UnitCardDTO::getIsEligibleFor2ndSubFaction)) {
+                ineligibleSubFactions.add(s);
+            }
+        });
+
+        return ineligibleSubFactions;
+    }
+
+
+}// end of class
 
 

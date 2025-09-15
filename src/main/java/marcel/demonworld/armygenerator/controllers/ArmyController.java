@@ -1,13 +1,15 @@
-package marcel.demonworld.armygenerator.Controllers;
+package marcel.demonworld.armygenerator.controllers;
 
 
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.AllianceAndAlternativesDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
+import marcel.demonworld.armygenerator.dto.game.EntityDTOs.SecondSubFactionDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.FactionDataDTO;
 import marcel.demonworld.armygenerator.mappingInterfaces.UnitCardToFactionDataMapper;
 import marcel.demonworld.armygenerator.services.game.AllyAndAlternativesService;
 import marcel.demonworld.armygenerator.services.game.FactionService;
+import marcel.demonworld.armygenerator.services.game.SecondSubFactionService;
 import marcel.demonworld.armygenerator.services.game.UnitCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +34,9 @@ public class ArmyController {
     private FactionService factionService;
 
     @Autowired
+    private SecondSubFactionService secondSubFactionService;
+
+    @Autowired
     private UnitCardToFactionDataMapper unitCardToFactionDataMapper;
 
     /**
@@ -52,11 +57,12 @@ public class ArmyController {
      */
     @GetMapping("/factionDTOs")
     public List<FactionDataDTO> getAllFactionDTOs() {
+
         List<UnitCardDTO> unitCards = armyService.findAllUnitDTOs();
-
         List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOS = allyService.returnAll();
+        List<SecondSubFactionDTO> allSecondSubFactions = secondSubFactionService.returnAll();
 
-        return unitCardToFactionDataMapper.unitCardToFactionData(unitCards, allAllianceAndAlternativeDTOS);
+        return unitCardToFactionDataMapper.unitCardToFactionData(unitCards, allAllianceAndAlternativeDTOS, allSecondSubFactions);
     }
 
     /**

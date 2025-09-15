@@ -189,5 +189,8 @@ public class UnitCard {
     @Column(name = "isDeleted", columnDefinition = "integer")
     private Boolean isDeleted;
 
+    @Column(name = "eligibleFor2ndSubFaction", columnDefinition = "integer")
+    private Boolean isEligibleFor2ndSubFaction;
+
 
 }

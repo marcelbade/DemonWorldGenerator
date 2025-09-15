@@ -23,12 +23,14 @@ import java.util.Optional;
  * ArmyList objects have the problem, that the list property is a nested list of objects. I.e., it is a list containing
  * at least one UnitCardDTO object and each of the UnitCard objects can contain a list of
  * containing least one ItemCardDTO object. Such a nested structure is, to be uncouth,
- * a pain in the butt to persist in SQL. To avoid  the hassle and added complexity of writing it into a JSON field,
- * the list is instead encoded as a string. Every UnitCardDTO is represented by its ID. Individual IDs are separated
- * by a dot. if a UnitCard contains a list of ItemCardDTOs, then the ItemCard list is announced
- * by a colon, is comma-separated and ends with a dot.
+ * a pain in the butt to persist in SQL. To avoid the hassle and added complexity of writing it into a JSON field,
+ * the list is instead encoded as a simple string. Every UnitCardDTO and ItemDTO is uniquely represented by its ID.
+ * Individual unitCard IDs are separated by a dot. If a UnitCard contains a list of one or more ItemCardDTOs,
+ * then the ItemCard list is announced by a colon, is comma-separated and ends with a dot.
+ * If a unitCard has a second sub faction, then the second sub faction is separated from the unit Card id
+ * with a dash. (Currently in the game this applies only to the Thain faction, see the rule book for any questions)
  * <p>
- * Example: "11.12.23.5:9,23,4.12" -> army list with 4 units, the 4th unit has 3 items.
+ * Example: "11.12.23.5:9,23,4.12" -> army list with 5 units, the 4th unit has 3 items.
  */
 @Component
 @Primary
@@ -202,7 +204,7 @@ public class ArmyListEncoderImpl implements ArmyListEncoder {
 
         if (optional.isPresent()) {
             UnitCardDTO unitCardDTO = unitCardMapper.entityToDto(optional.get());
-            unitCardDTO.setMaxCounter();
+            unitCardDTO.setMaxHitpointCounter();
             return unitCardDTO;
         } else {
             throw new AppException("cannot decode stored army list - unit" + encodedUnit + " not found by decoder", HttpStatus.NOT_FOUND);

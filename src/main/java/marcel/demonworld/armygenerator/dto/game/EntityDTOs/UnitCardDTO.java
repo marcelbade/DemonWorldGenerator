@@ -140,7 +140,9 @@ public class UnitCardDTO implements DemonWorldCard {
 
     private final Boolean unitDestroyed = false;
 
-    private Integer maxCounter;
+    private Integer maxHitpointCounter;
+
+    private Boolean isEligibleFor2ndSubFaction;
 
     @Override
     public String getName() { //
@@ -157,8 +159,8 @@ public class UnitCardDTO implements DemonWorldCard {
         return this.points;
     }
 
-    public void setMaxCounter() { //
-        this.maxCounter = this.numberOfElements * this.hitpoints;
+    public void setMaxHitpointCounter() { //
+        this.maxHitpointCounter = this.numberOfElements * this.hitpoints;
     }
 
 }
