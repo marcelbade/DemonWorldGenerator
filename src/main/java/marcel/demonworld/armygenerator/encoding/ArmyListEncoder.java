@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.Encoding;
+package marcel.demonworld.armygenerator.encoding;
 
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 

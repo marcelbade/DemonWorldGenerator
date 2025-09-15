@@ -2,7 +2,7 @@ package marcel.demonworld.armygenerator.controllers;
 
 
 import jakarta.validation.Valid;
-import marcel.demonworld.armygenerator.Exceptions.AppException;
+import marcel.demonworld.armygenerator.exceptions.AppException;
 import marcel.demonworld.armygenerator.dto.auth.CredentialsDTO;
 import marcel.demonworld.armygenerator.dto.auth.UserDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;

@@ -1,7 +1,7 @@
 package marcel.demonworld.armygenerator.security;
 
 
-import marcel.demonworld.armygenerator.Exceptions.AppException;
+import marcel.demonworld.armygenerator.exceptions.AppException;
 import marcel.demonworld.armygenerator.dto.auth.ErrorDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

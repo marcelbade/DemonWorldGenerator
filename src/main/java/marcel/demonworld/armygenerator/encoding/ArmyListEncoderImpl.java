@@ -1,6 +1,6 @@
-package marcel.demonworld.armygenerator.Encoding;
+package marcel.demonworld.armygenerator.encoding;
 
-import marcel.demonworld.armygenerator.Exceptions.AppException;
+import marcel.demonworld.armygenerator.exceptions.AppException;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.EquipmentTypes;

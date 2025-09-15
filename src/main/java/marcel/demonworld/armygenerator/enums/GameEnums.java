@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.Enums;
+package marcel.demonworld.armygenerator.enums;
 
 public enum GameEnums {
     NONE,

@@ -1,7 +1,7 @@
 package marcel.demonworld.armygenerator.controllers;
 
 
-import marcel.demonworld.armygenerator.Exceptions.AppException;
+import marcel.demonworld.armygenerator.exceptions.AppException;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 import marcel.demonworld.armygenerator.services.auth.UserService;

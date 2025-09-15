@@ -1,7 +1,7 @@
 package marcel.demonworld.armygenerator.services.game;
 
 import lombok.AllArgsConstructor;
-import marcel.demonworld.armygenerator.Exceptions.AppException;
+import marcel.demonworld.armygenerator.exceptions.AppException;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
 import marcel.demonworld.armygenerator.entities.UnitCard;
 import marcel.demonworld.armygenerator.mapperImplementations.unitCardMapperImplementation;
@@ -26,9 +26,9 @@ public class UnitCardService {
     private final unitCardMapperImplementation mapper;
 
     /**
-     * Method returns all units in the game.
+     * Method returns all units in the DB as DTOs.
      *
-     * @return List<UnitCard>
+     * @return List<UnitCardDTO>
      */
     public List<UnitCardDTO> findAllUnitDTOs() { //
         List<UnitCard> all = repo.findAll();
@@ -36,6 +36,12 @@ public class UnitCardService {
         return all.stream().filter(Objects::nonNull).map(mapper::entityToDto).collect(Collectors.toList());
     }
 
+
+    /**
+     * Method returns all unitCards in the DB as entities.
+     *
+     * @return List<UnitCard>
+     */
     public List<UnitCard> findAllUnitEntities() { //
         return repo.findAll();
     }
@@ -45,6 +51,12 @@ public class UnitCardService {
         repo.save(mapper.dtoToEntity(unit));
     }
 
+    /**
+     * Method stores a new unit in the DB.
+     *
+     * @param newUnit unitCardDTO object
+     * @return the generated identifier
+     */
     public UnitCard createNewUnit(UnitCardDTO newUnit) {
 
         Optional<UnitCard> foundUnit = repo.findByNameAndFaction(newUnit.getUnitName(), newUnit.getFaction());
@@ -53,9 +65,7 @@ public class UnitCardService {
             throw new AppException("unit already exists for this faction!", HttpStatus.BAD_REQUEST);
         }
 
-        UnitCard save = repo.save(mapper.dtoToEntity(newUnit));
-
-        return save;
+        return repo.save(mapper.dtoToEntity(newUnit));
     }
 
     public void deleteUnit(String customItemName, String faction) {
@@ -71,13 +81,6 @@ public class UnitCardService {
         }
     }
 
-    /**
-     * @param faction
-     * @return
-     */
-    public List<UnitCard> findAllFactionUnitCards(String faction) {
-        return repo.findAllForFaction(faction);
-    }
 
 }
 

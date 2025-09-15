@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.Exceptions;
+package marcel.demonworld.armygenerator.exceptions;
 
 import org.springframework.http.HttpStatus;
 

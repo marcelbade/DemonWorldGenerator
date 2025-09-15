@@ -1,6 +1,6 @@
 package marcel.demonworld.armygenerator.mapperImplementations;
 
-import marcel.demonworld.armygenerator.Encoding.ArmyListEncoder;
+import marcel.demonworld.armygenerator.encoding.ArmyListEncoder;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ArmyListDTO;
 import marcel.demonworld.armygenerator.entities.ArmyList;
 import marcel.demonworld.armygenerator.entities.ArmyListAccess;

@@ -2,7 +2,7 @@ package marcel.demonworld.armygenerator.services.auth;
 
 
 import lombok.RequiredArgsConstructor;
-import marcel.demonworld.armygenerator.Exceptions.AppException;
+import marcel.demonworld.armygenerator.exceptions.AppException;
 import marcel.demonworld.armygenerator.dto.auth.CredentialsDTO;
 import marcel.demonworld.armygenerator.dto.auth.SignUpDTO;
 import marcel.demonworld.armygenerator.dto.auth.UserDTO;
@@ -130,11 +130,10 @@ public class UserService {
     }
 
     public User findEntityByUsername(String username) {
-        User user = repo
+
+        return repo
                 .findByUserName(username)
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
-
-        return user;
     }
 
 

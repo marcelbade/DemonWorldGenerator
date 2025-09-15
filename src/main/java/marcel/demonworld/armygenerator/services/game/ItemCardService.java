@@ -1,7 +1,7 @@
 package marcel.demonworld.armygenerator.services.game;
 
 import lombok.AllArgsConstructor;
-import marcel.demonworld.armygenerator.Exceptions.AppException;
+import marcel.demonworld.armygenerator.exceptions.AppException;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ItemCardDTO;
 import marcel.demonworld.armygenerator.entities.ItemCard;
 import marcel.demonworld.armygenerator.mapperImplementations.ItemCardMapperImplementation;
@@ -69,13 +69,14 @@ public class ItemCardService {
     }
 
     /**
-     * @param faction
-     * @return
+     * Method returns all items for a given faction.
+     *
+     * @param faction String
+     * @return List<ItemCard>
      */
     public List<ItemCard> findAllFactionItemCards(String faction) {
         return repo.findAllForFaction(faction);
     }
-
 
 
 }

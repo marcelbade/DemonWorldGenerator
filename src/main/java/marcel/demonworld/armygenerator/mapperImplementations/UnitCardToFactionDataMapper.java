@@ -1,6 +1,6 @@
 package marcel.demonworld.armygenerator.mapperImplementations;
 
-import marcel.demonworld.armygenerator.Enums.GameEnums;
+import marcel.demonworld.armygenerator.enums.GameEnums;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.AllianceAndAlternativesDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.SecondSubFactionDTO;

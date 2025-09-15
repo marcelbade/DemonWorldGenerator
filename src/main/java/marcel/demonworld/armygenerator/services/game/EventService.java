@@ -2,7 +2,7 @@ package marcel.demonworld.armygenerator.services.game;
 
 
 import lombok.AllArgsConstructor;
-import marcel.demonworld.armygenerator.Exceptions.AppException;
+import marcel.demonworld.armygenerator.exceptions.AppException;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.EventDTO;
 import marcel.demonworld.armygenerator.entities.Event;
 import marcel.demonworld.armygenerator.mappingInterfaces.EventMapper;
