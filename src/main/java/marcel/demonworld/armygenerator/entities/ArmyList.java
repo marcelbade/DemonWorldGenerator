@@ -27,7 +27,7 @@ public class ArmyList {
     @Column(name = "list", columnDefinition = "text")
     private String list;
 
-    @JoinColumn(name = "String", columnDefinition = "text")
+    @JoinColumn(name = "String", columnDefinition = "text") // TODO annotaion is bullshit - remove!!
     private String faction;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -61,11 +61,11 @@ public class ArmyList {
     }
 
     public void deleteAccess(ArmyListAccess access) {
-        this.usersWithAccess.remove(access);
+        this.usersWithAccess.remove(access); //
     }
 
     public void deleteMultipleAccesses(List<ArmyListAccess> accesses) {
-        this.usersWithAccess.removeAll(accesses);
+        this.usersWithAccess.removeAll(accesses); //
     }
 
 }

@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.Controllers;
+package marcel.demonworld.armygenerator.controllers;
 
 
 import jakarta.validation.Valid;

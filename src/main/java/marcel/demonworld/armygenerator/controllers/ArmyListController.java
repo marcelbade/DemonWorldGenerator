@@ -1,4 +1,4 @@
-package marcel.demonworld.armygenerator.Controllers;
+package marcel.demonworld.armygenerator.controllers;
 
 
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.ArmyListDTO;
