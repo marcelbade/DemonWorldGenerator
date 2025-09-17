@@ -8,8 +8,6 @@ import java.util.List;
 
 /**
  * main data structure for the army builder. Contains structured
- *
- *
  */
 
 @Data

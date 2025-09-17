@@ -1,16 +1,10 @@
 package marcel.demonworld.armygenerator.controllers;
 
 
-import marcel.demonworld.armygenerator.dto.game.EntityDTOs.AllianceAndAlternativesDTO;
-import marcel.demonworld.armygenerator.dto.game.EntityDTOs.FactionDTO;
-import marcel.demonworld.armygenerator.dto.game.EntityDTOs.SecondSubFactionDTO;
-import marcel.demonworld.armygenerator.dto.game.EntityDTOs.UnitCardDTO;
+import marcel.demonworld.armygenerator.dto.game.EntityDTOs.*;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.FactionDataDTO;
 import marcel.demonworld.armygenerator.mappingInterfaces.UnitCardToFactionDataMapper;
-import marcel.demonworld.armygenerator.services.game.AllyAndAlternativesService;
-import marcel.demonworld.armygenerator.services.game.FactionService;
-import marcel.demonworld.armygenerator.services.game.SecondSubFactionService;
-import marcel.demonworld.armygenerator.services.game.UnitCardService;
+import marcel.demonworld.armygenerator.services.game.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +33,9 @@ public class ArmyController {
     @Autowired
     private UnitCardToFactionDataMapper unitCardToFactionDataMapper;
 
+    @Autowired
+    private FactionColorService factionColorService;
+
     /**
      * Returns ALL unit cards currently in the game, as an unordered, unfiltered list.
      *
@@ -61,6 +58,7 @@ public class ArmyController {
         List<UnitCardDTO> unitCards = armyService.findAllUnitDTOs();
         List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOS = allyService.returnAll();
         List<SecondSubFactionDTO> allSecondSubFactions = secondSubFactionService.returnAll();
+        List<FactionColorDTO> allFactionColors = factionColorService.returnAll();
 
         return unitCardToFactionDataMapper.unitCardToFactionData(unitCards, allAllianceAndAlternativeDTOS, allSecondSubFactions);
     }
@@ -74,4 +72,10 @@ public class ArmyController {
     public List<String> getAllFactionNames() {
         return factionService.returnAll().stream().map(FactionDTO::getFactionName).collect(Collectors.toList());
     }
+
+    @GetMapping("/factionColors")
+    public List<FactionColorDTO> getAllFactionColors() {
+        return factionColorService.returnAll();
+    }
+
 }
