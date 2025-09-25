@@ -44,6 +44,8 @@ public class UnitCardDTO implements DemonWorldCard {
 
     private Boolean squareFormation;
 
+    private Boolean shieldWallFormation;
+
     private Boolean horde;
 
     private Integer commandStars;

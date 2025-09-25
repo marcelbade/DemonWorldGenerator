@@ -57,6 +57,9 @@ public class UnitCard {
     @Column(name = "squareFormation", columnDefinition = "integer")
     private Boolean squareFormation;
 
+    @Column(name = "shieldWallFormation", columnDefinition = "integer")
+    private Boolean shieldWallFormation;
+
     @Column(name = "horde", columnDefinition = "integer")
     private Boolean horde;
 
@@ -191,6 +194,9 @@ public class UnitCard {
 
     @Column(name = "eligibleFor2ndSubFaction", columnDefinition = "integer")
     private Boolean isEligibleFor2ndSubFaction;
+
+
+
 
 
 }
