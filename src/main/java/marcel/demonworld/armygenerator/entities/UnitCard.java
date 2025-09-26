@@ -195,8 +195,8 @@ public class UnitCard {
     @Column(name = "eligibleFor2ndSubFaction", columnDefinition = "integer")
     private Boolean isEligibleFor2ndSubFaction;
 
-
-
+    @Column(name = "hasTwoWeapons", columnDefinition = "integer")
+    private Boolean hasTwoWeapons;
 
 
 }

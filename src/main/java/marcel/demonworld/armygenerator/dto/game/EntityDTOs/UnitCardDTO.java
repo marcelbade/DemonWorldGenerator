@@ -146,6 +146,8 @@ public class UnitCardDTO implements DemonWorldCard {
 
     private Boolean isEligibleFor2ndSubFaction;
 
+    private Boolean hasTwoWeapons;
+
     @Override
     public String getName() { //
         return this.unitName;

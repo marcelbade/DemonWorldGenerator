@@ -83,6 +83,7 @@ public class unitCardMapperImplementation implements UnitCardMapper {
                 .createdBy(unitCard.getCreatedBy())
                 .isDeleted(unitCard.getIsDeleted())
                 .isEligibleFor2ndSubFaction(unitCard.getIsEligibleFor2ndSubFaction())
+                .hasTwoWeapons(unitCard.getHasTwoWeapons())
                 .build();
 
 
@@ -152,6 +153,7 @@ public class unitCardMapperImplementation implements UnitCardMapper {
                 .createdBy(unitCardDTO.getCreatedBy())
                 .isDeleted(unitCardDTO.getIsDeleted())
                 .isEligibleFor2ndSubFaction(unitCardDTO.getIsEligibleFor2ndSubFaction())
+                .hasTwoWeapons(unitCardDTO.getHasTwoWeapons())
                 .build();
     }
 }
