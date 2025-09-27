@@ -54,8 +54,11 @@ public class UnitCardToFactionDataMapper implements marcel.demonworld.armygenera
             FactionDataDTO factionDataDTO = new FactionDataDTO();
 
             factionDataDTO.setFactionName(factionName);
+
+            // add subfactions and units!
             factionDataDTO.setSubFactions(createSubFactionDTOs(factionName, unitList, allAllianceAndAlternativeDTOs, false));
 
+            // set alternative lists, if the faction has them
             AllianceAndAlternativesDTO allyAndAlts = findAlly(factionName, allAllianceAndAlternativeDTOs);
             factionDataDTO.setHasAlternativeLists(allyAndAlts.getHasAlternativeLists());
             factionDataDTO.setNumberOfAlternativeArmySelections(allyAndAlts.getNumberOfChoices());
@@ -63,6 +66,7 @@ public class UnitCardToFactionDataMapper implements marcel.demonworld.armygenera
 
             String allyName = allyAndAlts.getAlly();
 
+            // Add Ally, if the faction has one
             if (allyName.equals(GameEnums.NONE.toString())) {
                 factionDataDTO.setAlly(GameEnums.NO_ALLY.toString());
                 factionDataDTO.setAllySubFactions(null);
@@ -126,7 +130,10 @@ public class UnitCardToFactionDataMapper implements marcel.demonworld.armygenera
      * @param isAlly                        boolean
      * @return a complete and unordered list of all <SubFactionDTO> objects for the given faction.
      */
-    private List<SubFactionDTO> createSubFactionDTOs(String factionName, List<UnitCardDTO> units, List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs, boolean isAlly) {
+    private List<SubFactionDTO> createSubFactionDTOs(String factionName, //
+                                                     List<UnitCardDTO> units,
+                                                     List<AllianceAndAlternativesDTO> allAllianceAndAlternativeDTOs,
+                                                     boolean isAlly) {
 
         List<SubFactionDTO> result = new ArrayList<>();
         List<String> distinctSubFactions = createSubFactionListForFaction(factionName, units);
