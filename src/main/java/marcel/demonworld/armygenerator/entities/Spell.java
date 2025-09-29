@@ -15,7 +15,7 @@ public class Spell {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ID;
+    private Integer Id;
 
     @Column(name = "faction", columnDefinition = "text")
     private String faction;

@@ -10,6 +10,7 @@ import lombok.Setter;
 @Builder
 public class SpellDTO {
 
+    private Integer Id;
 
     private String faction;
 

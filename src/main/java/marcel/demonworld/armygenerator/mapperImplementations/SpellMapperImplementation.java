@@ -13,6 +13,7 @@ public class SpellMapperImplementation implements SpellMapper {
     @Override
     public SpellDTO mapEntityToDTO(Spell spell) {
         return SpellDTO.builder()
+                .Id(spell.getId())
                 .faction(spell.getFaction())
                 .spellName(spell.getSpellName())
                 .spellTier(spell.getSpellTier())
@@ -26,6 +27,7 @@ public class SpellMapperImplementation implements SpellMapper {
     @Override
     public Spell mapDtoToEntity(SpellDTO spellDto) {
         return Spell.builder()
+                .Id(spellDto.getId())
                 .faction(spellDto.getFaction())
                 .spellName(spellDto.getSpellName())
                 .spellTier(spellDto.getSpellTier())

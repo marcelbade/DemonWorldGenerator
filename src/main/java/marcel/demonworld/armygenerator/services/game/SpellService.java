@@ -4,6 +4,7 @@ package marcel.demonworld.armygenerator.services.game;
 import marcel.demonworld.armygenerator.dto.game.EntityDTOs.SpellDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.SpellFactionDTO;
 import marcel.demonworld.armygenerator.entities.Faction;
+import marcel.demonworld.armygenerator.entities.Spell;
 import marcel.demonworld.armygenerator.mappingInterfaces.SpellMapper;
 import marcel.demonworld.armygenerator.repositories.game.FactionRepository;
 import marcel.demonworld.armygenerator.repositories.game.SpellRepostiory;
@@ -21,13 +22,13 @@ public class SpellService {
     SpellMapper mapper;
 
     @Autowired
-    SpellRepostiory spellRepo;
+    SpellRepostiory repo;
 
     @Autowired
     FactionRepository factionRepo;
 
     public List<SpellDTO> getAllSpells() {
-        return spellRepo.findAll().stream().map(s -> mapper.mapEntityToDTO(s)).collect(Collectors.toList());
+        return repo.findAll().stream().map(s -> mapper.mapEntityToDTO(s)).collect(Collectors.toList());
     }
 
     public List<SpellFactionDTO> getAllSpellsOrderedByFaction() {
@@ -36,7 +37,7 @@ public class SpellService {
         List<String> factions = factionRepo.findAll().stream().map(Faction::getFactionName).collect(Collectors.toList());
 
         for (String faction : factions) {
-            List<SpellDTO> factionSpells = spellRepo
+            List<SpellDTO> factionSpells = repo
                     .findAll()
                     .stream()
                     .filter(spell -> spell.getFaction().equals(faction))
@@ -52,8 +53,12 @@ public class SpellService {
 
 
     public void updateUnitCard(SpellDTO spell) {
-        spellRepo.save(mapper.mapDtoToEntity(spell));
+        repo.save(mapper.mapDtoToEntity(spell));
     }
 
 
+    public void updateSpell(SpellDTO spellDto) {
+        Spell spell = mapper.mapDtoToEntity(spellDto);
+        repo.save(spell);
+    }
 }

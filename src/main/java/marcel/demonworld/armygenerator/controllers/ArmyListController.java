@@ -17,7 +17,7 @@ public class ArmyListController {
     @Autowired
     private ArmyListService listService;
 
-    
+
     @GetMapping("/getListsForUser")
     public List<ArmyListDTO> getAllListsForUser(@RequestParam String userName) {
 
@@ -37,7 +37,7 @@ public class ArmyListController {
     }
 
     @DeleteMapping("/deleteList")
-    public ResponseEntity<String> deleteList( @RequestParam String userName, @RequestParam Long listId) {
+    public ResponseEntity<String> deleteList(@RequestParam String userName, @RequestParam Long listId) {
 
         MethodLevelSecurityConfig.authenticateUser(userName);
 
