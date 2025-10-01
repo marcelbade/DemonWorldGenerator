@@ -8,4 +8,5 @@ public interface SpellMapper {
     SpellDTO mapEntityToDTO(Spell spell);
 
     Spell mapDtoToEntity(SpellDTO spellDto);
-}
+
+ }

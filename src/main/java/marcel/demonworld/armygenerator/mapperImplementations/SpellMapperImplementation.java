@@ -37,4 +37,5 @@ public class SpellMapperImplementation implements SpellMapper {
                 .target(spellDto.getTarget())
                 .build();
     }
+
 }

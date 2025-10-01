@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/auth/spells")
 public class EditSpellController {
@@ -17,16 +19,14 @@ public class EditSpellController {
     private SpellService service;
 
 
+
     // add and update!
     @PostMapping("/editSpell")
-    public ResponseEntity<String> editSpellProperties(@RequestBody SpellDTO spellDTO) {
-
-
-        // TODO: see kanban note: Add Magic to the UI
-       // MethodLevelSecurityConfig.authenticateUser(spellDTO.getUserName());
+    public ResponseEntity<List<SpellDTO>> editSpellProperties(@RequestBody SpellDTO spellDTO) {
 
         service.updateSpell(spellDTO);
-        return ResponseEntity.ok(spellDTO.getSpellName());
+        List<SpellDTO> allSpells = service.getAllSpells();
+        return ResponseEntity.ok(allSpells);
     }
 
 }

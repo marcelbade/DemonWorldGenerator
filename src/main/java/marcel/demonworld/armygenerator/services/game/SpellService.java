@@ -5,10 +5,12 @@ import marcel.demonworld.armygenerator.dto.game.EntityDTOs.SpellDTO;
 import marcel.demonworld.armygenerator.dto.game.WrapperDTOs.SpellFactionDTO;
 import marcel.demonworld.armygenerator.entities.Faction;
 import marcel.demonworld.armygenerator.entities.Spell;
+import marcel.demonworld.armygenerator.exceptions.AppException;
 import marcel.demonworld.armygenerator.mappingInterfaces.SpellMapper;
 import marcel.demonworld.armygenerator.repositories.game.FactionRepository;
 import marcel.demonworld.armygenerator.repositories.game.SpellRepostiory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -57,8 +59,14 @@ public class SpellService {
     }
 
 
-    public void updateSpell(SpellDTO spellDto) {
-        Spell spell = mapper.mapDtoToEntity(spellDto);
+    public void updateSpell(SpellDTO spellDTO) {
+        Spell spell = mapper.mapDtoToEntity(spellDTO);
+
+        if (spellDTO.getId() == 0) {
+            throw new AppException(spellDTO.getSpellName()  //
+                    + "has an invalid id and cannot be updated", HttpStatus.BAD_REQUEST);
+        }
+
         repo.save(spell);
     }
 }
