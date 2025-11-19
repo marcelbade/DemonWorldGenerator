@@ -7,7 +7,7 @@ import org.json.simple.JSONObject;
 import java.util.List;
 
 /**
- * main data structure for the army builder. Contains structured
+ * main data structure for the army builder.
  */
 
 @Data
