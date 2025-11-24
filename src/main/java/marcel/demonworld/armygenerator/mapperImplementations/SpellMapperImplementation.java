@@ -21,6 +21,7 @@ public class SpellMapperImplementation implements SpellMapper {
                 .requirements(spell.getRequirements())
                 .duration(spell.getDuration())
                 .target(spell.getTarget())
+                .abbreviatedEffect(spell.getAbbreviatedEffect())
                 .build();
     }
 
@@ -35,6 +36,7 @@ public class SpellMapperImplementation implements SpellMapper {
                 .requirements(spellDto.getRequirements())
                 .duration(spellDto.getDuration())
                 .target(spellDto.getTarget())
+                .abbreviatedEffect(spellDto.getAbbreviatedEffect())
                 .build();
     }
 

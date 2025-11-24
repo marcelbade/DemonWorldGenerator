@@ -30,7 +30,9 @@ public class SpellService {
     FactionRepository factionRepo;
 
     public List<SpellDTO> getAllSpells() {
-        return repo.findAll().stream().map(s -> mapper.mapEntityToDTO(s)).collect(Collectors.toList());
+        List<SpellDTO> collect = repo.findAll().stream().map(s -> mapper.mapEntityToDTO(s)).collect(Collectors.toList());
+        collect.forEach(s -> s.setIsSelected(false));
+        return collect;
     }
 
     public List<SpellFactionDTO> getAllSpellsOrderedByFaction() {
@@ -43,7 +45,8 @@ public class SpellService {
                     .findAll()
                     .stream()
                     .filter(spell -> spell.getFaction().equals(faction))
-                    .map(spell -> mapper.mapEntityToDTO(spell)).collect(Collectors.toList());
+                    .map(spell -> mapper.mapEntityToDTO(spell))
+                    .collect(Collectors.toList());
 
             result.add(SpellFactionDTO.builder()
                     .factionName(faction)

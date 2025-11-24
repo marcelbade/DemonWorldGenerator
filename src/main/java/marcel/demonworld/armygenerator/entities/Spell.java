@@ -38,4 +38,7 @@ public class Spell {
     @Column(name = "spellTier", columnDefinition = "text")
     private String spellTier;
 
+    @Column(name = "abbreviatedEffect", columnDefinition = "text")
+    private String abbreviatedEffect;
+
 }

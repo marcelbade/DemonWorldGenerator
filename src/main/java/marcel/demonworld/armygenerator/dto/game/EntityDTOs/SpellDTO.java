@@ -25,4 +25,9 @@ public class SpellDTO {
     private String target;
 
     private String spellTier;
+
+    private String abbreviatedEffect;
+
+    private Boolean isSelected;
+
 }
