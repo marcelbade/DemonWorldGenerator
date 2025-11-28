@@ -7,6 +7,7 @@ import lombok.Data;
 @Builder
 public class SecondSubFactionDTO {
 
+    private Integer id;
     private String faction;
     private String secondSubFaction;
 

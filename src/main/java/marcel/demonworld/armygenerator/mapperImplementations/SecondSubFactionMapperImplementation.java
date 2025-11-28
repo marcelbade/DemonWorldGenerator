@@ -15,6 +15,7 @@ public class SecondSubFactionMapperImplementation implements SecondSubFactionMap
     public SecondSubFactionDTO entityToDTO(SecondSubFaction secondSubFaction) {
         return SecondSubFactionDTO
                 .builder()
+                .id(secondSubFaction.getId())
                 .faction(secondSubFaction.getFaction().getFactionName())
                 .secondSubFaction(secondSubFaction.getSecondSubFaction())
                 .build();
