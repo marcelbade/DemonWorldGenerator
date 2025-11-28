@@ -85,29 +85,16 @@ public class ArmyListEncoderImpl implements ArmyListEncoder {
                 codedList.append(encodedItems);
             }
 
-            // get second sub faction names
-            List<String> secondSubFactionNamesForFaction = getSecondSubFactionNamesForFaction(unitCard.getFaction());
             // get second sub faction data
             List<SecondSubFactionDTO> secondSubFactionDTOsForFaction = getSecondSubFactionDTOsForFaction(unitCard.getFaction());
 
-            // test if unit has a second subFaction
-            if (secondSubFactionNamesForFaction.contains(unitCard.getSecondSubFaction())) {
-                codedList.append("-");
-
-                Optional<Integer> optional = secondSubFactionDTOsForFaction
-                        .stream() //
-                        .filter(dto -> dto.getSecondSubFaction().equals(unitCard.getSecondSubFaction()))
-                        .map(SecondSubFactionDTO::getId)
-                        .findFirst();
-
-                if (optional.isPresent()) {
-                    codedList.append(optional.get());
-                } else {
-                    throw new AppException("cannot encode second sub faction - "
-                            + unitCard.getSecondSubFaction()
-                            + " not found by encoder", HttpStatus.NOT_FOUND);
-                }
-            }
+            secondSubFactionDTOsForFaction.forEach(dto -> {
+                        if (dto.getSecondSubFaction().equals(unitCard.getSecondSubFaction())) {
+                            codedList.append("-");
+                            codedList.append(dto.getId());
+                        }
+                    }
+            );
 
             // test for end of list
             if (i != armyList.size() - 1) {
@@ -168,15 +155,12 @@ public class ArmyListEncoderImpl implements ArmyListEncoder {
     }
 
 
-    private List<String> getSecondSubFactionNamesForFaction(String selectedFaction) {
-
-        return secondSubFactionService.returnAll()
-                .stream()//
-                .filter(dto -> dto.getFaction().equals(selectedFaction))
-                .map(SecondSubFactionDTO::getSecondSubFaction)
-                .collect(Collectors.toList());
-    }
-
+    /**
+     * Method returns all second subFaction DTOs from hte DB for the given faction .
+     *
+     * @param selectedFaction String, faction name
+     * @return a list of all second subFaction DTOs found in the DB. every DTO has the id and th sub faction name.
+     */
     private List<SecondSubFactionDTO> getSecondSubFactionDTOsForFaction(String selectedFaction) {
 
         return secondSubFactionService.returnAll()
